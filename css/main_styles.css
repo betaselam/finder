@@ -1,0 +1,124 @@
+
+/* High contrast support for jQuery dialog buttons */
+.ui-helper-highcontrast .ui-dialog .ui-dialog-titlebar-close {
+	width: auto;
+}
+.ui-helper-highcontrast .ui-dialog .ui-dialog-titlebar-close .ui-icon {
+	width: auto;
+	height: auto;
+	background-image: none;
+	text-indent: 0;
+	border: 1px solid black;
+}
+.ui-dialog-titlebar .icon-circle_remove {
+	color: #333;
+	font-size: 1.5em;
+	margin-right: 15px;
+	margin-top: 15px;
+}
+.ui-dialog-titlebar .icon-circle_remove:hover {
+	color: #666;
+	text-decoration: none;
+}
+.ui-widget-content a#helpMe {
+	color: #046791;
+	font-weight: 700;
+	font-size: 1.1em;
+}
+.ui-dialog .ui-dialog-content .modalSteps {
+	padding: 0;
+}
+.hiddenText, .HiddenText, .ui-hidden-accessible, ui-helper-hidden-accessible {
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+	width: 0;
+}
+.errorDialog .ui-dialog-titlebar {
+	background-color:#F9F3A9;
+	margin: 10px 10px 0 10px;
+}
+.collapsibleBlue i.icon-circle_remove {
+	color:#666;
+}
+.compare-plans-table td .icon-circle_remove {
+	float: none;
+	font-size: 1.25em;
+	margin: 0 .8em 0 .3em;
+}
+.ui-dialog-titlebar .icon-circle_remove {
+	color: #333;
+	font-size: 1.5em;
+	margin-right: 15px;
+	margin-top: 15px;
+}
+.ui-dialog-titlebar .icon-circle_remove:hover {
+	color: #666;
+	text-decoration: none;
+}
+.icon-circle_remove {
+	background: none;
+	color: #333;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	float: right;
+}
+
+.ui-dialog .ui-dialog-content .modalSteps {
+	padding: 0;
+}
+.modalStep .icon-circle_exclamation_mark {
+	color: #d44116;
+	float: left;
+	display: table-cell;
+	padding: 5px 0 ;
+	font-size: 16px;
+}
+.modalStep {
+	height: 364px;
+	overflow: hidden;
+	display: none;
+}
+
+.modalStep .fixedBottom {
+	bottom: 100px;
+	position: absolute;
+}
+
+.modalStep fieldset {
+	margin-top: 10px;
+}
+
+.errorDialog .modalStep {
+	min-height: 345px;
+	height:auto;
+}
+
+.modalStep {
+	overflow-y: auto;
+	padding: 0 30px;
+	min-height: 365px;
+}
+
+.modalStep .icon-circle_exclamation_mark {
+	color: #d44116;
+	float: left;
+	display: table-cell;
+	padding: 5px 0 ;
+	font-size: 16px;
+}
+
+.errorDialog .modalSteps {
+	background-color:#F9F3A9;
+	margin: 0 10px 10px 10px;
+}
+
+.activeModalStep {
+	display: block;
+}
+
+.plan-selected-status .btn {
+	margin: 0 0 20px;
+}

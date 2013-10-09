@@ -1,0 +1,34 @@
+﻿<tr id="child_census_row_<%=startingNode %>">
+    <script>
+        $('#child_census_row_1').addClass("odd");
+        $('#child_census_row_3').addClass("odd");
+    </script>
+    <th class="censusTableText censusTableTextPerson minTableWidth" scope="row">
+        <div id="divChild_<%=startingNode + 1 %>" class="personMargin">
+        Child
+        </div>
+    </th>
+    <td class="censusTableText minTableWidth">
+        <label class="HiddenText" for="child_<%=startingNode %>_gender">Select Child #<%=startingNode + 1 %> Gender</label>
+        <select id="child_<%=startingNode %>_gender" class="columnInputWidthLarge" name="child_<%=startingNode %>_gender" title="Child #<%=startingNode + 1 %> Gender">
+            <option value="">Select Gender</option>
+            <option value="M" <%- (child && child.gender == "Male") ? "selected" : "" %>>Male</option>
+            <option value="F"  <%- (child && child.gender == "Female") ? "selected" : "" %>>Female</option>
+        </select>
+    </td>
+    <td class="censusTableText standardTableWidth">
+      <label class="HiddenText" for="child_<%=startingNode %>">Child #<%=startingNode + 1 %> Date of Birth. Expected date format MM/DD/YYYY</label>       
+      <div class="tableCalenderMargin">
+      <input type="text" class="select_date dob columnInputWidthSmall" id="child_<%=startingNode %>" data-validate="notBlankDOB validBirthDate notFutureDate lessthanPrimary" name="child_<%=startingNode %>" value="<%- (child && child !== "" && child.dateOfBirth) ? child.dateOfBirth:""   %>" maxlength="10" title="Child #<%=startingNode + 1 %> Date of Birth"/>
+      <span class="censusTableSubHeader">MM/DD/YYYY</span>
+      </div>
+    </td>
+    <td class="censusTableTextLast standardTableWidth">
+        <label class="HiddenText" for="child_<%=startingNode %>_gender">Select Child #<%=startingNode + 1 %> Tobacco Use</label>
+        <select id="child_<%=startingNode %>_tobacco_user" class="columnInputWidthLarge" title="Child #<%=startingNode + 1 %> Tobacco Use">
+            <option value="">Select Usage</option>
+            <option value="true" <%- (child && child.tobaccoUser == "Smoker") ? "selected" : "" %>>Yes</option>
+            <option value="false"<%- (child && child.tobaccoUser == "Non-Smoker") ? "selected" : "" %>>No</option>
+        </select>
+    </td>
+</tr>

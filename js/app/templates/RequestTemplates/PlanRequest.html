@@ -1,0 +1,68 @@
+﻿<p:IndividualPlanQuoteRequest xmlns:p="http://rbis.cms.org/api" xmlns:p1="http://rbis.cms.org/api-types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://rbis.cms.org/api IndividualPlanQuoteRequest.xsd ">
+  <p:Enrollees>
+    <p1:Primary>
+      <p1:DateOfBirth><%= input.primary.dateOfBirth %></p1:DateOfBirth>
+      <p1:Gender><%= input.primary.gender %></p1:Gender>
+      <p1:TobaccoUser><%= input.primary.tobaccoUser %></p1:TobaccoUser>
+    </p1:Primary>
+    <% if(input.spouse !== null) {%>
+     <p1:Spouse>
+      <p1:DateOfBirth><%= input.spouse.dateOfBirth %></p1:DateOfBirth>
+      <p1:Gender><%= input.spouse.gender %></p1:Gender>
+      <p1:TobaccoUser><%= input.spouse.tobaccoUser %></p1:TobaccoUser>
+    </p1:Spouse> 
+    <% } %>
+    <% for(i = 0; i< input.children.length ; i++){ %>
+     <p1:Child<%= i+1 %>>
+      <p1:DateOfBirth><%= input.children[i].dateOfBirth %></p1:DateOfBirth>
+      <p1:Gender><%= input.children[i].gender %></p1:Gender>
+      <p1:TobaccoUser><%= input.children[i].tobaccoUser %></p1:TobaccoUser>
+    </p1:Child<%= i+1 %>> 
+   <%} %>
+
+  </p:Enrollees>
+  <p:Location>
+    <p1:ZipCode><%= input.zipcode %></p1:ZipCode>
+     <% if(input.countyname !== "" && input.stateCode !== ""){ %>
+      <p1:County>
+         <p1:CountyName><%= input.countyName %></p1:CountyName>
+         <p1:StateCode><%= input.stateCode %></p1:StateCode>
+      </p1:County>
+      <% } %>
+  </p:Location>
+  <p:InsuranceEffectiveDate><%= input.insuranceEffectiveDate %></p:InsuranceEffectiveDate>
+  <% if(input.isFilterAnalysisRequiredIndicator !== ""){  %>
+  <p:IsFilterAnalysisRequiredIndicator><%=input.isFilterAnalysisRequiredIndicator %></p:IsFilterAnalysisRequiredIndicator>
+   <% }%>
+  <p:PaginationInformation>
+    <p1:PageNumber><%= input.pageNumber %></p1:PageNumber>
+    <p1:PageSize><%= input.pageSize %></p1:PageSize>
+  </p:PaginationInformation>
+  <% if(input.sort !== null){ %>
+  <p:SortOrder>
+            <p1:SortField><%= input.sort.sortField %></p1:SortField>
+            <p1:SortDirection><%= input.sort.sortDirection %></p1:SortDirection>
+  </p:SortOrder>
+  <% } %>
+
+         <p:Filter>
+                    <% if(input.ptype !== ""){ %><p1:ProviderTypes><%= input.ptype.toUpperCase() %></p1:ProviderTypes><% } %>
+                    <% if(input.companies !== "" && input.companies.length > 0 ){ %>
+                    <% for(var i=0;i < input.companies.length ; i++){ %>
+                     <p1:Issuers><%= input.companies[i] %></p1:Issuers>
+                    <%} } %>
+                    <% if(input.annded !== ""){ %><p1:AnnualDeductibleFilterRange><%= input.annded %></p1:AnnualDeductibleFilterRange><% } %>
+                    <% if(input.ooplimit !== ""){ %><p1:AnnualOutOfPocketFilterRange><%= input.ooplimit  %></p1:AnnualOutOfPocketFilterRange><% } %>
+                    <% if(input.maxben !== ""){ %><p1:AnnualMaxBenefitsFilterRange><%= input.maxben %></p1:AnnualMaxBenefitsFilterRange><% } %>
+                    <% if(input.baserate !== ""){ %><p1:BaseRateFilterRange><%= input.baserate %></p1:BaseRateFilterRange><% } %>
+                    <% if(input.adftrs !== ""){  if(input.adftrs.toLowerCase() === "hsa eligible") {%><p1:HSAEligibleIndicator>true</p1:HSAEligibleIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "domestic partner coverage"){ %><p1:DomesticPartnerIndicator>true</p1:DomesticPartnerIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "same sex coverage"){ %><p1:SameSexIndicator>true</p1:SameSexIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "maternity coverage"){ %><p1:MaternityInNetworkCoverageIndicator>true</p1:MaternityInNetworkCoverageIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "mental health coverage"){ %><p1:MentalInNetworkCoverageIndicator>true</p1:MentalInNetworkCoverageIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "rx coverage"){ %><p1:PrescriptionInNetworkCoverageIndicator>true</p1:PrescriptionInNetworkCoverageIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "substance abuse coverage"){ %><p1:SubstanceAbuseInNetworkCoverageIndicator>true</p1:SubstanceAbuseInNetworkCoverageIndicator><% } } %>
+
+         </p:Filter>
+  
+</p:IndividualPlanQuoteRequest>

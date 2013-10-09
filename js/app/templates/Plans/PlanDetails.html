@@ -1,0 +1,634 @@
+﻿<div class="title-print-header">
+	<h1>Plan Details</h1>
+	<button class="btn btn-small btn-print" onclick="window.print()"><i class="icon-print" aria-hidden="true"></i>Print</button>
+</div>
+<div id="blueTop">
+    
+    <div id="blueContainer">
+        
+        <div id="WhiteContainerLayout">
+            
+            <div class="detailBox clear article">
+                <div class=" article-no-padding">
+	                <div>
+		                <div class="indexCardHeader">
+			                <div class="indexTitle">
+				                <div class="planName">
+                                    <h2><a href="javascript:void(0);" planid="<%= model.planID %>" class="planDetailsButton" title="Plan Title"><%= model.planNameText %></a></h2>
+                                </div>
+                                <div class="contactCompany "><%= model.issuerNameText%>
+                                </div>
+			                </div>
+                            <div class="SBCButton ">                            
+                                <%if (model.SBC.uRLCode !== "No Link"){ %>
+                                 <button class="btn btn-primary sumBenefitsCoverage forceDisplay" onclick="window.open('<%=model.SBC.uRLAddress %>');" title="Summary of Benefits And Coverage" >Summary of Benefits &amp; Coverage</button>
+                                <%} %>
+                            </div>
+                            <div class="insurContactBox">
+                                <!--Overall div for contact box, floated right-->
+                                <div class="spacer">
+                                </div>
+                                <div class="insurContactBoxMiddle">
+                                    <div class="insurPhone topSmallText">
+                                        <div class="insur800num topSmallText">
+                                            <%= (model.issuerTollFreeNumber === model.issuerLocalNumber) ?  model.issuerLocalNumber : model.issuerTollFreeNumber +', '+ model.issuerLocalNumber %>
+                                        </div>
+                                        <% if (model.issuerTTYNumber != null && model.issuerTTYNumber != "") {%>
+                                        <div class="insur800num topSmallText">
+                                            TTY:<%= model.issuerTTYNumber %></div>
+                                        <%} %>
+                                        </div>
+                                        <div class="leftSide bold blue">
+                                            <% if(model.IssuerURL.uRLCode == "Valid") { %>
+                                            <span class="tableText"><a id="A1" class=" noDecoration planTitle" href="<%=model.IssuerURL.uRLAddress %>" onclick="_gaq.push                                            (['_trackEvent', 'outbound', 'click', '#']);" target="_blank" title="Visit the Website">View website
+                                                </a>
+                                                <i class="icon-circle_remove" title="test"></i>
+                                                <!--
+                                                <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide">
+                                                <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+                                                -->
+                                            </span>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="insurContactBoxBottom">
+                                </div>
+                            </div>
+			                <div class="indexCompare">
+				
+				                <!---hidden complare link-------
+				                <span  class="planCompareHidden"><a href="javascript:void(0);" class="planCompare" title="Click to compare">Click to Compare</a></span>
+				                -->
+			
+			                </div>
+
+			                <div class="indexDetails"></div>
+			                <div class="spacer"></div>
+                            <br />
+		                </div>
+                        <div class="indexCardBody">
+			                <div class="indexBodyCol">
+				                <div class="indexBodyColInner">
+					                <p>
+                                        <b>
+                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_Estimated-Monthly-Base-Rate" class="contextualHelp" title="Estimated Monthly Base Rate">Estimated Monthly Base Rate</a>
+                                        </b>
+                                    </p>
+					                <span class="planText bold indexLargeFont">$<%=model.baseRateAmount %></span>/mo.
+				                </div>
+			                </div>
+                            <div class="indexBodyCol">
+				                <div class="indexBodyColInner">
+					                <p>
+                                        <b>
+                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_In-Network-Out-of-Pocket-Limit" class="contextualHelp" title="In-Network Out-of-Pocket Limit">In-Network Out-of-Pocket Limit</a>
+                                        </b>
+                                    </p>
+					                <p class="planText">
+							            Individual<br /><span class="bold indexLargeFont">
+                                         <%= model.InNetworkCostSharing.individualAnnualOOPLimitAmount %></span>
+                                    </p>
+                                    <p class="planText">
+							            Family<br /><span class="bold indexLargeFont">
+                                         <%= model.InNetworkCostSharing.familyAnnualOOPLimitAmount %></span>
+                                    </p>
+				                </div>
+			                </div>
+                            <div class="indexBodyCol">
+				                <div class="indexBodyColInner">
+					                <p>
+                                        <b>
+                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_Annual-Deductible-For-Plan" class="contextualHelp" title="Annual Deductible">Annual Deductible</a>
+                                        </b>
+                                   </p>
+                                    <p class="planText">
+							            Individual<br /><span class="bold indexLargeFont">
+                                         <%= model.InNetworkCostSharing.individualAnnualDeductibleAmount %></span>
+                                         </p>
+                                    <p class="planText">
+							            Family<br /><span class="bold indexLargeFont">
+                                         <%= model.InNetworkCostSharing.familyAnnualDeductibleAmount %></span>
+                                     </p>
+				                </div>
+                            </div>
+                            <div class="indexBodyCol">
+		                        <div class="indexBodyColInner">
+					                <p><b><a href="javascript:void(0);" data-name="<%= model.planID %>_Annual-Deductible-For-Plan" class="contextualHelp" title="Annual Maximum Benefits">Annual Maximum Benefits</a></b></p>
+                                    <p class="planText">
+							            Individual<br /><span class="bold indexLargeFont">
+                                         <%=model.InNetworkCostSharing.individualAnnualMaxBenefitAmount %></span>
+                                    </p>
+                                    <p class="planText">
+							            Family<br /><span class="bold indexLargeFont">
+                                         <%=model.InNetworkCostSharing.individualAnnualMaxBenefitAmount %></span>
+                                    </p>
+				                </div>
+		                    </div>
+			                <div class="spacer"></div>
+		                </div>
+                        <div class="indexCardFooter">
+			                <div class="indexFooterCol col-plan3">
+				               <b><a href="javascript:void(0);" data-name="<%= model.planID %>_Doctor-Choice" class="contextualHelp" title="Doctor Choice">Doctor Choice:</a></b>
+                               <p class="planText" style="margin-top: 0px;"><%=model.providerType %>
+							   <% if (model.providerType ==="PPO"){ %>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-PPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on PPO"></a>
+					                <%} else if (model.providerType ==="HMO"){ %>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-HMO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on HMO"></a>
+					                <%} else if (model.providerType ==="INDEMNITY"){ %>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-INDEMNITY" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on INDEMNITY"></a>
+					                <%} else if (model.providerType ==="POS"){ %>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-POS" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on POS"></a> 
+					                <%} else if (model.providerType ==="EPO"){ %>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-EPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on EPO"></a>
+					                <%} else {%>
+					                <%= model.providerType %>
+					                <%} %>
+				               </p>
+			               </div>
+                           <div class="indexFooterCol col-plan3">
+				                <b>Prescription Coverage:</b>
+				                <p class="planText" style="margin-top: 0px;">
+						            <%=model.prescriptionInNetworkCoverageIndicator %>
+				                </p>
+			                </div>
+                            <div class="indexFooterCol col-plan3 placeRight">
+				                <b><a href="javascript:void(0);" data-name="<%= model.planID %>_Denied-Applications" class="contextualHelp" title="How many applications are denied?">How many applications are denied?</a></b><br />
+				                    <p class="planText" style="margin-top: 0px;">
+					                    <%=model.productApplicantsDeniedPercentage %>% who applied were turned down.
+				                    </p>
+			                </div>
+                            <div class="spacer"></div>	
+		                </div>
+	                </div>
+                    <div class="article-footer-gray greyFooterDetailPad">
+		                <!--<b class="bold">You may be charged more.</b>-->
+                        <b><a href="javascript:void(0);" data-name="<%= model.planID %>_More-Charged" class="contextualHelp" title="You may be charged more">You may be charged more.</a></b>
+			                <%=model.productApplicantsUpRatedPercentage %>% received surcharged quotes.
+	                </div>  
+                </div>
+                <table class="plan-detail-table" width="100%" role="presentation">
+                
+                    <tbody>                        
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">Plan Coverage</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="plan-plan-coverage" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="plan-plan-coverage">
+                            <td class=" tableRightSideText bottomGreyBorder"  colspan="<%= model.length %>">
+                                <span class="tableRightSideText">
+                                What is included in the in-network out-of-pocket limit? 
+                                </span>      
+                            </td>
+
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.InNetworkCostSharing.annualOOPElementsText %>
+                                </p>
+                            </td>
+                         </tr>
+
+                         <tr class="plan-plan-coverage">
+                            <td class=" tableRightSideText bottomGreyBorder" colspan="<%= model.length %>">
+                                <span class="tableRightSideText ">
+                                    Is this plan Health Savings Account (HSA) eligible?  
+                                </span>
+                            </td>
+
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText ">
+                                    <% if (model.hSAEligibleIndicator === "Yes") { %>
+                                        <i class=" icon-circle_ok icon-green icon-tableCorrection" aria-hidden="true"></i>
+                                    <% } else { %>
+                                        <i class=" icon-circle_remove icon-red icon-tableCorrection" aria-hidden="true"></i>
+                                    <% } %>
+                                    <%= model.hSAEligibleIndicator%>
+                                </p>
+                            </td>
+                        </tr>
+
+                        <tr class="plan-plan-coverage">
+                            <td class="tableRightSideText" colspan="<%= model.length %>">
+                                <span class="tableRightSideText">
+                                    How can I find a doctor in this plan's network?
+                                </span>
+                            </td>
+                        
+                            <td class="tableLeftSideText">
+                                <p class="tableLeftSideText">
+                                    <% if (model.ProviderURL.uRLCode == "Valid"){ %>
+                                    <a id="check_for_doc" class="blue noDecoration bold" href="<%= model.ProviderURL.uRLAddress %>" onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '#']);" target="_blank" title="Check for your doctor">
+                                            Check for your Doctor
+                                    </a>
+                                    <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide">
+                                        <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/>
+                                    </a>
+                                            <%} else { model.ProviderURL.alternateText } %>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">If you are sick and go to the doctor's office or need other services?</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planCommonMedical" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="planCommonMedical">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Primary care physician office visit</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.PrimaryCareVisit %>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="planCommonMedical">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Specialist physician office visit</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.SpecialistVisit %></p>
+                            </td>
+                        </tr>
+                        <tr class="planCommonMedical">
+                            <td class="tableRightSideText">
+                                <span class="tableRightSideText">
+                                    Diagnostic test (X- ray, blood work)</span>
+                            </td>
+                            <td class="tableLeftSideText ">
+                                <p class="tableLeftSideText">
+                                    <%= model.DiagnosticTest %></p>
+                            </td>
+                        </tr>
+
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">If you need minor surgery?</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planMinorSurgery" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="planMinorSurgery">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Outpatient Facility Fee</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                        <%= model.OutpatientFacilityFee %></p>
+                            </td>
+                        </tr>
+                        <tr class="planMinorSurgery">
+                            <td class="tableRightSideText ">
+                                <span class="tableRightSideText">
+                                    Specialist physician office visit</span>
+                            </td>
+                            <td class="tableLeftSideText ">
+                                <p class="tableLeftSideText">
+                                    <%= model.OutpatientPhysicianFee %></p>
+                            </td>
+                        </tr>
+
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">If you stay overnight in the hospital?</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planOvernightHospital" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="planOvernightHospital">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Hospital facility fee</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.HospitalFacilityFee %></p>
+                            </td>
+                        </tr>
+                        <tr class="planOvernightHospital">
+                            <td class="tableRightSideText ">
+                                <span class="tableRightSideText">
+                                    Hospital physician/surgeon office visit</span>
+                            </td>
+                            <td class="tableLeftSideText ">
+                                <p class="tableLeftSideText">
+                                    <%= model.HospitalPhysicianFee %></p>
+                            </td>
+                        </tr>
+
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">If you have an Emergency?</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planEmergency" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="planEmergency">
+                            <td class="tableRightSideText ">
+                                <span class="tableRightSideText">
+                                    Emergency Room</span>
+                            </td>
+                            <td class="tableLeftSideText ">
+                                <p class="tableLeftSideText">
+                                    <%= model.EmergencyRoom %></p>
+                            </td>
+                        </tr>
+                       
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left"><a href="javascript:void(0);" data-name="Prescription-Drugs" class="contextualHelp ctx-help-bluebar" title="" data-original-title="If you need drugs to treat your illness or condition?">If you need drugs to treat your illness or condition?</a></h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planPharmacy" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="planPharmacy">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Generic-Drugs" class="contextualHelp noDecoration dashed" title="Generic drugs">Generic drugs</a>
+                                    <span class="normalWeight"> (Purchase from Pharmacy)</span>
+                                </span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <% if (!model.genericDrugs || 0 === model.genericDrugs.length) { %>
+                                    Not Covered
+                                    <% } else { %>
+                                    <%= model.genericDrugs %>
+                                    <% } %>
+                                </p>
+                            </td>
+                        </tr >
+                        <tr class="planPharmacy">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Brand-Drugs" class="contextualHelp noDecoration dashed" title="Preferred Brand Drugs">Preferred Brand Drugs</a>
+                                    <span class="normalWeight"> (Purchase from Pharmacy)</span>
+                                </span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <% if (!model.peferredBrandDrugs || 0 === model.peferredBrandDrugs.length) { %>
+                                    Not Covered
+                                    <% } else { %>
+                                    <%= model.peferredBrandDrugs %>
+                                    <% } %>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="planPharmacy">
+                            <td class="tableRightSideText ">
+                                <span class="tableRightSideText">
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Non-formulary-Drugs" class="contextualHelp noDecoration dashed" title="Specialty drugs">Specialty drugs</a>
+                                    <span class="normalWeight"> (Purchase from Pharmacy)</span>
+                                </span>
+                            </td>
+                            <td class="tableLeftSideText">
+                                <p class="tableLeftSideText">
+                                    <% if (!model.specialtyDrugs || 0 === model.specialtyDrugs.length) { %>
+                                    Not Covered
+                                    <% } else { %>
+                                    <%= model.specialtyDrugs %>
+                                    <% } %>
+                                </p>
+                            </td>
+                        </tr>
+
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">What drugs are covered in the formulary?</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planCoveredDrugs" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>  
+
+                        <tr class="planCoveredDrugs">
+                            <td class="tableRightSideText ">
+                                <span class="tableRightSideText ">
+                                    Drugs covered in <a href="javascript:void(0);" data-name="<%= model.planID %>_Formulary" class="contextualHelp noDecoration dashed " title="formulary">formulary</a>
+                                </span>
+                            </td>
+                                       
+                            <td class="tableLeftSideText ">
+                                <p class="tableLeftSideText bold">
+                                    <%if (model.ProductFormularyURL.uRLCode === "Valid" && model.ProductFormularyURL.uRLAddress !== "#" ){ %>
+                                    <a id="check_the_formulary1" class="tableTextBold noDecoration" href="<%= model.ProductFormularyURL.uRLAddress %>" 
+                                    onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%= model.ProductFormularyURL.uRLAddress %>']);" 
+                                    target="_blank" title="Check the Formulary">Check the Formulary 
+                                                
+                                    </a>
+                                    <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide">
+                                    <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+                                    <%}else{ %>
+                                    <%= model.ProductFormularyURL.alternateText%>
+                                    <%} %>
+                                    </p>
+                            </td>
+                        </tr>
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">If you have mental health or substance abuse needs?</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planMentalHealth" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>  
+
+                        <tr class="planMentalHealth">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Mental/behavioral health outpatient services</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.MentalOutpatient%></p>
+                            </td>
+                        </tr>
+                        <tr class="planMentalHealth">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Mental/behavioral health inpatient services</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.MentalInpatient%></p>
+                            </td>
+                        </tr>
+                        <tr class="planMentalHealth">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Substance use disorder outpatient services</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.SubstanceDisorderOutpatient%></p>
+                            </td>
+                        </tr>
+                        <tr class="planMentalHealth">
+                            <td class="tableRightSideText">
+                                <span class="tableRightSideText">
+                                    Substance use disorder inpatient services</span>
+                            </td>
+                            <td class="tableLeftSideText ">
+                                <p class="tableLeftSideText">
+                                    <%= model.SubstanceDisorderInpatient%></p>
+                            </td>
+                        </tr>
+
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">If you become pregnant?</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planPregnant" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>     
+
+                        <tr class="planPregnant">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Prenatal postnatal care</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.PrenatalPostnatalCare%></p>
+                            </td>
+                        </tr>
+                        <tr class="planPregnant">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    Delivery and all inpatient services for maternity care</span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <p class="tableLeftSideText">
+                                    <%= model.DeliveryInpatient%></p>
+                            </td>
+                        </tr>
+                        <tr class="planPregnant">
+                            <td class="tableRightSideText">
+                                <span class="tableRightSideText">
+                                    Plan Brochure</span>
+                            </td>
+                            <td class="tableLeftSideText">
+                                <p class="tableLeftSideText">
+                                    <a id="read_brochure" class="tableTextBold noDecoration  bold" href="http://docs.anthem.com/wellpoint/docs/viewDocument?mcItemNbr=VABR13005XLD" onclick="_gaq.push(['_trackEvent', 'outbound', 'click', 'http://docs.anthem.com/wellpoint/docs/viewDocument?mcItemNbr=VABR13005XLD']);" target="_blank" title="Link to plan brochure">Possible link to Brochure
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                             
+                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                <div class="darkerBlueBackground expandTablePad"></div>
+                                <h3 class="expandText left">Benefits</h3>
+                                <div class="expcol-container right expandText">
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planSummary" title="collapse">Close -</a>
+                                </div>
+                            </td>
+                        </tr>     
+
+
+                        <tr class="planSummary">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Included-Benefits" class="contextualHelp noDecoration dashed" title="Included Benefits">Included Benefits</a></span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <% if(model.includedBenfits.length >0){%>
+                                <p>
+                                <ul>
+                                    <% _.each(model.includedBenfits, function(val, i) { %>
+                                        <li class="tableText"><%= model.includedBenfits[i] %></li>
+                                    <%});%>
+                                </ul>
+                                </p>
+                                <%}%>
+                            </td>
+                        </tr>
+                        <tr class="planSummary">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Excluded-Benefits" class="contextualHelp noDecoration dashed" title="Excluded Benefits">Excluded Benefits</a></span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                <% if(model.excludedBenfits.length >0){%>
+                                <p>
+                                <ul>
+                                    <% _.each(model.excludedBenfits, function(val, i) { %>
+                                        <li class="tableText"><%= model.excludedBenfits[i] %></li>
+                                    <%});%>
+                                </ul>
+                                </p>
+                                <%}%>
+                            </td>
+                        </tr>
+                        <tr class="planSummary">
+                            <td class="tableRightSideText bottomGreyBorder">
+                                <span class="tableRightSideText">
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Limited-Benefits" class="contextualHelp noDecoration dashed" title="Limited Benefits">Limited Benefits</a></span>
+                            </td>
+                            <td class="tableLeftSideText bottomGreyBorder">
+                                    <% if(model.limitedBenfits.length >0){%>
+                                    <p>
+                                <ul>
+                                    <% _.each(model.limitedBenfits, function(val, i) { %>
+                                        <li class="tableText"><%= model.limitedBenfits[i] %></li>
+                                    <%});%>
+                                </ul>
+                                </p>
+                                <%}%>
+                            </td>
+                        </tr>
+                        <tr class="planSummary">
+                            <td class="tableRightSideText">
+                                <span class="tableRightSideText">
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Benefit-Available-for-Purchase" class="contextualHelp noDecoration dashed" title="Benefits Available for Purchase at Additional Cost">Benefits Available for Purchase at Additional Cost</a></span>
+                            </td>
+                            <td class="tableLeftSideText">
+                                <% if(model.additionalBenfits.length >0){%>
+                                <ul>
+                                    <% _.each(model.additionalBenfits, function(val, i) { %>
+                                        <li class="tableText"><%= model.additionalBenfits[i] %></li>
+                                    <%});%>
+                                </ul>
+                                <%}%>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Second Table (closed)-->
+            </div>
+        </div>
+        <div class="detailBottom">
+                        
+        </div>
+    </div>
+                
+</div>
+        
+    <!-- end blueContainer-->
+

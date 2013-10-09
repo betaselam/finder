@@ -1,0 +1,121 @@
+﻿
+@media print
+{
+	/*shared styles------*/
+	.article
+	{
+		border:1px solid #666;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+	}
+	
+	.btn
+	{
+		border:1px solid #666 !important;
+	}
+	
+	.btn-info,
+	.btn-primary,
+	.btn-small {
+	  color: #000 !important;
+	  border-color: #666 !important;
+	  background-color: #fff !important;
+	  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ) !important; /* IE6-9 */
+	  background-image: none !important;
+	  outline-offset:2px !important;
+	}
+	
+	#footer
+	{
+		display:none;
+	}
+	
+	tr.hideContent
+	{
+		
+		display:table-row;
+	}
+	
+	.expcol-container
+	{
+		display:none;
+	}
+	
+	table
+    {
+    	table-layout:fixed;
+    	
+    }
+	
+	tr,td,th,p
+	{
+	    page-break-inside:avoid;
+	}
+	/*--------RESULTS PAGE PRINT -------------------------------------------------------*/
+	#leftHand-rail.navContainer,
+	.sort-container,
+	.pagination-container
+	
+	{
+		display:none;
+	}
+	
+	.indexCompare
+	{
+		visibility:hidden;
+	}
+	
+	.cardContainer
+	{
+		width:90%;
+		float:none;
+		margin:0 auto;
+	}
+	
+	
+	
+	.results-compare-container,
+	.compare-entry
+	{
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		border:1px solid #666;
+	}
+	
+	
+	.indexBodyCol
+	{
+		outline:#000 solid 1px;
+	}
+	
+	.article-footer-gray
+	{
+		border-top:1px solid #666;
+	}
+	
+	
+	.indexCompare div
+	{}
+
+    .btn-print, 
+    .SBCButton a,
+    .print-hide 
+    {
+        display: none;
+    }
+    
+    
+	/*-----------------compare print-----------------------------*/
+    
+    
+    
+    
+    table.compare-table a:link:after,
+    table.compare-table a:visited:after {
+        content: "";
+    }
+    
+    
+}

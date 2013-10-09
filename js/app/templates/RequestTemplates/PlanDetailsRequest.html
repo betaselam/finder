@@ -1,0 +1,39 @@
+﻿<p:IndividualPlanBenefitRequest xmlns:p="http://rbis.cms.org/api" xmlns:p1="http://rbis.cms.org/api-types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://rbis.cms.org/api IndividualPlanBenefitRequest.xsd">
+<p:Enrollees>
+    <p1:Primary>
+      <p1:DateOfBirth><%= input.primary.dateOfBirth %></p1:DateOfBirth>
+      <p1:Gender><%= input.primary.gender %></p1:Gender>
+      <p1:TobaccoUser><%= input.primary.tobaccoUser %></p1:TobaccoUser>
+    </p1:Primary>
+    <% if(input.spouse !== null) {%>
+     <p1:Spouse>
+      <p1:DateOfBirth><%= input.spouse.dateOfBirth %></p1:DateOfBirth>
+      <p1:Gender><%= input.spouse.gender %></p1:Gender>
+      <p1:TobaccoUser><%= input.spouse.tobaccoUser %></p1:TobaccoUser>
+    </p1:Spouse> 
+    <% } %>
+    <% for(i = 0; i< input.children.length ; i++){ %>
+     <p1:Child<%= i+1 %>>
+      <p1:DateOfBirth><%= input.children[i].dateOfBirth %></p1:DateOfBirth>
+      <p1:Gender><%= input.children[i].gender %></p1:Gender>
+      <p1:TobaccoUser><%= input.children[i].tobaccoUser %></p1:TobaccoUser>
+    </p1:Child<%= i+1 %>> 
+   <%} %>
+</p:Enrollees>
+<p:Location>
+  	<p1:ZipCode><%= input.zipcode %></p1:ZipCode> 
+	 <% if(input.countyname !== "" && input.stateCode !== ""){ %>
+      <p1:County>
+         <p1:CountyName><%= input.countyName %></p1:CountyName>
+         <p1:StateCode><%= input.stateCode %></p1:StateCode>
+      </p1:County>
+      <% } %>
+</p:Location>
+<p:InsuranceEffectiveDate><%= input.insuranceEffectiveDate %></p:InsuranceEffectiveDate> 
+<p:PlanIDs>
+    <% for(i=0; i<input.planId.length ; i++){ %>
+	<p:PlanID><%= input.planId[i]%></p:PlanID>
+    <%} %>
+	
+</p:PlanIDs>
+</p:IndividualPlanBenefitRequest>

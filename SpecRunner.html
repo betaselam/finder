@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+  <link rel="stylesheet" type="text/css" href="css/jasmine.css"/>
+  <script type="text/javascript" src="js/libs/jasmine.js"></script>
+  <script type="text/javascript" src="js/libs/jasmine-html.js"></script>
+  <script type="text/javascript" src="js/libs/require.js" data-main="js/app/config/config"></script>
+  <script type="text/javascript" src="/js/app/config/environment/globals.js"> </script>
+
+</head>
+<body>
+    <script type="text/javascript">
+        // Add your Jasmine spec files here
+        require(["../../test/specs/models/counties.spec",
+                "../../test/specs/models/plan.spec",
+                "../../test/specs/models/product.spec",
+                "../../test/specs/models/plandetails.spec",
+                "../../test/specs/models/productdetails.spec",
+               
+               
+                "../../test/specs/collections/plan.spec",
+                "../../test/specs/collections/plancompare.spec",
+                "../../test/specs/collections/product.spec",
+                "../../test/specs/collections/productcompare.spec",
+
+
+                "../../test/specs/views/index.spec",
+               
+                "../../test/specs/views/planhome.spec",
+                "../../test/specs/views/planresults.spec",
+                "../../test/specs/views/plancompare.spec",
+                "../../test/specs/views/plandetails.spec",
+
+                "../../test/specs/views/producthome.spec",
+                "../../test/specs/views/productresults.spec",
+                "../../test/specs/views/productcompare.spec",
+                "../../test/specs/views/productdetails.spec",
+
+                "../../test/specs/routers/router.spec"
+
+        ],
+        function (CountiesModelSpec,
+                  PlanModelSpec,
+                  ProductModelSpec,
+                  planDetailsModelSpec,
+                  productDetailsModelSpec,
+                  
+                  PlanCollectionSpec,
+                  PlanCompareCollectionSpec,
+                  ProductCollectionSpec,
+                  ProductCompareCollectionSpec,
+
+                  IndexViewSpec,
+                  PlanCompareSpec,
+                  PlanDetailsSpec,
+                  PlanResultsSpec,
+                  PlanHomeSpec,
+                  ProductHomeSpec,
+                  ProductDetailsSpec,
+                  ProductHomeSpec,
+                  ProductResultsSpec,
+
+                  DesktopRouterSpec
+                  ) {
+
+            jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
+            jasmine.getEnv().execute();
+        });
+    </script>
+</body>
+</html>

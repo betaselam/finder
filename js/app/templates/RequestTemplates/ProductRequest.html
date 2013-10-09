@@ -1,0 +1,44 @@
+﻿<p:SmallGroupProductQuoteRequest xmlns:p="http://rbis.cms.org/api" xmlns:p1="http://rbis.cms.org/api-types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://rbis.cms.org/api SmallGroupProductQuoteRequest.xsd ">
+   <p:NumberOfEmployees><%= input.numberOfEmployees %></p:NumberOfEmployees>
+   <p:Location>
+      <p1:ZipCode><%= input.zipcode %></p1:ZipCode>
+      <% if(input.countyname !== "" && input.stateCode !== ""){ %>
+      <p1:County>
+         <p1:CountyName><%= input.countyName %></p1:CountyName>
+         <p1:StateCode><%= input.stateCode %></p1:StateCode>
+      </p1:County>
+      <% } %>
+   </p:Location>
+   <p:InsuranceEffectiveDate><%= input.insuranceEffectiveDate %></p:InsuranceEffectiveDate>
+   <% if (input.isFilterAnalysisRequiredIndicator!=""){ %>
+   <p:IsFilterAnalysisRequiredIndicator><%= input.isFilterAnalysisRequiredIndicator %></p:IsFilterAnalysisRequiredIndicator>
+         <% } %>
+   <% if (input.pageNumber!="" && input.pageSize!=""){ %>
+   <p:PaginationInformation>
+      <p1:PageNumber><%= input.pageNumber %></p1:PageNumber>
+      <p1:PageSize><%= input.pageSize %></p1:PageSize>
+   </p:PaginationInformation>
+         <% } %>
+   <% if(input.sort !== null){ %>
+  <p:SortOrder>
+            <p1:SortField><%= input.sort.sortField %></p1:SortField>
+            <p1:SortDirection><%= input.sort.sortDirection %></p1:SortDirection>
+  </p:SortOrder>
+  <% } %>
+   <p:Filter>
+                    <% if(input.ptype !== ""){ %><p1:ProviderTypes><%= input.ptype.toUpperCase() %></p1:ProviderTypes><% } %>
+                    <% if(input.companies !== "" && input.companies.length > 0 ){ %>
+                    <% for(var i=0;i < input.companies.length ; i++){ %>
+                     <p1:Issuers><%= input.companies[i] %></p1:Issuers>
+                    <%} } %>
+                    <% if(input.adftrs !== ""){  if(input.adftrs.toLowerCase() === "hsa eligible") {%><p1:HSAEligibleIndicator>true</p1:HSAEligibleIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "domestic partner coverage"){ %><p1:DomesticPartnerIndicator>true</p1:DomesticPartnerIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "same sex coverage"){ %><p1:SameSexIndicator>true</p1:SameSexIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "maternity coverage"){ %><p1:MaternityInNetworkCoverageIndicator>true</p1:MaternityInNetworkCoverageIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "mental health coverage"){ %><p1:MentalInNetworkCoverageIndicator>true</p1:MentalInNetworkCoverageIndicator><% } %>
+                    <% if(input.adftrs.toLowerCase() === "rx coverage"){ %><p1:PrescriptionInNetworkCoverageIndicator>true</p1:PrescriptionInNetworkCoverageIndicator><% } } %>
+                   
+
+         </p:Filter>
+  
+</p:SmallGroupProductQuoteRequest>

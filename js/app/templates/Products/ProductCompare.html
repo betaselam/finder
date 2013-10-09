@@ -1,0 +1,509 @@
+﻿<% if(model.length === 0 ){ %>
+<div class="title-print-header">
+	<h1 class="headersmall header-bold" style="visibility:hidden"><%= model.length %> Insurance Products</h1>
+	<button class="btn btn-small btn-print" onclick="window.print()"><i class="icon-print" aria-hidden="true" title="Print"></i>Print</button>
+</div>
+<div class="article compare-no-items"> 
+    <p>You have no insurance products selected.<br />
+    Please go back to your <b><a data-name="plans" href="javascript:void(0);" title="List of Products" class="pageNavigation"><span data-name="products" class="pageNavigation">list of products.</span></a></b></p>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		//focus to beginning of content when all plans removed
+		$('#content-start').focus();
+	});
+</script>
+<%}else{ %>
+
+
+<div class="title-print-header">
+	<h1 class="headersmall header-bold"><%= model.length %> Insurance Products</h1>
+	<button class="btn btn-small btn-print" onclick="window.print()"><i class="icon-print" aria-hidden="true" title="Print"></i>Print</button>
+</div>
+
+<!---begin table markup--->
+<div class="article article-no-padding">
+	<table class="compare-table" width="100%" summary="The Product Compare Data table compares the data for your selected products. The table contains links to the Details page for each product as well as external links to the products' websites. Each sub-section within the table can be expanded or closed using the Expand/Close links. There are also help information links for certain terms within the table. Products can be removed from comparison by selecting the Remove links.">
+	<caption class="HiddenText">Product Compare Data</caption>
+		<thead>
+			<tr>
+				<!---get compare header--->
+				<% _.each(model, function(val, i) { %>
+					<th id="plan_<%= i+1 %>" abbr="<%= model[i].attributes.productName %>" class="table-col<%= model.length %>">
+						<a class="removeProduct" href="#" onclick="return false;" productid="<%= model[i].attributes.productID%>" productname="<%= model[i].attributes.productName %>" title="Remove <%= model[i].attributes.productName %>">
+							<i class="icon-circle_remove removeProduct print-hide" aria-hidden="true" productid="<%= model[i].attributes.productID%>" productname="<%= model[i].attributes.productName %>" ><span class="HiddenText">Remove <%= model[i].attributes.productName %></span></i>
+						</a>
+						<h2>
+							<a href="javascript:void(0);" productId="<%= model[i].attributes.productID %>" class="productDetailsLink" title="<%= model[i].attributes.productName %>"><%= model[i].attributes.productName %></a>
+						</h2>
+						<%= model[i].attributes.issuerNameText%>
+						<button class="btn btn-primary btn-small btn-compare-details productDetailsLink print-hide" productId="<%= model[i].attributes.productID %>"  title="Details for <%= model[i].attributes.productName %>">details <span class="HiddenText">for <%= model[i].attributes.productName %></span></button> 
+						
+					</th>
+				<%});%>
+			</tr>
+		</thead>
+		<tbody>
+			
+
+			<!---blue bar dividers--->
+			<tr>
+				
+				<th id="section_1" abbr="Summary of Cost & Coverage"  class="compare-bluebar" colspan="<%= model.length %>"><h3>Summary of Cost & Coverage</h3>
+				<div class="expcol-container compare-expcoll">
+						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="content-summary" data-name="Summary of Cost & Coverage" title="collapse"><span class='HiddenText'>Summary of Cost & Coverage</span>Close <span aria-hidden="true">-</span></a>
+				</div>
+				</th>
+				
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<% if(model[i].attributes.averageCostPerEnrollee){ %>
+							<a href="javascript:void(0);" data-name="Average-Cost-Per-Enrollee" class="contextualHelp" title="Average cost per enrollee">Average cost per enrollee</a><br /> <span class="highlight-rate"><%= model[i].attributes.averageCostPerEnrollee %>/mo</span>
+							<% }else { %>
+							<a href="javascript:void(0);" data-name="Average-Cost-Per-Enrollee" class="contextualHelp" title="Average cost per enrollee">Average cost per enrollee</a><br />Estimate is not available at this time.
+						<% }%>
+						
+					</td>
+				<%});%>
+			</tr>
+
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p><b>How accurate is this amount?</b></p>
+						<p>
+							<% if (model[i]){ %>
+							The actual cost per month may be significantly higher or lower than the average costs shown here, based on an employee&#39;s choice of deductible and cost sharing options as well as other factors.            
+							<%}%>
+						</p>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p><a href="javascript:void(0);" data-name="Available-Deductibles" class="contextualHelp" title="Available Deductibles">Available Deductibles</a></p>
+						<p>
+							InNetwork:<br />
+							<b><% if(model[i].attributes.InNetworkCostSharing.annualDeductibleAmount === "Not Applicable") {%>
+										Not applicable. See provider's plan brochure for details.
+									<%}else{ %>
+								<%= model[i].attributes.InNetworkCostSharing.annualDeductibleAmount %>
+							<%} %></b>
+						</p>
+						<p>
+							Out-of-Network:<br />
+							<b><% if(model[i].attributes.OutNetworkCostSharing.annualDeductibleAmount === "Not Applicable") {%>
+										Not applicable. See provider's plan brochure for details.
+									<%}else{ %>
+											<%= model[i].attributes.OutNetworkCostSharing.annualDeductibleAmount %>
+							 <%} %></b>
+						</p>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>
+							<a href="javascript:void(0);" data-name="Annual-Out-of-Pocket-Maximum" class="contextualHelp" title="Annual Out-of-Pocket Maximum Options">Annual Out-of-Pocket Maximum Options</a>
+						</p>
+						<p>
+							<b> <%= model[i].attributes.InNetworkCostSharing.annualOOPLimitAmount %></b>
+						</p>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>
+							<a href="javascript:void(0);" data-name="Health-Savings-Account" class="contextualHelp" title="Are any plans under this product Health Savings Account (HSA) eligible?">Are any plans under this product Health Savings Account (HSA) eligible?</a>
+						</p>
+						<p>
+							<b><%= model[i].attributes.hSAEligibleIndicator%></b>
+						</p>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>How can I find a doctor in this product's network?</p>
+						<p>
+							
+								<% if (model[i].attributes.ProviderURL.uRLCode === "Valid"){ %>
+								<a id="check_for_doc" class="blue" href="<%= model[i].attributes.ProviderURL.uRLAddress %>" 
+								onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '#']);" target="_blank" title="Check for your doctor for <%= model[i].attributes.productName %>">
+									Check for your Doctor
+									<!--<img alt="" src="http://finder.healthcare.gov/images/external-link-small-icon.gif" />-->
+								</a>
+								<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank">
+										<img alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+								<%} else { %>
+									<b><%= model[i].attributes.ProviderURL.alternateText %></b>
+								<%} %>
+							
+						</p>
+						
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>
+							<a href="javascript:void(0);" data-name="Doctor-Choice" class="contextualHelp" title="Doctor choice">Doctor choice</a>
+						</p>
+						<p>
+							<b> <%= model[i].attributes.providerType %></b>
+							<% if (model[i].attributes.providerType ==="PPO"){ %>
+							<i data-name="<%= model[i].attributes.planID %>_Provider-Type-PPO"  class="icon-circle_question_mark compare-question-mark contextualHelp" aria-hidden="true" title="info on PPO"></i>
+							<%} else if (model[i].attributes.providerType ==="HMO"){ %>
+							<i data-name="<%= model[i].attributes.planID %>_Provider-Type-HMO"   class="icon-circle_question_mark compare-question-mark contextualHelp" aria-hidden="true" title="info on HMO"></i>
+							<%} else if (model[i].attributes.providerType ==="INDEMNITY"){ %>
+							<i data-name="<%= model[i].attributes.planID %>_Provider-Type-INDEMNITY"  class="icon-circle_question_mark compare-question-mark contextualHelp" aria-hidden="true" title="info on INDEMNITY"></i>
+							<%} else if (model[i].attributes.providerType ==="POS"){ %>
+							<i data-name="<%= model[i].attributes.planID %>_Provider-Type-POS"  class="icon-circle_question_mark compare-question-mark contextualHelp" aria-hidden="true" title="info on POS"></i>
+							<%} else if (model[i].attributes.providerType ==="EPO"){ %>
+							<i data-name="<%= model[i].attributes.planID %>_Provider-Type-EPO"  class="icon-circle_question_mark compare-question-mark contextualHelp" aria-hidden="true" title="info on EPO"></i>
+							<%} else {%>
+							(<%= model[i].attributes.providerType %>)
+							<%} %>
+						</p>
+						
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>Annual In-Network Maximum Benefit</p>
+						<p>
+							
+								<% if(model[i].attributes.InNetworkCostSharing.annualMaxBenefitAmount === "Not Applicable"){ %>
+										<b> No Maximum</b>
+									<%}else{ %>
+										<b> <%=model[i].attributes.InNetworkCostSharing.annualMaxBenefitAmount %></b>
+								   <%} %>
+										</p>
+									</td>
+								<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>
+							<a href="javascript:void(0);" data-name="Range-of-Copay" class="contextualHelp" title="Range of Copay Options">Range of Copay Options</a><br />
+							<em>Minimum and maximum copay amounts</em>
+						</p>
+
+						<p>
+							In-Network: <br /> <span class="tableText">
+							<b> <% if(model[i].attributes.InNetworkCostSharing.pCPCopayAmount === "Not Applicable") { %>
+								Not applicable. Other cost-sharing may apply (such as deductible or co-insurance).
+							<%}else{ %>
+								<%=model[i].attributes.InNetworkCostSharing.pCPCopayAmount %>
+							<%} %></b> 
+                            </span>
+						</p>
+						<p>
+							Out-of-Network: <br /> <span class="tableText">
+							<b> <% if(model[i].attributes.OutNetworkCostSharing.pCPCopayAmount === "Not Applicable") { %>
+								Not applicable. Other cost-sharing may apply (such as deductible or co-insurance).
+							<%}else{ %>
+								<%=model[i].attributes.OutNetworkCostSharing.pCPCopayAmount %>
+							<%} %></b> 
+						    </span>
+						</p>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>
+							<a href="javascript:void(0);" data-name="Range-of-Co-insurance" class="contextualHelp" title="Range of Co-Insurance Options">Range of Co-Insurance Options</a><br />
+							<em>Minimum and maximum co-insurance amounts</em>
+						</p>
+
+						<p>
+							In-Network:<br />
+							<b> <% if(model[i].attributes.InNetworkCostSharing.coinsuranceRate === "Not Applicable") { %>
+								Not applicable. Other cost-sharing may apply (such as deductible or co-insurance).
+							<%}else{ %>
+								<%=model[i].attributes.InNetworkCostSharing.coinsuranceRate %>
+							<%} %></b> 
+						
+						</p>
+						<p>
+							Out-of-Network:  <br />
+							<b> <% if(model[i].attributes.OutNetworkCostSharing.coinsuranceRate === "Not Applicable") { %>
+								Not applicable. Other cost-sharing may apply (such as deductible or co-insurance).
+							<%}else{ %>
+								<%=model[i].attributes.OutNetworkCostSharing.coinsuranceRate %>
+							<%} %></b> 
+						
+						</p>
+					
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>What drugs are covered by this insurance product?</p>
+						<p>
+						<%if (model[i].attributes.ProductFormularyURL.uRLCode === "Valid" && model[i].attributes.ProductFormularyURL.uRLAddress !== "#" ){ %>
+						<a id="check_the_formulary1" class="tableTextBold" href="<%= model[i].attributes.ProductFormularyURL.uRLAddress %>" 
+						onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%= model[i].attributes.ProductFormularyURL.uRLAddress %>']);" 
+						target="_blank" title="Check the Formulary for <%= model[i].attributes.productName %>">Check the Formulary 
+						<!--<img alt="" src="http://finder.healthcare.gov/images/external-link-small-icon.gif"/>-->
+						</a>
+						<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank">
+								<img alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+						<%}else{ %>
+							<b><%= model[i].attributes.ProductFormularyURL.alternateText%></b>
+						<%} %>
+						</p>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>Does this product allow enrollment of same-sex partners?</p>
+						<p><b> <%= model[i].attributes.sameSexPartnerIndicator %></b> </p>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-summary">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_1">
+						<p>Does this product allow enrollment of domestic partners?</p>
+						<p><b> <%= model[i].attributes.domesticPartnerIndicator %></b> </p>
+					</td>
+				<%});%>
+			</tr>
+
+			<!---blue bar dividers--->
+			<tr>
+				
+				<th id="section_2" abbr="Benefits" class="compare-bluebar" colspan="<%= model.length %>">
+					<h3>Benefits</h3>
+					<div class="expcol-container compare-expcoll">
+						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="content-benefits" data-name="Benefits" title="collapse"><span class='HiddenText'>Benefits</span>Close <span aria-hidden="true">-</span></a>
+					</div>
+				</th>
+				
+			</tr>
+
+			<tr class="content-benefits">
+				
+				<th id="sect2_subsection1" headers="section_2" class="compare-bluebarlight" colspan="<%= model.length %>">
+					<h4><a href="javascript:void(0);" data-name="Included-Benefits" class="contextualHelp" title="Included Benefits">Included Benefits</a></h4>
+				</th>
+				
+			</tr>
+
+			<tr class="content-benefits">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_2 sect2_subsection1">
+						<% if(model[i].attributes.includedBenefits.length >0){%>
+						<ul>
+							<% _.each(model[i].attributes.includedBenefits, function(val, j) { %>
+								<li class="tableText"><%= model[i].attributes.includedBenefits[j] %></li>
+							<%});%>
+						</ul>
+						<%}%>
+						
+					</td>
+				<%});%>
+			</tr>
+
+
+			<tr class="content-benefits">
+				
+				<th id="sect2_subsection2" headers="section_2" class="compare-bluebarlight" colspan="<%= model.length %>">
+					<h4><a href="javascript:void(0);" data-name="Excluded-Benefits" class="contextualHelp" title="Excluded Benefits">Excluded Benefits</a></h4>
+				</th>
+				
+			</tr>
+
+
+			<tr class="content-benefits">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_2 sect2_subsection2">
+						 <% if(model[i].attributes.excludedBenefits.length >0){%>
+						<ul>
+							<% _.each(model[i].attributes.excludedBenefits, function(val, j) { %>
+								<li class="tableText"><%= model[i].attributes.excludedBenefits[j] %></li>
+							<%});%>
+						</ul>
+                <%}%>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-benefits">
+				
+				<th id="sect2_subsection3" headers="section_2" class="compare-bluebarlight" colspan="<%= model.length %>">
+					<h4><a href="javascript:void(0);" data-name="Limited-Benefits" class="contextualHelp" title="Limited Benefits">Limited Benefits</a></h4>
+				</th>
+				
+			</tr>
+
+			<tr class="content-benefits">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_2 sect2_subsection3">
+						<% if(model[i].attributes.limitedBenefits.length >0){%>
+						<ul>
+							<% _.each(model[i].attributes.limitedBenefits, function(val, j) { %>
+								<li class="tableText"><%= model[i].attributes.limitedBenefits[j] %></li>
+							<%});%>
+						</ul>
+						<%}%>
+					</td>
+				<%});%>
+			</tr>
+
+
+			<tr class="content-benefits">
+				
+				<th id="sect2_subsection4" headers="section_2" class="compare-bluebarlight" colspan="<%= model.length %>">
+					<h4><a href="javascript:void(0);" data-name="Benefit-Available-for-Purchase" class="contextualHelp" title="Benefits Available For Purchase at Additional Cost">Benefits Available For Purchase at Additional Cost</a></h4>
+				</th>
+				
+			</tr>
+
+			<tr class="content-benefits">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_2 sect2_subsection4">
+						<% if(model[i].attributes.additionalBenefits.length >0){%>
+						<ul>
+							<% _.each(model[i].attributes.additionalBenefits, function(val, j) { %>
+								<li class="tableText"><%= model[i].attributes.additionalBenefits[j] %></li>
+							<%});%>
+						</ul>
+						<%}%>
+					</td>
+				<%});%>
+			</tr>
+
+			<!---blue bar dividers--->
+			<tr>
+				
+				<th id="section_3" abbr="More Benefits" class="compare-bluebar" colspan="<%= model.length %>">
+					
+					<h3>More Benefits</h3>
+					<div class="expcol-container compare-expcoll">
+						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="content-more-benefits" data-name="More Benefits" title="collapse"><span class='HiddenText'>More Benefits</span>Close <span aria-hidden="true">-</span></a>
+					</div>
+				</th>				
+			</tr>
+
+			<tr class="content-more-benefits">
+				
+				<th id="sect3_subsection1" headers="section_3" class="compare-bluebarlight" colspan="<%= model.length %>">
+					<h4>Insurer's Phone</h4>
+				</th>
+				
+			</tr>
+
+			<tr class="content-more-benefits">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_3 sect3_subsection1">
+						 <%= (model[i].attributes.issuerTollFreeNumber === model[i].attributes.issuerLocalNumber) ?  model[i].attributes.issuerLocalNumber : model[i].attributes.issuerTollFreeNumber +', '+ model[i].attributes.issuerLocalNumber %>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-more-benefits">
+				
+				<th id="sect3_subsection2" headers="section_3" class="compare-bluebarlight" colspan="<%= model.length %>">
+					<h4>Insurer's Website</h4>
+				</th>
+				
+			</tr>
+
+			<tr class="content-more-benefits">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_3 sect3_subsection2">
+						 <%if (model[i].attributes.IssuerURL.uRLCode === "Valid"){ %>
+						<a id="A2" class="tableTextBold" href="<%= model[i].attributes.IssuerURL.uRLAddress%>"
+						onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%= model[i].attributes.IssuerURL.uRLAddress%>']);" 
+						target="_blank" title="Link to website for <%= model[i].attributes.productName %>">Visit the Website
+						</a>
+						<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank">
+								<img alt="External Globe Icon" alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+						<%}else{ %>
+							<%= model[i].attributes.IssuerURL.alternateText%>
+						<%} %>
+					</td>
+				<%});%>
+			</tr>
+
+			<tr class="content-more-benefits">
+				
+				<th id="sect3_subsection3" headers="section_3" class="compare-bluebarlight" colspan="<%= model.length %>">
+					<h4>Does this product have a brochure with more information?</h4>
+				</th>
+				
+			</tr>
+
+			<tr class="content-more-benefits">
+				<!---get compare sections--->
+				<% _.each(model, function(val, i) { %>
+					<td headers="plan_<%= i+1 %> section_3 sect3_subsection3">
+						<%if (model[i].attributes.ProductBenefitURL.uRLCode === "Valid"){ %>
+						<a id="A1" class="tableTextBold" href="<%= model[i].attributes.ProductBenefitURL.uRLAddress%>"
+						onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%= model[i].attributes.ProductBenefitURL.uRLAddress%>']);" 
+						target="_blank" title="Link to plan brochure for <%= model[i].attributes.productName %>">Read the Brochure
+						</a>
+						<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank">
+								<img alt="External Globe Icon" alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+						<%}else{ %>
+							<%= model[i].attributes.ProductBenefitURL%>
+						<%} %>
+					</td>
+				<%});%>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+<%} %>

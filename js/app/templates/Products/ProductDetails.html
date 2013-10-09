@@ -1,0 +1,364 @@
+﻿<div class="title-print-header">
+	<h1>Product Details</h1>
+	<button class="btn btn-small btn-print" onclick="window.print()"><i class="icon-print" aria-hidden="true"></i>Print</button>
+</div>
+<div id="wrapper">
+	<a name="skip"></a><a name="top"></a>
+	<div id="blueTop">
+        <div id="blueContainer">
+  		    
+			<div id="WhiteContainerLayout">
+			    
+                        <div class="detailBox article clear"><!--this tag contains the whole of the blue box (open)-->	
+	                        <div class="detailTop"></div><!-- top of blue box -->
+	                        <div class="detailBckrnd"><!-- body of blue box (open) -->
+	                            <div class="indexCardContainer ">
+	                                <div class="indexCardHeader">
+		                                <div class="indexTitle">
+                                            <div class="planName">
+			                                    <h2><a href="javascript:void(0);" ><%= model.productName %></a></h2>
+                                                    <% if (model.providerType ==="PPO"){ %>
+                                                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-PPO" class="contextualHelp " style="font-weight:normal;" title="Provider Type PPO" ><%= model.providerType %></a>
+                                                <%} else if (model.providerType ==="HMO"){ %>
+                                                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-HMO" class="contextualHelp " style="font-weight:normal;" title="Provider Type HMO" ><%= model.providerType %></a>
+                                                <%} else if (model.providerType ==="INDEMNITY"){ %>
+                                                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-INDEMNITY" class="contextualHelp "style="font-weight:normal;" title="Provider Type INDEMNITY" ><%= model.providerType %></a>
+                                                <%} else if (model.providerType ==="POS"){ %>
+                                                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-POS" class="contextualHelp " style="font-weight:normal;" title="Provider Type POS"><%= model.providerType %></a>
+                                                <%} else if (model.providerType ==="EPO"){ %>
+                                                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-EPO" class="contextualHelp " style="font-weight:normal;" title="Provider-Type-EPO"><%= model.providerType %></a>
+                                                <%} else {%>
+                                                    <%= model.providerType %>
+                                                <%} %>
+                                            </div>       
+                                        </div>
+		                                <div class="spacer"></div>
+	                                </div>
+                                    <div class="insurContactBoxMiddle">
+                                        <div class="insurPhone topSmallText">
+                                            <div class="insur800num topSmallText">
+                                                <%= (model.issuerTollFreeNumber === model.issuerLocalNumber) ?  model.issuerLocalNumber : model.issuerTollFreeNumber +', '+ model.issuerLocalNumber %>
+                                            </div>
+                                            <% if (model.issuerTTYNumber != null && model.issuerTTYNumber != "") {%>
+                                            <div class="insur800num topSmallText">
+                                                TTY:<%= model.issuerTTYNumber %></div>
+                                            <%} %>
+                                        </div>
+                                        <div class="leftSide bold blue">
+                                            <% if(model.IssuerURL.uRLCode === "Valid") { %>
+                                            <span class="tableText"><a id="link_to_carrier" class=" noDecoration planTitle" href="<%=model.IssuerURL.uRLAddress %>" onclick="_gaq.push                                            (['_trackEvent', 'outbound', 'click', '#']);" target="_blank" title="Visit the Website">View website
+                                                </a>
+                                                <a href="http://www.cms.gov/goodbye.asp" target="_blank">
+                                                <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+                                                 </span>
+                                            <% } else {%>
+                                                    model.IssuerURL.alternateText
+					                        <% } %>                                      
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="indexCardBody">
+                                        <div class="indexBodyCol">
+                                            <div class="indexBodyColInner">
+				                                <p><a href="javascript:void(0);" data-name="<%= model.productID %>_Average-Cost-Per-Enrollee" class="contextualHelp" title="Average Cost Per Enrollee">Average Cost Per Enrollee</a></p>
+				                                <p><%if  (model.averageCostPerEnrollee!=null && model.averageCostPerEnrollee!="") {%>
+									                                <span class="planText bold">$<%=parseFloat(model.averageCostPerEnrollee).toFixed(2) %></span>/mo.
+									                                <%} else {%> Estimate is not available at this time<%} %></p>
+			                                </div>
+		                                </div>
+                                        <div class="indexBodyCol">
+			                                <div class="indexBodyColInner">
+				                                <p><a href="javascript:void(0);" data-name="<%= model.productID %>_Annual-Out-of-Pocket-Maximum" class="contextualHelp" title="Annual Out-of-Pocket Maximum Options">Annual Out-of-Pocket Maximum Options</a></p>
+				                                <p class="planText"><%=model.InNetworkCostSharing.annualOOPLimitAmount %></p>
+			                                </div>
+		                                </div>
+                                        <div class="indexBodyCol">
+			                                <div class="indexBodyColInner">
+				                                <p><a href="javascript:void(0);" data-name="<%= model.productID %>_Annual-In-Network-Deductible" class="contextualHelp" title="Annual In-Network Deductible Options">Annual In-Network Deductible Options</a></p>
+				                                <p class="planText"><%=model.InNetworkCostSharing.annualDeductibleAmount %></p>
+			                                </div>
+		                                </div>
+                                        <div class="indexBodyCol">
+			                                <div class="indexBodyColInner">
+				                                <p><a href="javascript:void(0);" data-name="<%= model.productID %>_Range-of-Copay" class="contextualHelp" title="Range of Copay Options">Range of Copay Options</a><p>
+				                                <p class="planText"><%=model.InNetworkCostSharing.pCPCopayAmount %></p>
+				                                <p><a href="javascript:void(0);" data-name="<%= model.productID %>_Range-of-Co-insurance" class="contextualHelp" title="Range of Co-insurance Options">Range of Co-insurance Options</a></p>
+				                                </p><%=model.InNetworkCostSharing.coinsuranceRate %></p>
+			                                </div>
+		                                </div>
+		                                <div class="spacer"></div>
+	                                </div>
+                                    <div class="indexCardFooter">
+		                                <div class="indexFooterCol hsa-col">
+			                                <a href="javascript:void(0);" data-name="<%= model.productID %>_Health-Savings-Account" class="contextualHelp" title="Health Savings Account (HSA) Eligible?">Health Savings Account (HSA) Eligible?</a><br />
+			                                <%=model.hSAEligibleIndicator %>
+		                                </div>
+                                        <div class="indexFooterCol doctorChoice-col">
+			                                <a href="javascript:void(0);" data-name="<%= model.productID %>_Doctor-Choice" class="contextualHelp" title="Doctor Choice">Doctor Choice:</a><br />
+			                                <span class="planText"><%=model.providerType %>
+											 <% if (model.providerType ==="PPO"){ %>
+					                <i data-name="<%= model.planID %>_Provider-Type-PPO" class="contextualHelp icon-circle_question_mark darkBlueText" aria-hidden="true" alt=""></i>
+					                <%} else if (model.providerType ==="HMO"){ %>
+					                <i data-name="<%= model.planID %>_Provider-Type-HMO" class="contextualHelp  icon-circle_question_mark darkBlueText" aria-hidden="true" alt=""></i>
+					                <%} else if (model.providerType ==="INDEMNITY"){ %>
+					                <i data-name="<%= model.planID %>_Provider-Type-INDEMNITY" class="contextualHelp icon-circle_question_mark darkBlueText" aria-hidden="true" alt=""></i>
+					                <%} else if (model.providerType ==="POS"){ %>
+					                <i data-name="<%= model.planID %>_Provider-Type-POS" class="contextualHelp icon-circle_question_mark darkBlueText" aria-hidden="true" alt=""></i> 
+					                <%} else if (model.providerType ==="EPO"){ %>
+					                <i data-name="<%= model.planID %>_Provider-Type-EPO" class="contextualHelp icon-circle_question_mark darkBlueText" aria-hidden="true" alt=""></i>
+					                <%} else {%>
+					                <%= model.providerType %>
+					                <%} %>
+											
+											</span>
+                                                
+		                                </div>
+		                                <div class="spacer"></div>
+	                                </div>
+                                </div>
+                            <div class="summaryBody"><!--This div goes around the bulk of the body.(open)-->
+		                        
+                                <table class="product-detail-table" width="100%" role="presentation"> <!--Top Table (open)-->
+                                
+                                    <tbody>
+                                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                                <div class="darkerBlueBackground expandTablePad"></div>
+                                                <h3 class="expandText left">Product Coverage</h3>
+                                                <div class="expcol-container right expandText">
+                                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="productCoverage" title="collapse">Close -</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">How accurate is this amount?</span>
+				                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder ">	
+					                            <p class="tableLeftSideText">The actual cost per month may be significantly higher or lower than the average costs shown here, based on an employee&#39;s choice of deductible and cost sharing options as well as other factors.</p>		
+				                            </td>
+			                            </tr>
+			
+			                            <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">Annual In-Network Maximum Benefit</span>
+				                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder tablePad" style="font-weight:bold">
+                                                <% if(model.InNetworkCostSharing.annualMaxBenefitAmount === "Not Applicable"){ %>
+                                                    No Maximum
+                                                <%}else{ %>
+				                                    <%=model.InNetworkCostSharing.annualMaxBenefitAmount %>
+                                               <%} %>
+				                            </td>
+			                           </tr>
+			                           <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">How can I find a doctor in this product's network?</span>
+				                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder tablePad">
+				                                   <% if (model.ProviderURL.uRLCode ==="Valid"){ %>
+				                                <a id="check_for_doc" href=<%= model.ProviderURL.uRLAddress %> target="_blank" title="Explanation for Doctor Choice" 
+                                                class="planSubTitle noDecoration planTitle bold">Check for your Doctor 
+                                                <!--<img alt="External Link Small Icon" src="http://finder.healthcare.gov/images/external-link-small-icon.gif" />-->
+                                                </a>
+                                                <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide ">
+                                                    <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+                                                    <% } else {%>
+							                                <%= model.ProviderURL.alternateText%>
+					                                <% } %>
+				                           </td>
+			                           </tr>
+     		
+			                           <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">
+                                                    <a href="javascript:void(0);" data-name="<%= model.productID %>_Range-of-Copay" class="contextualHelp noDecoration dashed" title="Range of Copay Options">Range of Copay Options</a>
+                                                </span>
+				                            </td>       
+				                            <td class="tableLeftSideText bottomGreyBorder ">
+					                            <p class="tableTextBold tableLeftSideText">
+					                            In-Network:  <span class="tableText ">
+                                                <% if(model.InNetworkCostSharing.pCPCopayAmount === "Not Applicable") { %>
+                                                    <br /><span class="bold">Not applicable.</span> Other cost-sharing may apply (such as deductible or co-insurance).
+                                                <%}else{ %>
+                                                    <br /><%=model.InNetworkCostSharing.pCPCopayAmount %>
+                                                <%} %>
+					                            </span><br /><br />
+					                            Out-of-Network:  <span class="tableText ">
+					                            <% if(model.OutNetworkCostSharing.pCPCopayAmount === "Not Applicable") { %>
+                                                    <br /><span class="bold">Not applicable.</span> Other cost-sharing may apply (such as deductible or co-insurance).
+                                                <%}else{ %>
+                                                    <br /><%=model.OutNetworkCostSharing.pCPCopayAmount %>
+                                                <%} %>
+                                                </span>
+                                                </p>
+				                            </td>
+			                            </tr>
+			                            <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder tablePad">
+                                                <span class="tableRightSideText tablePad">
+                                                    <br/><a href="javascript:void(0);" data-name="<%= model.productID %>_Range-of-Co-insurance" class="contextualHelp dashed noDecoration" title="Range of Co-insurance Options">Range of Co-insurance Options</a>
+                                                </span>
+				                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder ">
+					                            <p class="tableTextBold tableLeftSideText">                 
+                                                In-Network:
+                                                <% if(model.InNetworkCostSharing.coinsuranceRate === "Not Applicable") { %>
+                                                    <br /><span class="bold">Not applicable.</span> Other cost-sharing may apply (such as deductible or co-insurance).
+                                                <%}else{ %>
+                                                    <br /><%=model.InNetworkCostSharing.coinsuranceRate %>
+                                                <%} %>
+					                            <br /><br />
+					                            Out-of-Network:  <span class="tableText ">
+                                                <% if(model.OutNetworkCostSharing.coinsuranceRate === "Not Applicable") { %>
+                                                    <br /><span class="bold">Not applicable.</span> Other cost-sharing may apply (such as deductible or co-insurance).
+                                                <%}else{ %>
+                                                    <br /><%=model.OutNetworkCostSharing.coinsuranceRate %>
+                                                <%} %>
+                                                </span>
+                                                </p>
+				                            </td>
+			                            </tr>
+                                        <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">Does this product allow enrollment of same-sex partners?</span>
+				                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder ">
+							                            <p class=" tableLeftSideText " style="font-weight:bold;"><%=model.sameSexPartnerIndicator %></p>
+				                            </td>
+			                            </tr>
+			                            <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">Does this product allow enrollment of domestic partners?</span>
+				                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder ">
+							                            <p class=" tableLeftSideText " style="font-weight:bold;"><%=model.domesticPartnerIndicator %></p>
+				                            </td>
+			                            </tr>
+                                        <tr class="productCoverage">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">What drugs are covered by this insurance product?</span>
+				                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder tablePad">
+				                               <% if (model.ProductFormularyURL.uRLCode === "Valid"){ %>
+					                            <a id="check_the_formulary" href=<%= model.ProductFormularyURL.uRLAddress %> target="_blank" title="Explanation for Formulary" 
+                                                class="planSubTitle noDecoration planTitle bold">Check the Formulary 
+                                                <!--<img alt="External Link Small Icon" src="http://finder.healthcare.gov/images/external-link-small-icon.gif" />-->
+                                                </a>
+                                                <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide" >
+                                                <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+                                                <% } else {%>
+							                            <%= model.ProductFormularyURL.alternateText%>
+					                            <% } %>
+
+					                            </td>
+			                            </tr>
+			                            <tr class="productCoverage">
+				                            <td class="tableRightSideText">
+					                            <p class="tableRightSideText">Does this product have a brochure with more information?</p>
+				                            </td>
+				                            <td class="tableLeftSideText tablePad">
+                                            <% if (model.ProductBenefitURL.uRLCode==="Valid"){ %>
+                                                <a id="read_brochure" href=<%=model.ProductBenefitURL.uRLAddress %> target="_blank" title="Link to brochure URL" 
+                                                class="planSubTitle noDecoration planTitle bold">Read the Brochure 
+                                                <!--<img alt="External Link Small Icon" src="http://finder.healthcare.gov/images/external-link-small-icon.gif" />-->
+                                                </a>
+                                                <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide">
+                                                <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+				                         <% } else {%>
+							                            <%= model.ProductBenefitURL.alternateText%>
+					                            <% } %>    </td>
+			                            </tr>
+                                         
+                           
+
+                                        <tr class="darkBlueBackground boldWhiteText expandTable">
+                                            <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
+                                                <div class="darkerBlueBackground expandTablePad"></div>
+                                                <h3 class="expandText left">Benefits</h3>
+                                                <div class="expcol-container right expandText">
+                                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="productsBenefits" title="collapse">Close -</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                            
+			                            <tr class="productsBenefits">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">
+                                                    <a href="javascript:void(0);" data-name="<%= model.productID %>_Included-Benefits" class="contextualHelp noDecoration dashed" title="Included Benefits">Included Benefits</a>
+                                                </span>
+                                            </td>
+				                            <td class="tableLeftSideText bottomGreyBorder tablePad">
+                                                <% if(model.includedBenefits.length >0){%>
+                                                <ul class="tableLeftSideText">
+                                                    <% _.each(model.includedBenefits, function(val, i) { %>
+                                                        <li class="tableText"><%= model.includedBenefits[i] %></li>
+                                                    <%});%>
+                                                </ul>
+                                                <%}%>
+                                            </td>
+			                            </tr>
+			                            <tr class="productsBenefits">
+				                            <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">
+                                                    <a href="javascript:void(0);" data-name="<%= model.productID %>_Excluded-Benefits" class="contextualHelp noDecoration dashed" title="Excluded Benefits">Excluded Benefits</a>
+                                                </span>
+                                            </td>
+                                            <td class="tableLeftSideText bottomGreyBorder tablePad">
+                                                <% if(model.excludedBenefits.length >0){%>
+                        
+                                                <ul class="tableLeftSideText">
+                                                    <% _.each(model.excludedBenefits, function(val, i) { %>
+                                                        <li class="tableText"><%= model.excludedBenefits[i] %></li>
+                                                    <%});%>
+                                                </ul>
+                                                <%}%>
+                                            </td>
+                                        </tr>   
+			                            <tr class="productsBenefits">
+				                           <td class="tableRightSideText bottomGreyBorder">
+                                                <span class="tableRightSideText ">
+                                                    <a href="javascript:void(0);" data-name="<%= model.productID %>_Limited-Benefits" class="contextualHelp dashed noDecoration" title="Limited Benefits">Limited Benefits</a>
+                                                </span>
+                                             </td>
+                                             <td class="tableLeftSideText bottomGreyBorder tablePad">
+                                                    <% if(model.limitedBenefits.length >0){%>
+                        
+                                                <ul class="tableLeftSideText">
+                                                    <% _.each(model.limitedBenefits, function(val, i) { %>
+                                                        <li class="tableText"><%= model.limitedBenefits[i] %></li>
+                                                    <%});%>
+                                                </ul>
+                                                <%}%>
+                                            </td>
+			                            </tr>
+			                            <tr class="productsBenefits">
+				                            <td class="tableRightSideText">
+                                                <span class="tableRightSideText ">
+                                                    <a href="javascript:void(0);" data-name="<%= model.productID %>_Benefit-Available-for-Purchase" class="contextualHelp dashed noDecoration" title="Benefits Available for Purchase at Additional Cost">Benefits Available for Purchase at Additional Cost</a>
+                                                </span>
+                                            </td>
+                                            <td class="tableLeftSideText tablePad">
+                                                <% if(model.additionalBenefits.length >0){%>
+                        
+                                                <ul class="tableLeftSideText">
+                                                    <% _.each(model.additionalBenefits, function(val, i) { %>
+                                                        <li class="tableText"><%= model.additionalBenefits[i] %></li>
+                                                    <%});%>
+                                                </ul>
+                                                <%}%>
+                                            </td>
+			                            </tr>
+                                    </tbody>
+		                        </table>
+                            <br/>
+                            <br/>
+		                    </div>
+	                    </div><!--This div goes around the bulk of the body. (close)--> 
+	                <div class="detailBottom"><!-- bottom of blue box --></div>
+                    </div><!--this tag contains the whole of the blue box (close)-->	
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

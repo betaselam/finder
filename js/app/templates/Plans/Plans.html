@@ -1,0 +1,197 @@
+﻿   <form id="form1" action="#" class="validatorFormGroup">
+    <div class="article article-no-padding">
+        <div id="step1" class="article-inner">
+            <div id="errormsg"></div>
+                <div class="censusGroup">
+				    <h1>Please provide some basic information so that we can estimate what health plans you may be eligible for.</h1>
+                
+                    <div class="censusLeft note">
+                                    A field with an asterisk (<span class="required">*</span>) is required.
+                    </div>
+                <!--Whole of Zip Code Section (open)-->
+                    <div class="censusLeft largeBottomMargin" >                
+                        <div id="whereDiv">
+                            <p class="censusSubTitle">Where are you seeking coverage?</p>
+                        </div>
+                        
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <p class="censusSubTitle">
+                                    <label for="zip"><span class="required">*</span> Zip Code</label>
+                                </p>                        
+                                <input id="zip" class="numericOnly" maxlength="5" data-validate="notBlank zipCode validateZip"  name="zip" size="5" title="Zip Code" type="text" pattern="[0-9]*" value="<%= (planHomeModel.get("zipCode")) ? planHomeModel.get("zipCode") : "" %>"/>
+                                <div class="zipCodeDiv">xxxxx</div>
+                                <div class="spacer"></div>
+                            </div>
+                    
+                            <div class="span7" id="countySelectionDiv" style="display:none;">
+                            
+                                <p class="censusSubTitle">
+                                    <label for="countySelection"><span class="required">*</span> Select County</label>
+                                </p>
+                                <select id="countySelection" class="" name="countySelection" title="Select County" data-validate="validateCounty">
+                                    <option value="--">--</option>
+                                </select>
+                            </div>
+                            <div class="spacer"></div>
+                        </div>
+                    </div>  
+                </div>
+                <div class="censusGroup standardBottomMargin">
+                    <div id="effectiveDate" class="censusLeft">
+                        <div id="whenDiv">
+                            <p class="bold negativeBottomMargin"><span class="required">*</span> When do you want coverage to start?</p>
+                        </div>
+                        <div class="rowfuild">
+                            <div class="span4">
+                                <label for="effective" class="hidden">* Coverage start date. Expected date format MM/DD/YYYY</label>
+                                <input type="text" class="select_date dob" data-validate="notBlank notBlankDate validCoverageDate FutureDate notPastOrCurrentDate" id="effective" style="width: 165px;" name="effective" value="<%- (planHomeModel.get("effectiveDate")) ? planHomeModel.get("effectiveDate") : "" %>" maxlength="10"/>
+                                <span class="censusTableSubHeader censusItem">MM/DD/YYYY</span>
+                            </div>
+                            <div class="spacer"></div>
+                        </div>
+                    </div>
+                </div>
+            <div class="censusGroup ">
+                
+                <div id="dependants" class="censusLeft">
+                    
+                    <div id="whoDiv" class="standardBottomMargin">
+                        <p class="censusSubTitle">Who is seeking coverage?</p>
+                    </div>
+                    <div>
+                        <table id="census_table">
+                            <caption class="HiddenText">This table allows you to enter demographic data regarding your family in order to find a plan that meets your needs. The table requires data for the primary family member. You may also add data for a spouse and up to five children.</caption>
+                            <thead>
+                                <tr>
+                                    <th class="censusTableHeader1" scope="col" style="width: 10%">
+                                        Person
+                                    </th>
+                                    <th class="censusTableHeader2 " scope="col" style="width: 20%">
+                                         &nbsp;Gender
+                                    </th>
+                                    <th class="censusTableHeader3 " scope="col" style="width: 25%">
+                                         &nbsp;Date of birth<br />
+                                    </th>
+                                    <th class="censusTableHeader4 " scope="col" style="width: 20%">
+                                         &nbsp;Tobacco Use?<br />
+                                        <span class="censusTableSubHeader"> &nbsp;&nbsp;past 12 months</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="primary_applicant" >
+                                    <th class="censusTableText censusTableTextPerson" scope="row">
+                                        <div class="personMargin"><span class="required">*</span> Primary</div>
+                                    </th>
+                                    <td class="censusTableText">
+                                        <label class="HiddenText" for="primary_gender">* Primary Gender</label>
+                                        <select id="primary_gender" class="columnInputWidthLarge" data-validate="notBlank" name="primary_gender" title="Primary Gender">
+                                            <option value="">Select Gender</option>
+                                            <option value="M" <%- (planHomeModel.get("primary") && planHomeModel.get("primary").gender == "Male") ? "selected" : "" %>>Male</option>
+                                            <option value="F" <%- (planHomeModel.get("primary") && planHomeModel.get("primary").gender == "Female") ? "selected" : "" %>>Female</option>
+                                        </select>
+                                
+                                    </td>
+                                    <td class="censusTableText" >
+                                        <label class="HiddenText" for="primary">* Primary Date of Birth. Expected date format MM/DD/YYYY</label>
+                                        <div class="tableCalenderMargin">
+                                        <input type="text" class="select_date dob columnInputWidthSmall" id="primary" data-validate="notBlank notBlankDOB validPrimaryBirthDate notFutureDate" name="primary" value="<%- (planHomeModel.get("primary") && planHomeModel.get("primary") !== "" && planHomeModel.get("primary").dateOfBirth) ? planHomeModel.get("primary").dateOfBirth:""   %>" maxlength="10"  title="Primary Date of Birth" />
+                                        <span class="censusTableSubHeader">MM/DD/YYYY</span>                                
+                                        </div>
+                                    </td>
+                                    <td class="censusTableTextLast">
+                                        <label class="HiddenText" for="primary_tobacco_user">* Primary Tobacco Use</label>
+                              	        <select  id="primary_tobacco_user" class="columnInputWidthLarge" data-validate="notBlank" title="Primary Tobacco User">
+                                            <option value="">Select Usage</option>
+                                            <option value="true" <%- (planHomeModel.get("primary") && planHomeModel.get("primary").tobaccoUser == "Smoker") ? "selected" : "" %>>Yes</option>
+                                            <option value="false" <%- (planHomeModel.get("primary") && planHomeModel.get("primary").tobaccoUser == "Non-Smoker") ? "selected" : "" %>>No</option>
+                                        </select>                                
+                                    </td>
+                                </tr>
+                                <!--<tr>
+                                    <td></td>
+                                    <td><label for="primary_gender" class="hidden">Gender: </label></td>
+                                    <td><label for="primary" class="hidden">Primary date of birth: </label></td>
+                                    <td><label for="primary_tobacco_user" class="hidden">Tobacco Use: </label></td>
+                                </tr>-->
+                                <tr class="odd">
+                                    <th class="censusTableText censusTableTextPerson" scope="row">
+                                        <div class="personMargin">
+                                        Spouse
+                                        </div>
+                                    </th>
+                                    <td class="censusTableText">
+                                        <label class="HiddenText" for="spouse_gender">Spouse Gender</label>
+                                        <select id="spouse_gender" class="columnInputWidthLarge" name="spouse_gender" title="Spouse Gender">
+                                            <option value="">Select Gender</option>
+                                            <option value="M" <%- (planHomeModel.get("spouse") && planHomeModel.get("spouse").gender == "Male") ? "selected" : "" %>>Male</option>
+                                            <option value="F" <%- (planHomeModel.get("spouse") && planHomeModel.get("spouse").gender == "Female") ? "selected" : "" %>>Female</option>
+                                        </select>
+                                    </td>
+                                    <td class="censusTableText">
+                                        <label class="HiddenText" for="spouse">Spouse Date of Birth. Expected date format MM/DD/YYYY</label>
+                                        <div class="tableCalenderMargin">
+                                        <input type="text" class="select_date dob columnInputWidthSmall" id="spouse"  data-validate="notBlankDOB validSpouseBirthDate notFutureDate"  name="spouse" value="<%- (planHomeModel.get("spouse") && planHomeModel.get("spouse") !== "" && planHomeModel.get("spouse").dateOfBirth) ? planHomeModel.get("spouse").dateOfBirth:""   %>" maxlength="10" title="Spouse Date of Birth"/>
+                                        <span class="censusTableSubHeader">MM/DD/YYYY</span>
+                                        </div>
+                                    </td>
+                                    <td class="censusTableTextLast">
+                                    <!--data-validate="checkspouse"-->
+                                        <label class="HiddenText" for="spouse_tobacco_user">Spouse Tobacco Use</label>
+                                        <select id="spouse_tobacco_user" class="columnInputWidthLarge" title="Spouse Tobacco User" >
+                                            <option value="">Select Usage</option>
+                                            <option value="true" <%- (planHomeModel.get("spouse") && planHomeModel.get("spouse").tobaccoUser == "Smoker") ? "selected" : "" %>>Yes</option>
+                                            <option value="false" <%- (planHomeModel.get("spouse") && planHomeModel.get("spouse").tobaccoUser == "Non-Smoker") ? "selected" : "" %>>No</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr id="child_census_row_0">
+                                    <th class="censusTableText censusTableTextPerson" scope="row">
+                                        <div id="divChild_1" class="personMargin">
+                                        Child
+                                        </div>
+                                    </th>
+                                    <td class="censusTableText">
+                                        <label class="HiddenText" for="child_0_gender">Select Child #1 Gender</label>
+                                        <select id="child_0_gender"  class="columnInputWidthLarge" name="child_0_gender" title="Child #1 Gender">
+                                            <option value="null">Select Gender</option>
+                                            <option value="M" <%- (planHomeModel.get("child0") && planHomeModel.get("child0").gender == "Male") ? "selected" : "" %>>Male</option>
+                                            <option value="F" <%- (planHomeModel.get("child0") && planHomeModel.get("child0").gender == "Female") ? "selected" : "" %>>Female</option>
+                                        </select>
+                                    </td>
+                                    <td class="censusTableText">
+                                        <label class="HiddenText" for="child_0">Child #1 Date of Birth. Expected date format MM/DD/YYYY</label>
+                                        <div class="tableCalenderMargin">
+                                        <input type="text" class="select_date dob columnInputWidthSmall" id="child_0" data-validate="notBlankDOB validBirthDate notFutureDate lessthanPrimary" name="child-1" value="<%- (planHomeModel.get("child0") && planHomeModel.get("child0") !== "" && planHomeModel.get("child0").dateOfBirth) ? planHomeModel.get("child0").dateOfBirth:""   %>" maxlength="10" title="Child #1 Date of Birth"/>
+                                        <span class="censusTableSubHeader">MM/DD/YYYY</span>
+                                        </div>
+                                </td>
+                                    <td class="censusTableTextLast">
+                                        <label class="HiddenText" for="child_0_tobacco_user">Select Child #1 Tobacco Use</label>
+                                        <select id="child_0_tobacco_user"  class="columnInputWidthLarge" title="Child #1 Tobacco Us">
+                                            <option value="">Select Usage</option>
+                                            <option value="true" <%- (planHomeModel.get("child0") && planHomeModel.get("child0").tobaccoUser == "Smoker") ? "selected" : "" %>>Yes</option>
+                                            <option value="false" <%- (planHomeModel.get("child0") && planHomeModel.get("child0").tobaccoUser == "Non-Smoker") ? "selected" : "" %>>No</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                           </tbody>
+                        </table>
+                    </div>
+                    <div class="addMoreChildren">
+                       <a id="add_child_link" href="javascript:void(0);" class="add_child_link btn btn-large " title="Add More Children">
+                            <i class="icon-circle_plus"></i> 
+                            &nbsp; Add Another Child     
+                       </a>
+                    </div> 
+                </div> 
+            </div>   
+        </div>
+		<div class="article-footer-gray censusBottom">
+			<button id="planBack" alt="Return Button Image" class="btn btn-secondary"title="Return to previous section">Back</ button>
+            <button id="smallgroupcensus" title="Search for private health insurance by zip code." alt="Submit Button Image" class="censusSubmit plangroupcensus btn btn-primary btn-xlarge" data-validationtrigger>VIEW PLANS</button>     
+		</div>
+	</div>
+</form>
+   

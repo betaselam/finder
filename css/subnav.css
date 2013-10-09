@@ -1,0 +1,295 @@
+﻿.subNav {
+	background-color:#025a80;
+	border-bottom: 1px solid #063346;
+	height: 64px;
+	z-index: 100;
+}
+.subNavigationContainer {
+	width:1000px;
+	min-width:1000px;
+	margin:0 auto;
+	padding:0 20px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+.subNavigationSection {
+	color:#fff;
+	width:1000px;
+	min-width:1000px;
+	min-height: 64px;
+	height: 65px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border-right: 1px solid #063346;
+	border-bottom: 1px solid #063346;
+	padding:0 30px;
+	display: table-row;
+	float:none;
+	position: static;
+}
+.subNavigationSection:first-child {
+	max-width: 249px;
+	padding:0 25px;
+}
+
+.subNavigationSection h1 {
+	font-size:1em;
+}
+.subNavigationSection:first-child a {
+	font-size:1.125em;
+	font-weight: 400;
+	text-align: left;
+}
+.subNavigationSection li.pull-right  {
+	padding-right:0;
+}
+.IE7 .subNavigationSection:first-child, .IE8 .subNavigationSection:first-child {
+	width: 249px;
+}
+.subNavLink {
+	display: table;
+	height: 64px;
+	width: 100%;
+	text-align: center;
+	position: relative;
+}
+.subNavLink a {
+	color: #fff;
+	display: table-cell;
+	vertical-align: middle;
+	font-size:1.125em;
+}
+.subNavLink a i {
+	vertical-align: text-bottom;
+	margin-right:10px;
+}
+.subNavLink .userName {
+	font-size: .85em;
+}
+.subNavLink a:hover {
+	text-decoration: none;
+}
+.subNavLink a i, .subNavLink a i:before {
+	text-decoration: none;
+}
+.subNavLink a:hover .iconText {
+	text-decoration: underline;
+}
+.subNavLink i, .subLink i {
+	color: #029cd2;
+	font-size: 1em;
+}
+.subNavLinkActive i {
+	color: #01435f;
+}
+.subNavLink .iconCustom-angle-left, .nav-button .iconCustom-angle-left {
+	background: #063346;
+	color:#fff;
+	font-size: 1.25em;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 0 4px 0 6px;
+	position: absolute;
+	left: -25px;
+	top: 21px;
+}
+.nav-button {
+	background: none;
+	border: 0;
+	float: left;
+	position: relative;
+	left: -15px;
+	top: 22px;
+}
+
+.nav-button:focus
+{
+	outline:#fff dotted 1px;
+}
+.nav-button .iconCustom-angle-left {
+	position: static;
+}
+.nav-button i.iconCustom-angle-left:after {
+	content: "\00a0";
+}
+
+ul.subNavigationSection li .subHeaderLink i {
+	display: table-cell;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+.subNavLink .iconCustom-angle-down {
+	font-size: 1.25em;
+	padding: 0 0 0 5px;
+	color:#fff;
+}
+.subNavLink .icon-user, .first > .subNavLink .icon-list {
+	font-size:30px;
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 12px;
+	padding-top:0;
+	padding-left: 8px;
+}
+
+.IE7 .contentContainer {
+	width: 960px;
+}
+.subNav.affix + .contentContainer {
+	margin-top: 128px;
+}
+
+
+ul.subNavigationSection li {
+	line-height: 1.25em;
+	display: table-cell;
+	vertical-align: middle;
+	border-right: 1px solid #063346;
+	padding-left: 30px;
+	padding-right: 30px;
+	/*min-width:150px;*/
+    -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+ul.subNavigationSection li.subnav-btn-container
+{
+	padding-left:0px;
+	
+}
+.subNavigationContainer.ul-myaccount ul.subNavigationSection li, .subNavigationContainer.ul-one-item ul.subNavigationSection li {
+	border-right: none;
+}
+.subNavigationContainer.ul-myaccount ul.subNavigationSection li i {
+	text-decoration: none;
+	color: #029cd2;
+	font-size: 1.5em;
+}
+
+.subNavigationContainer.my-plans ul.subNavigationSection .subLink-inner {
+	height: 64px;
+	margin: 0;
+	display: table;
+}
+
+.subNavigationContainer.ul-myaccount div + div ul.subNavigationSection li a:active, .subNavigationContainer.ul-myaccount div + div ul.subNavigationSection li a:hover, .subNavigationContainer.ul-myaccount div + div ul.subNavigationSection li a {
+	color: #fff;
+}
+.subNavigationContainer.ul-myaccount ul.subNavigationSection li i.icon-user, ul.subNavigationSection li i.icon-user {
+	font-size: 35px;
+}
+.subNavigationContainer.ul-myaccount div.pull-right .btn {
+	margin-top: 17px;
+}
+.subNavigationContainer.ul-myaccount .headerLabel {
+	line-height: 1.45em;
+}
+.subLink a {
+	color:white;
+	outline-color: #fff;
+	outline-offset: 2px;
+	text-decoration:none;
+}
+.subLink > a {
+	height: 60px;
+	display: table-cell;
+	vertical-align: middle;
+}
+.subLink > a:hover {
+	text-decoration: none;
+}
+.subNavLinkActive {
+	position: relative;
+	background: #b0e6fc;
+	border-bottom: 1px solid #9fd5eb;
+}
+.subNavLinkActive a, .subNavLinkActive i {
+	color:#01435f;
+	outline-color: #01435F;
+	text-decoration:none;
+	
+}
+ul.subNavigationSection li a i {
+	display: table-cell;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+.subNavLinkActive .headerLabel {
+	color: #01435F;
+}
+.headerLabel {
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+}
+.headerLabel.numSection {
+	padding-right: 10px;
+}
+.headerLabel a {
+	display: block;
+	text-decoration: none;
+	font-weight: 600;
+}
+.headerIcon {
+	display: table-cell;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+ul.subNavigationSection li.firstLink {
+	padding-left: 0;
+	padding-right:10px;
+	border-right:none;
+}
+ul.subNavigationSection li.firstLink .icon-list {
+	font-size:1.5em;
+	display: table-cell;
+	padding-right: 10px;
+	vertical-align: middle;
+	color: #029CD2;
+}
+
+.IE7 ul.subNavigationSection {
+	display: inline;
+}
+.IE7 ul.subNavigationSection li {
+	display: inline-block;
+	float: left;
+	padding-top: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+	min-height: 54px;
+}
+
+.blue-subnavHelp
+{
+	float: right;
+	margin-top: -45px;
+	text-transform:uppercase;
+}
+
+.blue-subnavHelp a,
+.blue-subnavHelp a:hover,
+.blue-subnavHelp a:focus
+{
+	text-decoration:none;
+	font-weight:600;
+	color:#fff;
+}
+
+.blue-subnavHelp i
+{
+	margin:4px;
+}
+
+.subnav-change-btn
+{
+	padding:10px;
+}
+
+.userRole {
+	font-size: .85em;
+	display:block;
+}

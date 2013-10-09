@@ -1,0 +1,26 @@
+﻿<div class="sort-container">
+   Sort by: <select id="ddlSort" class="ddlSort" style="width:auto">
+   <% if (input.pageType==="productResults") {%>
+<option value="OOP LIMIT - IN NETWORK,ASC">In-Network Out-of-Pocket limit, low to high</option>
+<option value="OOP LIMIT - IN NETWORK,DESC">In-Network Out-of-Pocket limit, high to low</option>
+<option value="ENROLLMENT,ASC">Enrollment, low to high</option>
+<option value="ENROLLMENT,DESC">Enrollment, high to low</option>
+<option value="AVERAGE COST PER ENROLLMENT,ASC">Estimated Monthly Base Rate, low to high</option>
+<option value="AVERAGE COST PER ENROLLMENT,DESC">Estimated Monthly Base Rate, high to low</option>
+<%} else if ((input.pageType==="planResults")) {%>
+<option value="OOP LIMIT - INDIVIDUAL - IN NETWORK,ASC">In-Network Out-of-Pocket limit, low to high</option>
+<option value="OOP LIMIT - INDIVIDUAL - IN NETWORK,DESC">In-Network Out-of-Pocket limit, high to low</option>
+<option value="BASE RATE,ASC">Estimated Monthly Base Rate, low to high</option>
+<option value="BASE RATE,DESC">Estimated Monthly Base Rate, high to low</option>
+<option value="ANNUAL DEDUCTIBLE - INDIVIDUAL - IN NETWORK,ASC">Annual Deductible, low to high</option>
+<option value="ANNUAL DEDUCTIBLE - INDIVIDUAL - IN NETWORK,DESC">Annual Deductible, high to low</option>
+<option value="ANNUAL MAX BENEFITS - FAMILY - IN NETWORK,ASC">Annual Maximum Benefits, low to high</option>
+<option value="ANNUAL MAX BENEFITS - FAMILY - IN NETWORK,DESC">Annual Maximum Benefits, high to low</option>
+<option value="ENROLLMENT,ASC">Enrollment, low to high</option>
+<option value="ENROLLMENT,DESC">Enrollment, high to low</option>
+<%} %>
+    </select>
+    <label for="ddlSort" class="HiddenText">sort dropdown</label>
+    </div>
+    
+

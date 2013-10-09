@@ -1,0 +1,77 @@
+﻿   <form id="form2" action="#" class="validatorFormGroup">
+    <div class="article article-no-padding">
+        <div id="step1" class="article-inner">
+         <div id="errormsg" class="censusGroup"></div>
+         <div class="contentWrap1"></div><div class="contentWrap2"></div>
+         
+            <div class="censusGroup standardBottomMargin">
+			    <h1>Please provide some basic information so that we can estimate what health plans your employees may be eligible for.</h1>
+            </div>
+            <div class="censusGroup">
+               <div class="censusLeft largeBottomMargin" >                
+                        <div id="whereDiv">
+                            <p class="censusSubTitle">Where are you seeking coverage?</p>
+                        </div>
+                        
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <p class="censusSubTitle">
+                                    <label for="zip"><span class="required">*</span> Zip Code</label>
+                                </p>                        
+                                <input id="zip" class="numericOnly" maxlength="5" data-validate="notBlank zipCode validateZip"  name="zip" size="5" title="Zip Code" type="text" pattern="[0-9]*" value=""/>
+                                <div class="zipCodeDiv">xxxxx</div>
+                                <div class="spacer"></div>
+                            </div>
+                    
+                            <div class="span7" id="countySelectionDiv" style="display:none;">
+                            
+                                <p class="censusSubTitle">
+                                    <label for="countySelection"><span class="required">*</span> Select County</label>
+                                </p>
+                                <select id="countySelection" class="left" name="countySelection" title="Select County" data-validate="validateCounty">
+                                    <option value="--">--</option>
+                                </select>
+                            </div>
+                            <div class="spacer"></div>
+                        </div>
+                 </div>
+                <!--Left portion of Zip Code (close)-->
+            </div>
+            
+            <div class="censusGroup standardBottomMargin">
+                    <div id="Div1" class="censusLeft">
+                        <div id="whenDiv">
+                            <p class="bold negativeBottomMargin"><span class="required">*</span> When do you want coverage to start?</p>
+                        </div>
+                        <div class="rowfuild">
+                            <div class="span4">
+                                <label for="effective" class="hidden">* Coverage start date</label>
+                                <input type="text" class="select_date dob" data-validate="notBlank notBlankDate validCoverageDate FutureDate notPastOrCurrentDate" id="effective" style="width:155px" name="effective" value="<%-(effectivedate)?effectivedate:"" %>" maxlength="10"/>
+                                <span class="censusTableSubHeader censusItem">MM/DD/YYYY</span>
+                            </div>
+                            <div class="spacer"></div>
+                        </div>
+                    </div>
+                </div>
+            <div class="censusGroup">
+                <!--Whole of Number of Employees (open)-->
+                <div class="censusLeft">
+                        <p class="censusSubTitle employeeCountselect">Number of Employees seeking coverage</p>
+                </div>
+                <div class="censusRight employeeCountSelect">
+                    <span class="icon-circle_minus icon-green decrement employeeCountSelect" data-input="employeeNum"></span>
+                    <input class="EmployeeNumTextBoxWithImage employeeCountSelect" id="employeeNum" data-validate="notBlank employeeNum" name="employeeNum" class="numericOnly" title="Number of Employees" type="text" pattern="[0-9]*" value=""/>
+                    <span class="icon-circle_plus icon-green increment employeeCountSelect" data-input="employeeNum"></span>
+                    <label for="employeeNum" class="hidden">Number of employees:</label>
+                </div>
+            </div>
+            <!--Dependents Section (close)-->
+            
+        </div>                
+		<div class="article-footer-gray censusBottom">
+			<button id="productBack" alt="Return Button Image" class="censusBack  btn btn-secondary" title="Return to previous section" >Back</button>
+            <button id="smallgroupcensus1" alt="Submit Button Image" class="censusSubmit  btn btn-primary" title="Search for private health insurance by zip code."  data-validationtrigger>View Products</button>                
+		</div>
+        <input type="hidden" id="formValidation" />
+    </div>
+   </form>

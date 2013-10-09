@@ -1,0 +1,113 @@
+﻿<div class="indexCardContainer article article-no-padding">
+	<div class="article-inner">
+		<div class="indexCardHeader">
+			<div class="indexTitle">
+				<div class="planName"><h2><a href="javascript:void(0);" planid="<%= model.planID %>" class="planDetailsButton" title="<%= model.planNameText %>"><%= model.planNameText %></a></h2></div>
+				<div class="planCompany" style="text-align:left"><%=model.issuerNameText %></div>
+			</div>
+
+			<div class="indexCompare">
+				<input id="<%= model.planID %>" name="compare_checkbox" type="checkbox" planName="<%=model.planNameText %>" value="<%=model.planNameText %>"/>						
+				<label for="<%= model.planID %>" id="lbl<%= model.planID %>">
+					<i class="headerIcon icon-charts" aria-hidden="true"></i> <b>Compare</b>
+				</label>
+			</div>
+			<noscript>
+				&lt;div&gt;
+					&lt;a href="/ihi/get_quotes?age=1&amp;amp;audience=fam&amp;amp;child_0_dob_day=&amp;amp;child_0_dob_month=&amp;amp;child_0_dob_year=&amp;amp;child_0_gender=&amp;amp;child_0_tobacco_user=false&amp;amp;child_1_dob_day=&amp;amp;child_1_dob_month=&amp;amp;child_1_dob_year=&amp;amp;child_1_gender=&amp;amp;child_1_tobacco_user=false&amp;amp;child_2_dob_day=&amp;amp;child_2_dob_month=&amp;amp;child_2_dob_year=&amp;amp;child_2_gender=&amp;amp;child_2_tobacco_user=false&amp;amp;child_3_dob_day=&amp;amp;child_3_dob_month=&amp;amp;child_3_dob_year=&amp;amp;child_3_gender=&amp;amp;child_3_tobacco_user=false&amp;amp;child_4_dob_day=&amp;amp;child_4_dob_month=&amp;amp;child_4_dob_year=&amp;amp;child_4_gender=&amp;amp;child_4_tobacco_user=false&amp;amp;compare_ids=16064VA0190006&amp;amp;effective_day=01&amp;amp;effective_month=10&amp;amp;effective_year=2013&amp;amp;is_census_page=true&amp;amp;medical_condition=y&amp;amp;no_afford=y&amp;amp;nojs=n&amp;amp;primary_dob_day=03&amp;amp;primary_dob_month=03&amp;amp;primary_dob_year=1979&amp;amp;primary_gender=M&amp;amp;primary_tobacco_user=true&amp;amp;situation=losing&amp;amp;sliders=false&amp;amp;spouse_dob_day=&amp;amp;spouse_dob_month=&amp;amp;spouse_dob_year=&amp;amp;spouse_gender=&amp;amp;spouse_tobacco_user=false&amp;amp;state=VA&amp;amp;x=86&amp;amp;y=24&amp;amp;zip=20171" title="Add this plan to lit of plans to compare." class='need_compare'&gt;Compare (up to 3)&lt;/a&gt;
+				&lt;/div&gt;
+			</noscript>
+			<div class="indexDetails">
+				<!-- <a class="need_compare" href="javascript:void(0);" planid='<%= model.planID %>'  title="Plan Details">       -->
+			    <button class="btn btn-primary btn-small btn-results-detail planDetailsButton" planid='<%= model.planID %>' title="Details for <%= model.planNameText %>">details <span class="HiddenText">for <%= model.planNameText %></span></button>
+				<!--</a>-->
+
+			</div>
+			<div class="spacer"></div>
+		</div>
+
+		<div class="indexCardBody font-small">
+			<div class="indexBodyCol">
+				<div class="indexBodyColInner">
+					<p><b><a href="javascript:void(0);" data-name="<%= model.planID %>_Estimated-Monthly-Base-Rate" class="contextualHelp" title="Estimated Monthly Base Rate">Estimated Monthly Base Rate</a></b></p>
+					<p><span class="highlight-rate">$<%=model.baseRateAmount %></span>/mo.</p>
+				</div>
+			</div>
+
+			<div class="indexBodyCol">
+				<div class="indexBodyColInner">
+					<p><b><a href="javascript:void(0);" data-name="<%= model.planID %>_In-Network-Out-of-Pocket-Limit" class="contextualHelp" title="In-Network Out-of-Pocket Limit">In-Network<br /> Out-of-Pocket Limit</a></b></p>
+					<p>Individual <br /><span class="highlight-rate"><%= model.individualAnnualOOPLimitAmount %></span></p>
+					<p>Family <br /><span class="highlight-rate"><%=model.familyAnnualOOPLimitAmount %></span></p>
+				</div>
+			</div>
+
+			<div class="indexBodyCol">
+				<div class="indexBodyColInner">
+					<p><b><a href="javascript:void(0);" data-name="<%= model.planID %>_Annual-Deductible-For-Plan" class="contextualHelp" title="Annual Deductible">Annual Deductible</a></b></p>
+					<p>Individual <br />
+					<span class="highlight-rate"><%= model.individualAnnualDeductibleAmount %></span></p>
+					<p>Family <br /><span class="highlight-rate"><%= model.familyAnnualDeductibleAmount %></span></p>
+				</div>
+		
+			</div>
+
+			<div class="indexBodyCol">
+				<div class="indexBodyColInner">
+					<p><b>Annual Maximum Benefit</b><br/>
+					<p>Individual <br /><span class="highlight-rate"><%=model.individualAnnualMaxBenefitAmount %></span></p>
+					<p>Family <br /><span class="highlight-rate"><%=model.familyAnnualMaxBenefitAmount %></span></p>
+				</div>
+		
+			</div>
+			<div class="spacer"></div>
+		</div>
+
+		<div class="indexCardFooter font-small">
+			<div class="indexFooterCol col-plan-1">
+				<p><b><a href="javascript:void(0);" data-name="<%= model.planID %>_Doctor-Choice" class="contextualHelp" title="Doctor Choice">Doctor Choice</a></b></p>
+				<p class="planText" style="margin-top: 0px;"><%=model.providerType %>
+				<% if (model.providerType ==="PPO"){ %>
+                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-PPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on PPO"></a>
+					<%} else if (model.providerType ==="HMO"){ %>
+					<a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-HMO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on HMO"></a>
+					<%} else if (model.providerType ==="INDEMNITY"){ %>
+					<a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-INDEMNITY" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on INDEMNITY"></a>
+					<%} else if (model.providerType ==="POS"){ %>
+					<a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-POS" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on POS"></a>
+					<%} else if (model.providerType ==="EPO"){ %>
+					<a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-EPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on EPO"></a>
+					<%} else {%>
+					(<%= model.providerType %>)
+					<%} %>
+				</p>
+			</div>
+
+			<div class="indexFooterCol col-plan-2">
+				<p><b>Prescription Coverage</b></p>
+				<p>
+						<%=model.prescriptionInNetworkCoverageIndicator %>
+				</p>
+			</div>
+
+			<div class="indexFooterCol col-plan-3">
+				<p><b><a href="javascript:void(0);" data-name="<%= model.planID %>_Denied-Applications" class="contextualHelp" title="How many applications are denied?">How many applications are denied?</a></b></p>
+				<p>
+					<%=model.productApplicantsDeniedPercentage %>% who applied were turned down.
+				</p>
+			</div>
+
+
+			<div class="spacer"></div>
+
+			
+		</div>
+	</div>
+
+	<div class="article-footer-gray">
+		<b><a href="javascript:void(0);" data-name="<%= model.planID %>_More-Charged" class="contextualHelp result-footer-link">You may be charged more.</a></b>
+			<%=model.productApplicantsUpRatedPercentage %>% received surcharged quotes.
+		
+	</div>
+
+</div>

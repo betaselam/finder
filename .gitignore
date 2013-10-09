@@ -1,0 +1,10 @@
+node_modules/
+coverage/
+reports/
+bin/
+obj/
+.idea/
+features/
+*.vspscc
+*.cs
+

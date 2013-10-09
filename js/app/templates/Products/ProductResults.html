@@ -1,0 +1,98 @@
+﻿<div class="indexCardContainer article">
+	<div class="indexCardHeader">
+		<div class="indexTitle">
+			<div class="planName"><h2><a href="javascript:void(0);" class="productDetailsButton" title="Product Title"  productid='<%= model.productID %>'><%= model.productNameText %></a></h2></div>
+            <div class="planCompany"><%=model.issuerNameText %></div>
+		</div>
+		<div class="indexCompare">
+			<input id="<%= model.productID %>" name="compare_checkbox" type="checkbox" productName='<%= model.productNameText %>'  />
+			<label for="<%= model.productID %>" id="lbl<%= model.productID %>">
+				<i class="headerIcon icon-charts" aria-hidden="true"></i> 
+                <b>Compare</b>
+			</label>
+			<!---hidden complare link-------
+			<span  class="planCompareHidden"><a href="javascript:void(0);" class="productCompare" title="Click to compare">Click to Compare</a></span>--->
+		</div>
+
+		<noscript>
+                &lt;a href="/sbiz/get_quotes?audience=sbiz&amp;amp;compare_ids=50727VA017&amp;amp;county=PRINCE+WILLIAM&amp;amp;effective_day=01&amp;amp;effective_month=8&amp;amp;effective_year=2013&amp;amp;employeeNum=11&amp;amp;nojs=n&amp;amp;situation=need&amp;amp;sliders=false&amp;amp;state=VA&amp;amp;x=23&amp;amp;y=8&amp;amp;zip=20109"
+                title="Add this plan to lit of plans to compare." class='need_compare'&gt;Compare
+                (up to 3)&lt;/a&gt;
+        </noscript>
+
+		<div class="indexDetails">
+			<!--<a class="need_compare" href="javascript:void(0);" productid='<%= model.productID %>' title="Product Details for <%= model.productNameText %>">-->
+			<button class="btn btn-primary btn-small btn-results-detail productDetailsButton" productid='<%= model.productID %>' title="Product Details for <%= model.productNameText %>">details <span class="HiddenText">for <%= model.productNameText %></span></button>
+			<!--</a>-->
+		</div>
+		<div class="spacer"></div>
+	</div>
+
+	<div class="indexCardBody font-small">
+		<div class="indexBodyCol">
+			<div class="indexBodyColInner">
+				<p><a href="javascript:void(0);" data-name="<%= model.productID %>_Average-Cost-Per-Enrollee" class="contextualHelp" title="Average Cost Per Enrollee">Average Cost Per Enrollee</a></p>
+				<p><%if  (model.averageCostPerEnrollee!=null && model.averageCostPerEnrollee!="") {%>
+									<span class="highlight-rate">$<%= parseFloat(model.averageCostPerEnrollee).toFixed(2) %></span>/mo.
+									<%} else {%> Estimate is not available at this time<%} %></p>
+			</div>
+		
+		</div>
+
+		<div class="indexBodyCol">
+			<div class="indexBodyColInner">
+				<p><a href="javascript:void(0);" data-name="<%= model.productID %>_Annual-Out-of-Pocket-Maximum" class="contextualHelp" title="Annual Out-of-Pocket Maximum Options">Annual Out-of-Pocket Maximum Options</a></p>
+				<p><%=model.annualOOPLimitAmount %></p>
+			</div>
+		</div>
+
+		<div class="indexBodyCol">
+			<div class="indexBodyColInner">
+				<p><a href="javascript:void(0);" data-name="<%= model.productID %>_Annual-In-Network-Deductible" class="contextualHelp" title="Annual In-Network Deductible Options">Annual In-Network Deductible Options</a></p>
+				<p><%=model.annualDeductibleAmount %></p>
+			</div>
+		
+		</div>
+
+		<div class="indexBodyCol">
+			<div class="indexBodyColInner">
+				<p><a href="javascript:void(0);" data-name="<%= model.productID %>_Range-of-Copay" class="contextualHelp" title="Range of Copay Options">Range of Copay Options</a><p>
+				<p><%=model.pCPCopayAmount %></p>
+				<p><a href="javascript:void(0);" data-name="<%= model.productID %>_Range-of-Co-insurance" class="contextualHelp" title="Range of Co-insurance Options">Range of Co-insurance Options</a></p>
+				</p><%=model.coinsuranceRate %></p>
+			</div>
+		
+		</div>
+		<div class="spacer"></div>
+	</div>
+
+	<div class="indexCardFooter font-small">
+		<div class="indexFooterCol hsa-col">
+			<p><a href="javascript:void(0);" data-name="<%= model.productID %>_Health-Savings-Account" class="contextualHelp" title="Health Savings Account (HSA) Eligible?" >Health Savings Account (HSA) Eligible?</a></p>
+			<p><%=model.hSAEligibleIndicator %></p>
+		</div>
+
+		<div class="indexFooterCol doctorChoice-col">
+			<p><a href="javascript:void(0);" data-name="<%= model.productID %>_Doctor-Choice" class="contextualHelp" title="Doctor Choice">Doctor Choice</a></p>
+			<p><span><%=model.providerType %></span>
+                <% if (model.providerType ==="PPO"){ %>
+				<i data-name="<%= model.planID %>_Provider-Type-PPO"  class="icon-circle_question_mark contextualHelp" aria-hidden="true"></i>
+                <%} else if (model.providerType ==="HMO"){ %>
+                <i data-name="<%= model.planID %>_Provider-Type-HMO"   class="icon-circle_question_mark contextualHelp" aria-hidden="true"></i>
+				 <%} else if (model.providerType ==="INDEMNITY"){ %>
+                <i data-name="<%= model.planID %>_Provider-Type-INDEMNITY"  class="icon-circle_question_mark contextualHelp" aria-hidden="true"></i>
+				<%} else if (model.providerType ==="POS"){ %>
+                <i data-name="<%= model.planID %>_Provider-Type-POS"  class="icon-circle_question_mark contextualHelp" aria-hidden="true"></i>
+				<%} else if (model.providerType ==="EPO"){ %>
+                <i data-name="<%= model.planID %>_Provider-Type-EPO"  class="icon-circle_question_mark contextualHelp" aria-hidden="true"></i>
+				<%} else {%>
+                (<%= model.providerType %>)
+                <%} %>
+            </p>
+
+		</div>
+		<div class="spacer"></div>
+	</div>
+
+</div>
+

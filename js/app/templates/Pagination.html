@@ -1,0 +1,29 @@
+﻿
+<div class="pagination-container">
+                        <% if(parseFloat(pageInfo.current) > 1) { %>
+			 <!--   <a class="need_compare" url="<%= "pagenumber=" + (parseFloat(pageInfo.current) - 1)%>"  href="<%= "#"+pageInfo.url+ "&pagenumber=" + (parseFloat(pageInfo.current) - 1) %>">-->
+                		    <a class="need_compare paginate_button btn_previous" url="<%= "pagenumber=" + (parseFloat(pageInfo.current) - 1)%>"  href="javascript:void(0);" title="Previous Page">
+                            <i class="iconCustom-angle-left arrowTopL" title="previous page" url="<%= "pagenumber=" + (parseFloat(pageInfo.current) - 1)%>"></i><span class="HiddenText">Previous Page</span></a>
+                        <% } else { %>
+                            
+							<i class="iconCustom-angle-left page-static-previous" title="previous page disabled" url="<%= "pagenumber=" + (parseFloat(pageInfo.current) - 1)%>"></i>
+                        <% } %>
+                        <%var dotshow = true; for (i = 1; i <= pageInfo.totalcount; i++) { if (i == 1 || i == pageInfo.totalcount || (i >= pageInfo.current - pageInfo.limit && i <= pageInfo.current + pageInfo.limit)) { dotshow = true; %>
+                            <% if(pageInfo.current !== i) { %>
+                           <!-- <a href="<%= "#"+pageInfo.url+ "&pagenumber=" + i %>" class="pagenumber"><%= i %></a>-->
+                           <a url="<%= "pagenumber=" + i %>" href="javascript:void(0);" class="paginate_button pagenumber"><%= i %></a>
+                            <% } else { %>
+                             <span class="sortNumSelect page-button-active"><%= i %></span> 
+                           <% } } else if (dotshow == true) { dotshow= false; %>
+                              <span class="sortNumSelect">...</span>
+                           <% } } %>
+		                <% if(pageInfo.totalcount !== parseFloat(pageInfo.current) ) { %>
+                         <!--   <a class="need_compare" href="<%= "#"+pageInfo.url+ "&pagenumber=" + (parseFloat(pageInfo.current) + 1) %>">-->
+                            <a class="need_compare paginate_button btn_next" url="<%= "pagenumber=" + (parseFloat(pageInfo.current) + 1)%>"  href="javascript:void(0);" title="Next Page">
+								<i class="iconCustom-angle-right arrowTopR" title="next page disabled" url="<%= "pagenumber=" + (parseFloat(pageInfo.current) + 1)%>"></i><span class="HiddenText">Next Page</span>
+							</a>
+                        <% } else { %>
+                            <i class="iconCustom-angle-right page-static-next" title="next page"></i>
+                        <% } %>
+</div>
+<div class="spacer"></div>

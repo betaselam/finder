@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="windows-1252"?>
+      <api:SmallGroupProductBenefitRequest xmlns:api="http://rbis.cms.org/api" xmlns:api1="http://rbis.cms.org/api-types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://rbis.cms.org/api SmallGroupProductBenefitRequest.xsd">
+         <api:ProductIDs>
+            <!--1 or more repetitions:-->
+              <% for(i=0; i<input.productId.length ; i++){ %>
+                <api:ProductID><%=input.productId[i]%></api:ProductID>
+             <%} %>
+         </api:ProductIDs>
+      </api:SmallGroupProductBenefitRequest>
+   

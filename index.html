@@ -1,0 +1,266 @@
+﻿<!doctype html>
+<!--[if IE]><![endif]-->
+<!--[if lt IE 7 ]> <html lang="en" class="ie6">    <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7">    <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8">    <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9">    <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en-us"><!--<![endif]-->
+ <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Finder.Healthcare.gov</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+    <!-- required by hss -->
+    <meta property="dcterms:title" content="Find Insurance Options | Finder.HealthCare.gov" name="DCTERMS.author" />	<!-- should be same as <title> content -->
+    <meta property="dcterms:created" content="Find Insurance Options" name="DCTERMS.created" /> <!-- changes for each site -->
+    <meta property="dcterms:title" content="Health Care" name="DC.title" />
+    <meta property="dcterms:subject" content="" name="DC.subject" />
+    <meta property="dcterms:creator" content="Health Care" name="DC.creator" />
+    <meta property="dcterms:publisher" content="U.S. Department of Health and Human Services" name="DC.publisher" />
+    <meta property="dcterms:contributor" content="" name="DC.contributor" />
+    <meta property="dcterms:language" content="en-us" name="DC.language" />
+    <meta property="dcterms:audience" content="" name="DCTERMS.audience" />
+    <meta property="dcterms:description" content="See which public, private and community programs meet your needs." name="description" /> <!-- Change for each site to contain brief description of site -->
+    <meta property="dcterms:type" content="page"/>
+    <meta property="dcterms:keywords" content="insurance, medicaid, medicare, healthcare" name="keywords" /> <!-- keyword relevant to the site -->
+    <meta property="dcterms:abstract" content="See which public, private and community programs meet your needs." name="DCTERMS.abstract" /> <!--  same as decription -->
+    <meta property="dcterms:dateSubmitted" content="2011-09-01" name="DCTERMS.dateSubmitted" />
+    <meta content="www.healthcare.gov" name="DCS.dcssip" />
+    <meta property="dcterms:date" content="2011-09-23" name="DC.date" />
+    <meta property="dcterms:created" content="2010-05-19T00:00:00" name="DC.created" /> 
+    <meta property="dcterms.dateReviewed" content="2011-09-23" name="DC.dateReviewed" />
+    <meta property="dcterms.dateModified" content="2011-09-23" name="DC.dateModified" />
+    
+    <script type="text/javascript" src="js/app/config/environment/globals.js"> </script>
+
+    <!--Conditionally include your JavaScript --> 
+    <script>
+
+      // Mobile/Desktop Detection script
+      (function (ua, w, d, undefined) {
+
+          // App Environment
+          var production = (gblEnvironment === "dev") ? false : true,
+          filesToLoad,
+          //BoilerplateMVC Helper Methods
+          boilerplateMVC = {
+              loadCSS: function (url, callback) {
+                  var link = d.createElement("link");
+                  link.type = "text/css";
+                  link.rel = "stylesheet";
+                  link.href = url;
+                  d.getElementsByTagName("head")[0].appendChild(link);
+                  if (callback) {
+                      callback();
+                  }
+              },
+              loadJS: function (file, callback) {
+                  var script = d.createElement("script");
+                  script.type = "text/javascript";
+                  if (script.readyState) {  // IE
+                      script.onreadystatechange = function () {
+                          if (script.readyState == "loaded" || script.readyState == "complete") {
+                              script.onreadystatechange = null;
+                              callback();
+                          }
+                      };
+                  } else {  // Other Browsers
+                      script.onload = function () {
+                          callback();
+                      };
+                  }
+                  if (((typeof file).toLowerCase()) === "object" && file["data-main"] !== undefined) {
+                      script.setAttribute("data-main", file["data-main"]);
+                      script.async = true;
+                      script.src = file.src;
+                  } else {
+                      script.src = file;
+                  }
+                  d.getElementsByTagName("head")[0].appendChild(script);
+              },
+              loadFiles: function (production, obj, callback) {
+                  var self = this;
+                  if (production) {
+                      // Loads the production CSS file(s)
+                      self.loadCSS(obj["prod-css"], function () {
+                          // If there are production JavaScript files to load
+                          if (obj["prod-js"]) {
+                              // Loads the correct initialization file (which includes Almond.js)
+                              self.loadJS(obj["prod-js"], callback);
+                          }
+                      });
+                  } else {
+                      // Loads the development CSS file(s)
+                      self.loadCSS(obj["dev-css"], function () {
+                          // If there are development Javascript files to load
+                          if (obj["dev-js"]) {
+                              // Loads Require.js and tells Require.js to find the correct intialization file
+                              self.loadJS(obj["dev-js"], callback);
+                          }
+                      });
+                  }
+              }
+          };
+
+
+
+          // Desktop CSS and JavaScript files to load
+          filesToLoad = {
+              // CSS file that is loaded when in development mode
+              "dev-css": "css/desktop.css",
+              // CSS file that is loaded when in production mode
+              "prod-css": "css/desktop.min.css",
+              // Require.js configuration file that is also loaded when in development mode
+              "dev-js": { "data-main": "js/app/config/config.js", "src": "js/libs/require.js" },
+              // JavaScript initialization file that is loaded when in development mode
+              "dev-init": "js/app/init/DesktopInit.js",
+              // JavaScript file that is loaded when in production mode
+              "prod-js": "js/app/init/DesktopInit.min.js"
+          };
+
+
+
+          boilerplateMVC.loadFiles(production, filesToLoad, function () {
+              if (!production && window.require) {
+                  require([filesToLoad["dev-init"]]);
+              }
+          });
+
+      })(navigator.userAgent || navigator.vendor || window.opera, window, document);
+
+</script>
+<script type="text/javascript"> var _sf_startpt = (new Date()).getTime()</script>
+<script type="text/javascript">
+    var _prum = [['id', '522a0a4babe53d4540000000'],['mark', 'firstbyte', (new Date()).getTime()]];
+    (function () {
+        var s = document.getElementsByTagName('script')[0], p = document.createElement('script');
+        p.async = 'async';
+        p.src = '//rum-static.pingdom.net/prum.min.js';
+        s.parentNode.insertBefore(p, s);
+    })();
+</script>
+
+
+</head>
+<body>
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-76J7" title="googletagmanager" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-JHKJ" title="googletagmanager" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<script type="text/javascript">
+    if (window.gblEnvironment === 'dev') {
+        (function (w, d, s, l, i) {w[l] = w[l] || []; w[l].push(
+        { 'gtm.start': new Date().getTime(), event: 'gtm.js' }
+        ); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src ='//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-76J7');
+
+    } else if (window.gblEnvironment === 'production') {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+        {'gtm.start': new Date().getTime(),event:'gtm.js'}
+        );var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-JHKJ');
+    }
+</script>
+<!-- End Google Tag Manager -->
+
+<div data-role="page">
+    <input type="hidden" id="selectedIds" value="" />
+    <div id="header" role="banner" data-role="header">
+	<noscript>
+            <p>
+              The page could not be loaded. The Healthcare.gov pages currently
+              do not fully support browsers with JavaScript disabled. Please note
+              that if you choose to continue without enabling JavaScript certain functionalities
+              on this website may not be available.
+           </p>
+    </noscript>
+	<a href="#content-start" id="skip-nav" class="accessibility" onclick="document.getElementById('content-start').focus();return false;">Skip Navigation</a>
+		<div class="container">
+			<div class='limiter hidden-phone desktop-nav' id='desktop-nav'>
+				<div class='row-fluid'>
+				  <div class='span4'>
+					<a href='#'><img class='logo' src='/img/logo.png' alt='Healthcare.gov' /></a>
+				  </div>
+				  <div class='span7 middle'>
+						
+        
+				  </div>
+				  <div class='span1'>
+        
+					 
+        
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- End of header -->
+
+	<!--blue bar subnav-->
+	<div class="subnav">
+	
+	</div>
+
+
+
+    <div data-role="content" class="page-content">
+  
+      <div class="row-fluid">
+      
+        <div class="span12">
+			<a id="content-start" name=“maincontentstart” tabindex="-1">Beginning of content</a>
+			<div class="container">
+				<div id="leftHand-rail" class=""></div>
+				<div id="rightBody-content" class="example"></div>
+				<div class="spacer"></div>
+			</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="footer" role="complimentary" data-role="footer">
+		<div class="container">
+			  <div class='footer-bottom row-fluid' role='navigation'>
+					<div class='span5'>
+						<ul class="footer-nav">
+							<li><a href='https://www.healthcare.gov/sitemap' title="Sitemap" target="_blank">Sitemap</a></li>
+							<li><a href='https://www.healthcare.gov/glossary' title="Glossary" target="_blank">Glossary</a></li>
+							<li><a href='https://www.healthcare.gov/contact-us/' title="Help Center" target="_blank">Contact Us</a></li>
+							<li><a href='https://www.healthcare.gov/archive' title="Archive" target="_blank">Archive</a></li>
+						</ul>
+						
+					</div>
+					<div class='span7'>
+						<ul class="footer-nav footer-nav-right">
+							<li><a href='https://www.healthcare.gov/accessibility' title="Accessibility" target="_blank">Accessibility</a></li>
+							<li><a href='https://www.healthcare.gov/privacy' title="Privacy policy" target="_blank">Privacy Policy</a></li>
+							<li><a href="https://www.healthcare.gov/links-to-other-sites" title="Links to Other Sites" target="_blank">Links to Other Sites</a></li>
+							<li><a target='_blank' href='http://www.hhs.gov/open/recordsandreports/plainwritingact/index.html' title="Plain Writing" target="_blank">Plain Writing</a></li>
+							<li><a target='_blank' href='http://www.cms.gov/About-CMS/Agency-Information/Aboutwebsite/Help.html' title="Viewers & Players" target="_blank">Viewers & Players</a></li>
+						</ul>
+					</div>
+					<hr class='dark remove'>
+
+					<div class="foot-link-container">
+						<div class="foot-hhs-container">
+							<a href="http://www.hhs.gov" target="_blank" title="Link to hhs.gov"><img src="img/icon-hhs.png" alt="Link to hhs.gov" border=0 /></a></div>
+						<div class="text-foot-disclaimer">A federal government website managed by the U.S. Centers for Medicare & Medicaid Services. 7500 Security Boulevard, Baltimore, MD 21244</div>
+						<div class="foot-right-icons">
+							<a href="http://www.whitehouse.gov" target="_blank" title="Link to whitehouse.gov"><img src="img/icon-wh.png" alt="Link to whitehouse.gov" border=0 /></a>
+							<a href="http://www.usa.gov" target="_blank" title="Link to usa.gov"><img src="img/icon-usagov.png" alt="Link to usa.gov" border=0 /></a>
+						</div>
+						<div class="spacer"></div>
+					</div>
+					
+			  </div>
+		</div>
+    </div><!-- End of footer -->
+
+</div> <!-- End of page -->
+
+</body>
+</html>

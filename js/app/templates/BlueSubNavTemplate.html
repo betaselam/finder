@@ -1,0 +1,111 @@
+﻿<div class="subNav">
+	<div class="subNavigationContainer">
+	<button data-name="index" class="nav-button pageNavigation" title="Back to Home"><i data-name="index" class="iconCustom-angle-left pageNavigation"></i><span class="HiddenText">Back to Home</span></button>
+	<% if (pageSection === "clearSubnav") { %>
+
+	<% } %>
+
+	
+
+	<% if (pageSection === "plans") { %>
+		
+        <ul class="subNavigationSection">
+            <li class="subLink firstLink"> 
+            <span class="headerLabel"> 
+                <span data-name="plansHome" class="userRole pageNavigation">Individual / Family Plan</span>
+                <b><%=searchParameters %></b></span> 
+			</li>
+			<li data-name="plansHome" class="subnav-btn-container subLink pageNavigation">
+                <button data-name="plansHome" class="btn btn-info btn-xmini subnav-change-btn pageNavigation" title="Change Your Search Criteria">CHANGE <span class="HiddenText">your search criteria</span></button></li>
+            <li data-name="plans" class="subLink subNavLinkActive">
+                <a data-name="plans" href="javascript:void(0);" title="List of Plans" onclick="return false;"><i class="headerIcon icon-list" aria-hidden="true"></i> <span class="headerLabel">List of Plans</span></a></li>
+			<li data-name="planCompare" class="subLink pageNavigation">
+                <a data-name="planCompare" class="pageNavigation" href="javascript:void(0);" title="Compare Plans"><i class="headerIcon icon-charts" aria-hidden="true"></i> <span data-name="planCompare" class="headerLabel pageNavigation">Compare Plans</span></a></li>
+	    </ul>
+	<% } %>
+
+	<% if (pageSection === "planDetails") { %>
+		
+        <ul class="subNavigationSection">
+            <li class="subLink firstLink"> 
+            <span class="headerLabel"> 
+                <span data-name="plansHome" class="userRole pageNavigation">Individual / Family Plan</span>
+                <b><%=searchParameters %></b></span> 
+			</li>
+			<li class="subnav-btn-container"><button data-name="plansHome" class="btn btn-info btn-xmini subnav-change-btn pageNavigation" title="Back to Search">CHANGE</button></li>
+            <li data-name="plans" class="subLink"><a data-name="plans" href="javascript:void(0);" class="pageNavigation" title="List of Plans"><i class="headerIcon icon-list" aria-hidden="true"></i> <span data-name="plans" class="headerLabel pageNavigation">List of Plans</span></a></li>
+			<li data-name="planCompare" class="subLink"><a data-name="planCompare" href="javascript:void(0);" title="Compare Plans" class="pageNavigation"><i class="headerIcon icon-charts" aria-hidden="true"></i> <span data-name="planCompare" class="headerLabel pageNavigation">Compare Plans</span></a></li>
+			</ul>
+	<% } %>
+
+
+    <% if (pageSection === "planCompare") { %>
+        <ul class="subNavigationSection">
+            <li class="subLink firstLink"> 
+            <span class="headerLabel"> 
+                <span data-name="plansHome" class="userRole pageNavigation">Individual / Family Plan</span>
+                <b><%=searchParameters %></b></span> 
+			</li>
+			<li class="subnav-btn-container"><button data-name="plansHome" class="btn btn-info btn-xmini subnav-change-btn pageNavigation" title="Back to Search">CHANGE</button></li>
+            <li data-name="plans" class="subLink pageNavigation"><a data-name="plans" href="javascript:void(0)" title="List of Plans"><i class="headerIcon icon-list" aria-hidden="true"></i> <span data-name="plans" class="headerLabel">List of Plans</span></a></li>
+			<li data-name="planCompare" class="subLink subNavLinkActive"><a href="#" title="Compare Plans" onclick="return false;"><i class="headerIcon icon-charts" aria-hidden="true"></i> <span class="headerLabel">Compare Plans</span></a></li>
+	    </ul>
+	<% } %>
+
+	<% if (pageSection === "products") { %>
+        <ul class="subNavigationSection">
+            <li class="subLink firstLink"> 
+                <span class="headerLabel"> 
+                    <span data-name="productsHome" class="userRole pageNavigation">Small Business</span>
+                    <b><%=searchParameters %></b>
+                </span> 
+			</li>
+			<li  data-name="productsHome" class="subnav-btn-container subLink pageNavigation">
+                <button data-name="productsHome" class="btn btn-info btn-xmini subnav-change-btn pageNavigation" title="Back to Search">CHANGE</button>
+            </li>
+            <li data-name="products" class="subLink subNavLinkActive pageNavigation">
+                <a data-name="products" class="pageNavigation" href="javascript:void(0);" title="List of Plans"><i class="headerIcon icon-list" aria-hidden="true"></i> <span data-name="products" class="headerLabel pageNavigation">List of Products</span></a>
+            </li>
+			<li data-name="productCompare" class="subLink pageNavigation">
+                <a data-name="productCompare" class="pageNavigation" href="javascript:void(0);" title="Compare Plans"><i class="headerIcon icon-charts" aria-hidden="true"></i> <span data-name="productCompare" class="headerLabel pageNavigation">Compare Products</span></a>
+            </li>
+	    </ul>
+
+	<% } %>
+
+	<% if (pageSection === "productDetails") { %>		
+        <ul class="subNavigationSection">
+            <li class="subLink firstLink"> 
+                <span class="headerLabel"> 
+                    <span data-name="productsHome" class="userRole pageNavigation">Small Business</span>
+                    <b><%=searchParameters %></b>
+                </span> 
+			</li>
+			<li class="subnav-btn-container"><button data-name="productsHome" class="btn btn-info btn-xmini subnav-change-btn pageNavigation" title="Back to Search">CHANGE</button></li>
+            <li data-name="products" class="subLink"><a data-name="products" href="javascript:void(0);" class="pageNavigation" title="List of Products"><i class="headerIcon icon-list" aria-hidden="true"></i> <span data-name="products" class="headerLabel pageNavigation">List of Products</span></a></li>
+			<li data-name="productCompare" class="subLink"><a data-name="productCompare" href="javascript:void(0);" title="Compare Plans" class="pageNavigation"><i class="headerIcon icon-charts" aria-hidden="true"></i> <span data-name="productCompare" class="headerLabel pageNavigation">Compare Products</span></a></li>
+			</ul>
+	<% } %>
+    	
+	<% if (pageSection === "productCompare") { %>
+		
+        <ul class="subNavigationSection">
+            <li class="subLink firstLink"> 
+                <span class="headerLabel"> 
+                    <span data-name="productsHome" class="userRole pageNavigation">Small Business</span>
+                    <b><%=searchParameters %></b>
+                </span> 
+			</li>
+			<li class="subnav-btn-container"><button data-name="productsHome" class="btn btn-info btn-xmini subnav-change-btn pageNavigation" title="Back to Search">CHANGE</button></li>
+            <li data-name="products" class="subLink pageNavigation"><a data-name="products" href="javascript:void(0);" class="pageNavigation" title="List of Plans"><i class="headerIcon icon-list" aria-hidden="true"></i> <span data-name="products" class="headerLabel pageNavigation">List of Products</span></a></li>
+			<li data-name="productCompare" class="subLink subNavLinkActive pageNavigation"><a data-name="productCompare" href="javascript:void(0);" title="Compare Plans" class="pageNavigation"><i class="headerIcon icon-charts" aria-hidden="true"></i> <span data-name="productCompare" class="headerLabel pageNavigation">Compare Products</span></a></li>
+	    </ul>
+	<% } %>
+	<!---help button
+		<div class="blue-subnavHelp">
+			<a href="#" title="help" onclick="return false"><i class="icon-circle_question_mark" aria-hidden="true"></i> Help</a>
+		</div>
+	</div>	
+	--->
+</div>
+
