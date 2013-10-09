@@ -7,7 +7,7 @@ define(["jquery", "backbone", "models/PlanModel", "helpers/helper"],
       // Creates a new Backbone Collection class object
       var PlanCollecion = Backbone.Collection.extend({
 
-          url: "handler/ServiceHandler.ashx",
+          url: "/services",
           //filters
           compareId: "",
           TotalEligiblePlansQuanity: 0,
