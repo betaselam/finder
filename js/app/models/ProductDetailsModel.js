@@ -17,7 +17,7 @@ define(["jquery",
         var ProductDetailsModel = Backbone.Model.extend({
 
 
-            url: "handler/ServiceHandler.ashx",
+            url: "/services",
             // Model Constructor
             initialize: function () {
 
