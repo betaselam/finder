@@ -7,7 +7,7 @@ define(["jquery", "backbone", "models/ProductModel", "helpers/helper"],
       // Creates a new Backbone Collection class object
       var ProductCollection = Backbone.Collection.extend({
 
-          url: "handler/ServiceHandler.ashx",
+          url: "/services",
 
           TotalEligibleProductsQuantity: 0,
           doctorChoice: "",
