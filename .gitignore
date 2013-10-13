@@ -7,4 +7,11 @@ obj/
 features/
 *.vspscc
 *.cs
+*.txt
+Grunfile.js
+SpecRunner.html
+server/
+karma.conf.js
+package.json
+handler/
 
