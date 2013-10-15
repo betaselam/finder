@@ -372,7 +372,8 @@ define(["jquery",
                     'postRequest': encodeURI(template)
                 }
 
-                return requestData;
+                //return requestData;
+                return encodeURI(template);
             },
 
 
@@ -449,7 +450,8 @@ define(["jquery",
                     'postRequest': encodeURI(template)
                 }
 
-                return requestData;
+		return encodeURI(template);
+                //return requestData;
             },
 
             getPlanRequest: function (params) {
@@ -548,7 +550,9 @@ define(["jquery",
                     'requestURL': gblPlansServiceURL,
                     'postRequest': encodeURI(template)
                 };
-                return requestData;
+                //return requestData;
+		return encodeURI(template);
+
             },
 
             reverseDate: function (date) {
@@ -635,7 +639,9 @@ define(["jquery",
                     'requestURL': gblProductsServiceURL,
                     'postRequest': encodeURI(template)
                 }
-                return requestData;
+                //return requestData;
+		return encodeURI(template);
+
             },
 
             setSelectorValues: function (params) {
@@ -704,7 +710,9 @@ define(["jquery",
                     'requestURL': gblCountiesForZipServiceURL,
                     'postRequest': encodeURI(template({ zip: zipCode }))
                 }
-                return requestData;
+		
+		return encodeURI(template({ zip: zipCode }));
+                //return requestData;
             },
 
             getURLText: function (urlValid, urlText, altText) {
