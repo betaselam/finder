@@ -1,4 +1,4 @@
-﻿// Collection.js
+// Collection.js
 // -------------
 define(["jquery", "backbone", "models/PlanModel", "helpers/helper"],
 
@@ -7,7 +7,8 @@ define(["jquery", "backbone", "models/PlanModel", "helpers/helper"],
       // Creates a new Backbone Collection class object
       var PlanCollecion = Backbone.Collection.extend({
 
-          url: "/services",
+          //url: gblServiceHandler,
+          url: gblPlansServiceHandler,
           //filters
           compareId: "",
           TotalEligiblePlansQuanity: 0,
