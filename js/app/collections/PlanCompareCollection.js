@@ -1,4 +1,4 @@
-﻿// Plan Compare Collection
+// Plan Compare Collection
 // ------------------------
 define(["jquery",
         "backbone",
@@ -13,7 +13,8 @@ define(["jquery",
       // Creates a new Backbone Collection class object
       var PlanCompareCollecion = Backbone.Collection.extend({
 
-          url: "/services",
+          //url: gblServiceHandler,
+          url: gblPlansServiceHandler,
           // Tells the Backbone Collection that all of it's models will be of type Model (listed up top as a dependency)
           models: [],
           parse: function (data, options) {
