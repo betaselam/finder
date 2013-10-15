@@ -178,7 +178,7 @@ define(["jquery",
                             $('#zip-feedbackMsg').text(" ")
                             var requestData = helper.getCountiesRequest(value);
                             var countiesModel = new CountiesModel();
-                            countiesModel.fetch({ type: "POST", dataType: "xml", data: requestData, async: false,
+                            countiesModel.fetch({ type: "POST", dataType: "xml", data: requestData, async: false, processData: false, contentType: 'application/xml',
                                 success: function (data) {
                                     if (data && data.attributes.counties !== null) {
                                         if (data.attributes.counties.length > 1) {
@@ -703,16 +703,7 @@ define(["jquery",
             getCountiesRequest: function (zipCode) {
 
                 var template = _.template(countiesRequest);
-
-
-                var str1 = template({ zip: zipCode });
-                var requestData = {
-                    'requestURL': gblCountiesForZipServiceURL,
-                    'postRequest': encodeURI(template({ zip: zipCode }))
-                }
-		
-		return encodeURI(template({ zip: zipCode }));
-                //return requestData;
+                return encodeURI(template({ zip: zipCode }));
             },
 
             getURLText: function (urlValid, urlText, altText) {
