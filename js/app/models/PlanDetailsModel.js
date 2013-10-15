@@ -1,4 +1,4 @@
-﻿// Plan Details Model.js
+// Plan Details Model.js
 // ----------------------
 define(["jquery",
         "backbone",
@@ -17,7 +17,8 @@ define(["jquery",
         // Creates a new Backbone Model class object
         var PlanDetailsModel = Backbone.Model.extend({
 
-            url: "/services",
+            //url: gblServiceHandler,
+            url: gblPlanBenefitsServiceHandler,
             // Model Constructor
             initialize: function () {
             },
