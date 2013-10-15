@@ -1,4 +1,4 @@
-﻿// Model.js
+// Model.js
 // --------
 define(["jquery",
         "backbone",
@@ -20,7 +20,8 @@ define(["jquery",
         var CountiesModel = Backbone.Model.extend({
 
             // Model url
-            url: gblServiceHandler,
+            //url: gblServiceHandler,
+            url: gblCountyServiceHandler,
 
             // Default values for all of the Model attributes
             defaults: {
