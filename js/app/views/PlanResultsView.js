@@ -1,4 +1,4 @@
-﻿// Plan Results View
+// Plan Results View
 // -------
 define(["jquery",
         "backbone",
@@ -10,6 +10,7 @@ define(["jquery",
         "text!templates/Plans/PlansComparePanel.html",
         "text!templates/Plans/PlansComparePanel2.html",
         "text!templates/Plans/PlansFilters.html",
+        "text!templates/Plans/NoPlanResults.html",
 		"text!templates/BlueSubNavTemplate.html",
         "helpers/helper"],
 
@@ -23,6 +24,7 @@ define(["jquery",
             PlanComparePanelTmpl,
             PlanComparePanelTmpl2,
             PlansFilterTmpl,
+            NoPlanResultsTmpl,
 			subtemplate,
             helper) {
 
@@ -45,7 +47,7 @@ define(["jquery",
             // View Event Handlers
             events: {
                 "click .planDetailsButton": "planDetails",
-                "change .ddlSort": "sortPlanResults",
+                "blur .ddlSort": "sortPlanResults",
                 "click .planCompare": "planCompare",
                 "click .searchOptions": "changeSearchOptions",
                 "click .cmpPln": "planCompare",
@@ -114,49 +116,53 @@ define(["jquery",
                         zipCode: zip,
                         effectiveDate: effective
                     }
-                    var searchTemplate = _.template(PlanParametersTmpl);
-                    searchTemplate = searchTemplate({ searchParam: searchParam });
-                    self.$el.append(searchTemplate);
-
-
-                    var input = { pageType: "planResults" };
-                    var sortTemplate = _.template(PlanSortTmpl); //sorting
-                    sortTemplate = sortTemplate({ input: input });
-                    self.$el.append(sortTemplate);
-
-                    var params = Backbone.history.fragment;
-                    helper.setSelectorValues(params);
-
-
-                    self.$el.append(templ); //pagination
-
-                    var compareTemplate = _.template(PlanComparePanelTmpl); // compare
-                    self.$el.append(compareTemplate);
-
-                    $.each(this.model, function (i, plan) {
-
-                        this.template = _.template(PlanResultsTmpl, { model: plan });
-                        self.$el.append(this.template);
-
-                        if (plan.isCompare === "true") {
-                            $('#' + plan.planID).attr('checked', 'checked');
-                        }
-                    });
-
-                    compareTemplate = _.template(PlanComparePanelTmpl2); // compare panel below
-                    self.$el.append(compareTemplate);
-
-                    this.addComparePlans();
-
-
-
-                    self.$el.append(templ); //pagination
-
-                    helper.intializeContextualHelp();
                     if (searchParam.totalRecords === 0) {
-                        alert('Your search returned zero plans. Please check the information you entered and try again.');
-                    }
+                        //alert('Your search returned zero plans. Please check the information you entered and try again.');
+                        var noResultsTemplate = _.template(NoPlanResultsTmpl); //sorting
+                        self.$el.append(noResultsTemplate);
 
+                    }
+                    else {
+
+                        var searchTemplate = _.template(PlanParametersTmpl);
+                        searchTemplate = searchTemplate({ searchParam: searchParam });
+                        self.$el.append(searchTemplate);
+
+                        var input = { pageType: "planResults" };
+                        var sortTemplate = _.template(PlanSortTmpl); //sorting
+                        sortTemplate = sortTemplate({ input: input });
+                        self.$el.append(sortTemplate);
+
+                        var params = Backbone.history.fragment;
+                        helper.setSelectorValues(params);
+
+
+                        self.$el.append(templ); //pagination
+
+                        var compareTemplate = _.template(PlanComparePanelTmpl); // compare
+                        self.$el.append(compareTemplate);
+
+                        $.each(this.model, function (i, plan) {
+
+                            this.template = _.template(PlanResultsTmpl, { model: plan });
+                            self.$el.append(this.template);
+
+                            if (plan.isCompare === "true") {
+                                $('#' + plan.planID).attr('checked', 'checked');
+                            }
+                        });
+
+                        compareTemplate = _.template(PlanComparePanelTmpl2); // compare panel below
+                        self.$el.append(compareTemplate);
+
+                        this.addComparePlans();
+
+
+
+                        self.$el.append(templ); //pagination
+
+                        helper.intializeContextualHelp();
+                    }
                 }
 
                 //set equal height to each blue box content
@@ -168,16 +174,22 @@ define(["jquery",
 
             sortPlanResults: function (event) {
                 event.stopPropagation();
-                var sortSelected = $("#ddlSort").val();
-                var sortParams = sortSelected.split(",");
-                var sortField = sortParams[0];
-                var sortOrder = sortParams[1];
-                var params = Backbone.history.fragment;
+                var currSortField = helper.getParameterByName("sortfield", Backbone.history.fragment);
+                var currSortDirection = helper.getParameterByName("sortdirection", Backbone.history.fragment);
+                var currSort = currSortField + "," + currSortDirection;
 
-                params = helper.updateQueryStringParameter(params, "ctrl", "ddlSort"); //508 fix
-                var newURL = helper.getURLWithSortParams(params, sortField, sortOrder);
-                if (params !== newURL)
-                    Backbone.history.navigate(newURL, true);
+                var sortSelected = $("#ddlSort").val();
+                if (currSort !== sortSelected) {
+                    var sortParams = sortSelected.split(",");
+                    var sortField = sortParams[0];
+                    var sortOrder = sortParams[1];
+                    var params = Backbone.history.fragment;
+
+                    params = helper.updateQueryStringParameter(params, "ctrl", "ddlSort"); //508 fix
+                    var newURL = helper.getURLWithSortParams(params, sortField, sortOrder);
+                    if (params !== newURL)
+                        Backbone.history.navigate(newURL, true);
+                }
                 return false;
             },
 
@@ -223,13 +235,13 @@ define(["jquery",
                 this.comparePlans = helper.getParameterByName("cpmplans", params) !== "" ? helper.getParameterByName("cpmplans", params).split('|') : [];
 
                 for (var i = 0; i < this.selectedIds.length; i++) {
-                    $('#selectedCompareItems').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.comparePlans[i] + "</div>" +
+                    $('#selectedCompareItems').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.comparePlans[i] + "</div>" +
                     "<a id='acmpr_" + this.selectedIds[i] + "' href='javascript:void(0);' class='comparedLinks compare-remove' planName='" + this.comparePlans[i] + "' name='remove-x' aria-hidden='false'><span class='hiddenText' >Remove " + this.comparePlans[i] + "</span><span aria-hidden='true' id = aspn_" + this.selectedIds[i] + " planName='" + this.comparePlans[i] + "'>X</span></a>" +
-                    "<div class='spacer'></div></div>");
+                    "<div class='spacer'></div></div></li>");
 
-                    $('#selectedCompareItems2').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.comparePlans[i] + "</div>" +
+                    $('#selectedCompareItems2').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.comparePlans[i] + "</div>" +
                     "<a id='bcmpr_" + this.selectedIds[i] + "' href='javascript:void(0);' class='comparedLinks compare-remove' planName='" + this.comparePlans[i] + "' name='remove-x' aria-hidden='false'><span class='hiddenText' >Remove " + this.comparePlans[i] + "</span><span aria-hidden='true' id = bspn_" + this.selectedIds[i] + " planName='" + this.comparePlans[i] + "'>X</span></a>" +
-                    "<div class='spacer'></div></div>");
+                    "<div class='spacer'></div></div></li>");
 
                 }
 
@@ -269,13 +281,13 @@ define(["jquery",
                         this.selectedIds.push(itemId);
                         this.comparePlans.push(planTitle);
 
-                        $('#selectedCompareItems').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("planName") + "</div>" +
+                        $('#selectedCompareItems').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("planName") + "</div>" +
                         "<a id='acmpr_" + itemId + "' href='javascript:void(0);' class='comparedLinks  compare-remove' planName='" + $(event.target).attr("planName") + "' name='remove-x' aria-hidden='false' ><span class='hiddenText'>Remove " + planTitleUncoded + "</span><span aria-hidden='true' id=aspn_" + itemId + " planName='" + $(event.target).attr("planName") + "'> X</span></a>" +
-                        "<div class='spacer'></div></div>");
+                        "<div class='spacer'></div></div></li>");
 
-                        $('#selectedCompareItems2').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("planName") + "</div>" +
+                        $('#selectedCompareItems2').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("planName") + "</div>" +
                         "<a id='bcmpr_" + itemId + "' href='javascript:void(0);' class='comparedLinks  compare-remove' planName='" + $(event.target).attr("planName") + "' name='remove-x' aria-hidden='false' ><span class='hiddenText'>Remove " + planTitleUncoded + "</span><span aria-hidden='true' id=bspn_" + itemId + " planName='" + $(event.target).attr("planName") + "'> X</span></a>" +
-                        "<div class='spacer'></div></div>");
+                        "<div class='spacer'></div></div></li>");
 
                     } else {
                         alert("Up to 3 plans can be selected for comparison.  Please remove a plan before trying to add another for comparison.");
