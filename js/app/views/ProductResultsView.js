@@ -1,4 +1,4 @@
-﻿// View.js
+// View.js
 // -------
 define(["jquery",
         "backbone",
@@ -11,7 +11,8 @@ define(["jquery",
         "text!templates/Products/ProductCompareSection.html",
         "text!templates/Products/ProductCompareSection2.html",
 		"text!templates/Products/ProductsFilters.html",
-		"text!templates/BlueSubNavTemplate.html",
+        "text!templates/Products/NoProductResults.html",
+        "text!templates/BlueSubNavTemplate.html",
         "helpers/helper"],
 
     function ($,
@@ -25,6 +26,7 @@ define(["jquery",
                 ProductCompareSectionTmpl,
                 ProductCompareSectionTmpl2,
 				ProductFilterTmpl,
+				NoProductResultsTmpl,
 				subtemplate,
                 helper) {
 
@@ -47,7 +49,7 @@ define(["jquery",
             // View Event Handlers
             events: {
                 "click .productDetailsButton": "productDetails",
-                "change .ddlSort": "sortProductResults",
+                "blur .ddlSort": "sortProductResults",
                 "click .productCompare": "productCompare",
                 "click  [name=compare_checkbox], .comparedLinks": "cBoxClick",
                 "click .searchOptions": "changeSearchOptions",
@@ -107,48 +109,55 @@ define(["jquery",
                         effectiveDate: effective
                     }
 
-                    var searchTemplate = _.template(ProductParametersTmpl);
-                    searchTemplate = searchTemplate({ searchParam: searchParam });
-                    self.$el.append(searchTemplate);
+                    if (searchParam.totalRecords === 0) {
+                        //alert('Your search returned zero plans. Please check the information you entered and try again.');
+                        var noResultsTemplate = _.template(NoProductResultsTmpl); //sorting
+                        self.$el.append(noResultsTemplate);
 
-
-
-                    //sorting
-                    var input = {
-                    	pageType: "productResults"
                     }
-                    var sortTemplate = _.template(ProductSortTmpl);
-                    sortTemplate = sortTemplate({ input: input });
-                    self.$el.append(sortTemplate);
-                    var params = Backbone.history.fragment;
-                    helper.setSelectorValues(params);
-
-                    self.$el.append(templ); //pagination
-
-                    var compareTemplate = _.template(ProductCompareSectionTmpl); //compare
-                    self.$el.append(compareTemplate);
-
-                    $.each(this.model, function (i, product) {
-                        this.template = _.template(ProductResultsTmpl, { model: product });
-                        $(self.$el).append(this.template);
-
-                        if (product.isCompare === "true")
-                            $('#' + product.productID).attr('checked', 'checked');
-
-                    });
+                    else {
+                        var searchTemplate = _.template(ProductParametersTmpl);
+                        searchTemplate = searchTemplate({ searchParam: searchParam });
+                        self.$el.append(searchTemplate);
 
 
-                    compareTemplate = _.template(ProductCompareSectionTmpl2); //compare
-                    self.$el.append(compareTemplate);
+
+                        //sorting
+                        var input = {
+                            pageType: "productResults"
+                        }
+                        var sortTemplate = _.template(ProductSortTmpl);
+                        sortTemplate = sortTemplate({ input: input });
+                        self.$el.append(sortTemplate);
+                        var params = Backbone.history.fragment;
+                        helper.setSelectorValues(params);
+
+                        self.$el.append(templ); //pagination
+
+                        var compareTemplate = _.template(ProductCompareSectionTmpl); //compare
+                        self.$el.append(compareTemplate);
+
+                        $.each(this.model, function (i, product) {
+                            this.template = _.template(ProductResultsTmpl, { model: product });
+                            $(self.$el).append(this.template);
+
+                            if (product.isCompare === "true")
+                                $('#' + product.productID).attr('checked', 'checked');
+
+                        });
 
 
-                    this.addCompareProducts();
-                    self.$el.append(templ); //pagination
-                    helper.intializeContextualHelp();
+                        compareTemplate = _.template(ProductCompareSectionTmpl2); //compare
+                        self.$el.append(compareTemplate);
 
-                    if (searchParam.productCount === 0) {
-                        alert('Your search returned zero products. Please check the information you entered and try again.');
+
+                        this.addCompareProducts();
+                        self.$el.append(templ); //pagination
+                        helper.intializeContextualHelp();
                     }
+                    //                    if (searchParam.productCount === 0) {
+                    //                        alert('Your search returned zero products. Please check the information you entered and try again.');
+                    //                    }
 
 
                 }
@@ -162,16 +171,24 @@ define(["jquery",
 
             sortProductResults: function (event) {
                 event.stopPropagation();
-                var sortSelected = $("#ddlSort").val();
-                var sortParams = sortSelected.split(",");
-                var sortField = sortParams[0];
-                var sortOrder = sortParams[1];
-                var params = Backbone.history.fragment;
+                var currSortField = helper.getParameterByName("sortfield", Backbone.history.fragment);
+                var currSortDirection = helper.getParameterByName("sortdirection", Backbone.history.fragment);
+                var currSort = currSortField + "," + currSortDirection;
 
-                params = helper.updateQueryStringParameter(params, "ctrl", "ddlSort"); //508 fix
-                var newURL = helper.getURLWithSortParams(params, sortField, sortOrder);
-                if (params !== newURL)
-                    Backbone.history.navigate(newURL, true);
+                var sortSelected = $("#ddlSort").val();
+
+                if (currSort !== sortSelected) {
+                    var sortParams = sortSelected.split(",");
+                    var sortField = sortParams[0];
+                    var sortOrder = sortParams[1];
+                    var params = Backbone.history.fragment;
+
+                    params = helper.updateQueryStringParameter(params, "ctrl", "ddlSort"); //508 fix
+
+                    var newURL = helper.getURLWithSortParams(params, sortField, sortOrder);
+                    if (params !== newURL)
+                        Backbone.history.navigate(newURL, true);
+                }
                 return false;
             },
 
@@ -216,12 +233,12 @@ define(["jquery",
                 this.compareProducts = helper.getParameterByName("products", params) !== "" ? helper.getParameterByName("products", params).split('|') : [];
 
                 for (var i = 0; i < this.selectedIds.length; i++) {
-                    $('#selectedCompareItems').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.compareProducts[i] + "</div>" +
+                    $('#selectedCompareItems').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.compareProducts[i] + "</div>" +
                     "<a id='acmpr_" + this.selectedIds[i] + "' href='javascript:void(0);' class='comparedLinks compare-remove' productName='" + this.compareProducts[i] + "' name='remove-x' aria-hidden='false'><span class='hiddenText'>Remove " + this.compareProducts[i] + "</span><span aria-hidden='true' id=aspn_" + this.selectedIds[i] + " productName='" + this.compareProducts[i] + "'>X</span></a>" +
-                    "<div class='spacer'></div></div>");
-                    $('#selectedCompareItems2').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.compareProducts[i] + "</div>" +
+                    "<div class='spacer'></div></div></li>");
+                    $('#selectedCompareItems2').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + this.compareProducts[i] + "</div>" +
                     "<a id='bcmpr_" + this.selectedIds[i] + "' href='javascript:void(0);' class='comparedLinks compare-remove' productName='" + this.compareProducts[i] + "' name='remove-x' aria-hidden='false'><span class='hiddenText'>Remove " + this.compareProducts[i] + "</span><span aria-hidden='true' id=bspn_" + this.selectedIds[i] + " productName='" + this.compareProducts[i] + "'>X</span></a>" +
-                    "<div class='spacer'></div></div>");
+                    "<div class='spacer'></div></div></li>");
                 }
                 if (this.selectedIds.length > 0) {
                     $('#compare_button').addClass('compareBtn-active');
@@ -245,9 +262,9 @@ define(["jquery",
                     self.compareProducts[key] = helper.encodeSpecialChar(value);
                 });
 
-                var itemId = 
-                ($(event.target).attr("id").indexOf('cmpr_') > -1) 
-                || 
+                var itemId =
+                ($(event.target).attr("id").indexOf('cmpr_') > -1)
+                ||
                 ($(event.target).attr("id").indexOf('spn_') > -1) ? $(event.target).attr("id").split('_')[1] : $(event.target).attr("id");
 
                 var productTitle = helper.encodeSpecialChar($(event.target).attr("productName"));
@@ -265,15 +282,15 @@ define(["jquery",
                     if (this.selectedIds.length < 3) {
                         this.selectedIds.push(itemId);
                         this.compareProducts.push(productTitle);
-                     
 
-                        $('#selectedCompareItems').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("productName") + "</div>" +
-                    "<a id='acmpr_" + itemId + "' href='javascript:void(0);' class='comparedLinks compare-remove' productName='" + $(event.target).attr("productName") + "' name='remove-x' aria-hidden='false'><span class='hiddenText'>Remove " + productTitleUncoded + "</span><span aria-hidden='true' id=aspn_" + itemId + " productName='"+productTitle+"'>X</span></a>" +
-                    "<div class='spacer'></div></div>");
 
-                        $('#selectedCompareItems2').append("<div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("productName") + "</div>" +
+                        $('#selectedCompareItems').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("productName") + "</div>" +
+                    "<a id='acmpr_" + itemId + "' href='javascript:void(0);' class='comparedLinks compare-remove' productName='" + $(event.target).attr("productName") + "' name='remove-x' aria-hidden='false'><span class='hiddenText'>Remove " + productTitleUncoded + "</span><span aria-hidden='true' id=aspn_" + itemId + " productName='" + productTitle + "'>X</span></a>" +
+                    "<div class='spacer'></div></div></li>");
+
+                        $('#selectedCompareItems2').append("<li><div class='compare-entry'><i class='iconCustom-ok compare-icon-check' aria-hidden='true'></i><div class='compare-entry-text'>" + $(event.target).attr("productName") + "</div>" +
                     "<a id='bcmpr_" + itemId + "' href='javascript:void(0);' class='comparedLinks compare-remove' productName='" + $(event.target).attr("productName") + "' name='remove-x' aria-hidden='false'><span class='hiddenText'>Remove " + productTitleUncoded + "</span><span aria-hidden='true' id=bspn_" + itemId + " productName='" + productTitle + "'>X</span></a>" +
-                    "<div class='spacer'></div></div>");
+                    "<div class='spacer'></div></div></li>");
                         //$(event.target).attr("checked", "checked");
 
                     } else {
@@ -303,7 +320,7 @@ define(["jquery",
 
                 //keyboard focus to compare button on remove
                 if ($(event.target).attr("name") == "remove-x") {
-                	$('#compare_button').focus();
+                    $('#compare_button').focus();
 
                 }
 
