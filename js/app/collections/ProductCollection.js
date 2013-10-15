@@ -1,4 +1,4 @@
-﻿// Collection.js
+// Collection.js
 // -------------
 define(["jquery", "backbone", "models/ProductModel", "helpers/helper"],
 
@@ -7,7 +7,8 @@ define(["jquery", "backbone", "models/ProductModel", "helpers/helper"],
       // Creates a new Backbone Collection class object
       var ProductCollection = Backbone.Collection.extend({
 
-          url: "/services",
+          //url: gblServiceHandler,
+          url: gblProductsServiceHandler,
 
           TotalEligibleProductsQuantity: 0,
           doctorChoice: "",
@@ -57,8 +58,9 @@ define(["jquery", "backbone", "models/ProductModel", "helpers/helper"],
               temp.issuerID = product.IssuerID.Text;
               temp.providerType = product.ProviderType.Text; // Doctor's Choice
               temp.hSAEligibleIndicator = (product.HSAEligibleIndicator.Text == "true") ? "Yes" : "No"; // Health Savings Account (HSA) Eligible?
-              temp.pCPCopayAmount = helper.getValuefromObj(product.InNetworkCostSharing.PCPCopayAmount, "Amount", "Not applicable.");
-              temp.coinsuranceRate = helper.getMinMax(product.InNetworkCostSharing.CoinsuranceRate);
+              //temp.pCPCopayAmount = helper.getValuefromObj(product.InNetworkCostSharing.PCPCopayAmount, "Amount", "Not applicable.");
+              temp.pCPCopayAmount = helper.getMinMax(product.InNetworkCostSharing.PCPCopayAmount, "$"); //changed to minmax for HNF-840
+              temp.coinsuranceRate = helper.getMinMax(product.InNetworkCostSharing.CoinsuranceRate, "%");
               temp.annualDeductibleAmount = helper.getAmounts(product.InNetworkCostSharing.AnnualDeductibleAmount);
               temp.annualOOPLimitAmount = helper.getAmounts(product.InNetworkCostSharing.AnnualOOPLimitAmount);
               temp.isCompare = this.compareId.indexOf(product.ProductID.Text) > -1 ? "true" : "false";
