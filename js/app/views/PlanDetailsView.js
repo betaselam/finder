@@ -1,4 +1,4 @@
-﻿// Plan Details View
+// Plan Details View
 // -------
 define(["jquery",
         "backbone",
