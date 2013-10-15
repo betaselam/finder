@@ -178,7 +178,7 @@ define(["jquery",
                             $('#zip-feedbackMsg').text(" ")
                             var requestData = helper.getCountiesRequest(value);
                             var countiesModel = new CountiesModel();
-                            countiesModel.fetch({ type: "POST", dataType: "xml", data: requestData, async: false, contentType: 'application/xml',
+                            countiesModel.fetch({ type: "POST", dataType: "xml", data: requestData, async: false, processData: false, contentType: 'application/xml',
                                 success: function (data) {
                                     if (data && data.attributes.counties !== null) {
                                         if (data.attributes.counties.length > 1) {
@@ -365,15 +365,7 @@ define(["jquery",
                 }
                 var template = _.template(productDetailsRequest);
                 template = template({ input: input });
-
-
-                var requestData = {
-                    'requestURL': gblProductBenefitsServiceURL,
-                    'postRequest': encodeURI(template)
-                }
-
-                //return requestData;
-                return encodeURI(template);
+                return template;
             },
 
 
@@ -444,14 +436,7 @@ define(["jquery",
                 }
                 var template = _.template(planDetailsRequest);
                 template = template({ input: input });
-
-                var requestData = {
-                    'requestURL': gblPlanBenefitsServiceURL,
-                    'postRequest': encodeURI(template)
-                }
-
-		return encodeURI(template);
-                //return requestData;
+                return template;
             },
 
             getPlanRequest: function (params) {
@@ -545,13 +530,7 @@ define(["jquery",
                 }
                 var template = _.template(planRequest);
                 template = template({ input: input });
-
-                var requestData = {
-                    'requestURL': gblPlansServiceURL,
-                    'postRequest': encodeURI(template)
-                };
-                //return requestData;
-		return encodeURI(template);
+                return template;
 
             },
 
@@ -634,13 +613,7 @@ define(["jquery",
                 }
                 var template = _.template(productRequest);
                 template = template({ input: input });
-
-                requestData = {
-                    'requestURL': gblProductsServiceURL,
-                    'postRequest': encodeURI(template)
-                }
-                //return requestData;
-		return encodeURI(template);
+                return template;
 
             },
 
@@ -703,7 +676,7 @@ define(["jquery",
             getCountiesRequest: function (zipCode) {
 
                 var template = _.template(countiesRequest);
-                return encodeURI(template({ zip: zipCode }));
+                return template({ zip: zipCode });
             },
 
             getURLText: function (urlValid, urlText, altText) {
