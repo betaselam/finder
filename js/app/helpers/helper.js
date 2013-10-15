@@ -1,4 +1,4 @@
-﻿define(["jquery",
+define(["jquery",
         "backbone",
         "text!templates/RequestTemplates/PlanRequest.html",
         "text!templates/RequestTemplates/ProductRequest.html",
@@ -216,6 +216,18 @@
                 return myCustomRules;
             },
 
+            addCommas:function (nStr){
+	            nStr += '';
+	            x = nStr.split('.');
+	            x1 = x[0];
+	            x2 = x.length > 1 ? '.' + x[1] : '';
+	            var rgx = /(\d+)(\d{3})/;
+	            while (rgx.test(x1)) {
+		            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	            }
+	            return x1 + x2;
+            },
+
             openProductDialog: function (self) {
                 var value = $('#employeeNum').val();
                 if ((parseFloat(value) !== NaN) && (parseFloat(value) === 1 || (parseFloat(value) > 50 && parseFloat(value) <= 100))) {
@@ -356,7 +368,7 @@
 
 
                 var requestData = {
-                    'requestURL': 'https://rbis2gateway.insuranceoversight.hhs.gov/RBIS-API/v5.6/REST/getProductBenefits',
+                    'requestURL': gblProductBenefitsServiceURL,
                     'postRequest': encodeURI(template)
                 }
 
@@ -433,7 +445,7 @@
                 template = template({ input: input });
 
                 var requestData = {
-                    'requestURL': 'https://rbis2gateway.insuranceoversight.hhs.gov/RBIS-API/v5.6/REST/getPlanBenefits',
+                    'requestURL': gblPlanBenefitsServiceURL,
                     'postRequest': encodeURI(template)
                 }
 
@@ -533,7 +545,7 @@
                 template = template({ input: input });
 
                 var requestData = {
-                    'requestURL': 'https://rbis2gateway.insuranceoversight.hhs.gov/RBIS-API/REST/getPlans',
+                    'requestURL': gblPlansServiceURL,
                     'postRequest': encodeURI(template)
                 };
                 return requestData;
@@ -620,7 +632,7 @@
                 template = template({ input: input });
 
                 requestData = {
-                    'requestURL': 'https://rbis2gateway.insuranceoversight.hhs.gov/RBIS-API/REST/getProducts',
+                    'requestURL': gblProductsServiceURL,
                     'postRequest': encodeURI(template)
                 }
                 return requestData;
@@ -689,7 +701,7 @@
 
                 var str1 = template({ zip: zipCode });
                 var requestData = {
-                    'requestURL': 'https://rbis2gateway.insuranceoversight.hhs.gov/RBIS-API/v5.6/REST/getCountiesForZip',
+                    'requestURL': gblCountiesForZipServiceURL,
                     'postRequest': encodeURI(template({ zip: zipCode }))
                 }
                 return requestData;
