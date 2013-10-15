@@ -149,8 +149,10 @@ define(["jquery",
                             helper.cleanupView(self.resultsview);
                             self.resultsview = new PlanView({ model: data.models, totalcount: data.TotalEligiblePlansQuanity });
                             self.resultsview.render();
-                            helper.cleanupView(self.filterView);
-                            self.filterView = new PlanFiltersView({ filters: data });
+                            if (data.TotalEligiblePlansQuanity && data.TotalEligiblePlansQuanity !== "0") {
+                                helper.cleanupView(self.filterView);
+                                self.filterView = new PlanFiltersView({ filters: data });
+                            }
                         }
                         helper.unBlockUIHlpr();
                     },
@@ -249,8 +251,10 @@ define(["jquery",
                             helper.cleanupView(self.resultsview);
                             self.resultsview = new ProductView({ model: data.models, totalcount: data.TotalEligibleProductsQuantity });
                             self.resultsview.render();
-                            helper.cleanupView(self.productFilterView);
-                            self.productFilterView = new ProductFiltersView({ filters: data });
+                            if (data.TotalEligibleProductsQuantity && data.TotalEligibleProductsQuantity !== "0") {
+                                helper.cleanupView(self.productFilterView);
+                                self.productFilterView = new ProductFiltersView({ filters: data });
+                            }
                         }
                         helper.unBlockUIHlpr();
                     },
