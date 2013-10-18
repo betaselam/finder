@@ -141,7 +141,7 @@ define(["jquery",
                 this.planCollection = new PlanCollection(helper.planOptions(encodedParams));
 
                 var self = this;
-                this.planCollection.fetch({ type: "POST", dataType: "xml", data: requestData, contentType: 'application/xml',
+                this.planCollection.fetch({ type: "POST", dataType: "xml", data: requestData,
                     success: function (data) {
                         if (data != null) {
                             helper.cleanupView(self.blueSubNavView);
@@ -177,7 +177,7 @@ define(["jquery",
                 //var requestData = helper.getPlanDetailsRequest(decodeURI(params));
                 var requestData = helper.getPlanDetailsRequest(params);
                 this.planDetailsModel = new PlanDetailsModel();
-                this.planDetailsModel.fetch({ type: "POST", dataType: "xml", data: requestData, contentType: 'application/xml',
+                this.planDetailsModel.fetch({ type: "POST", dataType: "xml", data: requestData,
                     success: function (data) {
                         if (data != null) {
                             helper.cleanupView(self.blueSubNavView);
@@ -243,7 +243,7 @@ define(["jquery",
                 var requestData = helper.getProductRequest(encodedParams);
                 this.productcollection = new ProductCollection(helper.productOptions(encodedParams));
 
-                this.productcollection.fetch({ type: "POST", dataType: "xml", data: requestData, contentType: 'application/xml',
+                this.productcollection.fetch({ type: "POST", dataType: "xml", data: requestData,
                     success: function (data) {
                         if (data != null) {
                             helper.cleanupView(self.blueSubNavView);
@@ -277,7 +277,7 @@ define(["jquery",
                 var self = this;
                 var requestData = helper.getPlanDetailsRequest(params);
                 this.planCompareCollection = new PlanCompareCollection();
-                this.planCompareCollection.fetch({ type: "POST", dataType: "xml", data: requestData, contentType: 'application/xml',
+                this.planCompareCollection.fetch({ type: "POST", dataType: "xml", data: requestData,
                     success: function (data) {
                         if (data != null) {
                             helper.cleanupView(self.blueSubNavView);
@@ -308,7 +308,7 @@ define(["jquery",
                 var self = this;
                 var requestData = helper.getProductDetailsRequest(params);
                 this.productCompareCollection = new ProductCompareCollection();
-                this.productCompareCollection.fetch({ type: "POST", dataType: "xml", data: requestData, contentType: 'application/xml',
+                this.productCompareCollection.fetch({ type: "POST", dataType: "xml", data: requestData,
                     success: function (data) {
                         if (data != null) {
                             helper.cleanupView(self.blueSubNavView);

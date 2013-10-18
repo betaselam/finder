@@ -1,4 +1,4 @@
-// View.js
+﻿// View.js
 // -------
 define(["jquery",
         "backbone",
@@ -113,7 +113,8 @@ define(["jquery",
                         //alert('Your search returned zero plans. Please check the information you entered and try again.');
                         var noResultsTemplate = _.template(NoProductResultsTmpl); //sorting
                         self.$el.append(noResultsTemplate);
-
+                        $('#leftHand-rail').removeClass('navContainer');
+                        $('#rightBody-content').removeClass('cardContainer');
                     }
                     else {
                         var searchTemplate = _.template(ProductParametersTmpl);

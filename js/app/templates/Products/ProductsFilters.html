@@ -1,90 +1,89 @@
 ﻿
 
+ 
 
-<div class="leftColumn">
-		<div class="leftColumnBottom">
+<button class="btn btn-small btn-print-results" onclick="window.print()"><i class="icon-print" aria-hidden="true"></i>Print</button>
+<h2 class="filter-top-header">Narrow Your Results</h2>
+<h3 class="filter-section-header">Insurance Details</h3>
 
-				<button class="btn btn-small btn-print-results" onclick="window.print()"><i class="icon-print" aria-hidden="true"></i>Print</button>
-				<div class="filter-top-header">Narrow Your Results</div>
-				<div class="filter-section-header">Insurance Details</div>
-
-				<!-- Doctors Choice -->
-					<div id="providers_title" class="filter-title-container">
-						<div class="collapseTitle">Doctor Choice</div>
-						
-					</div>
-					<div class="expcol-container filter-expcoll">
-						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="providers" data-name="Doctor Choice" title="collapse"><span class='HiddenText'>Doctor Choice </span>Close <span aria-hidden="true">-</span></a>
-					</div>
-					<div class="clearBoth"></div>
-					<div id="providers" class="filter-section providers">
-                       <% if(filteredparams.ptype) { %>
-                    <div class="collapseText filter-section-entry"><a class="filters" href="javascript:void(0)" url="ptype=" title="Show All Doctor Choices">Show All Doctor Choices</a></div>
-                    <% } %>
-					 <% for(var i = 0 ; i < filters.doctorChoice.length; i++){  %>
-									<div class="collapseTextCollapsed filter-section-entry" style="margin-bottom:2px;"><a class="filters" href="javascript:void(0)" url="ptype=<%=filters.doctorChoice[i].Filter %>" title="<%= filters.doctorChoice[i].Filter %>"><%= filters.doctorChoice[i].Filter %> (<%= filters.doctorChoice[i].Quantity %>)</a></div>
-                     <% } %>
-					</div>
+<!-- Doctors Choice -->
+	<div id="providers_title" class="filter-title-container">
+		<h4 class="collapseTitle">Doctor Choice</h4>						
+	</div>
+	<div class="expcol-container filter-expcoll">
+		<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="providers" data-name="Doctor Choice" title="collapse"><span class='HiddenText'>Doctor Choice </span>Close <span aria-hidden="true">-</span></a>
+	</div>
+	<div class="clearBoth"></div>
+	<div id="providers" class="filter-section providers">
+        <% if(filteredparams.ptype) { %>
+            <div class="collapseText filter-section-entry"><a class="filters" href="javascript:void(0);" url="ptype=" title="Show All Doctor Choices">Show All Doctor Choices</a></div>
+        <% } %>
+        <ul class="filterlinks">
+			<% for(var i = 0 ; i < filters.doctorChoice.length; i++){  %>
+			<li><div class="collapseTextCollapsed filter-section-entry" style="margin-bottom:2px;"><a class="filters" href="javascript:void(0)" url="ptype=<%=filters.doctorChoice[i].Filter %>" title="<%= filters.doctorChoice[i].Filter %>"><%= filters.doctorChoice[i].Filter %> (<%= filters.doctorChoice[i].Quantity %>)</a></div></li>
+        <% } %>
+            </ul>
+	</div>
+<!-- End Doctors Choice -->
+				
+<!-- Start Additional features -->
+	<div id="addfeatures_title" class="filter-title-container">
+		<h4 class="collapseTitle">Additional Features</h4>						
+	</div>
+	<div class="expcol-container filter-expcoll">
+		<a href="javascript:void(0);" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="addfeatures" data-name="Additional Features" title="collapse"><span class='HiddenText'>Additional Features </span>Close <span aria-hidden="true">-</span></a>
+	</div>
+	<div class="clearBoth"></div>
+	<div id="addfeatures" class="filter-section addfeatures">
+        <% if(filteredparams.adftrs) { %>
+    <div class="collapseText filter-section-entry"><a class="filters" href="javascript:void(0)" url="adftrs=" title="Show All Additional Features">Show All Additional Features</a></div>
+    <% } %>
+    <ul class="filterlinks">
+        <% for(var i = 0 ; i < filters.additionalFeatures.length; i++){  if(filteredparams.adftrs) { %>
+            <% if(filteredparams.adftrs.toLowerCase() === filters.additionalFeatures[i].name.toLowerCase() ) { %>
+	        <li><div class="collapseTextCollapsed filter-section-entry" style="margin-bottom:2px;"><a class="filters" href="javascript:void(0)" url="adftrs=<%=filters.additionalFeatures[i].name %>" title="<%= filters.additionalFeatures[i].name %>"><%= filters.additionalFeatures[i].name %> (<%= filters.additionalFeatures[i].Quantity %>)</a></div></li>
+        <% } } else{ %>
+            <li><div class="collapseTextCollapsed filter-section-entry" style="margin-bottom:2px;"><a class="filters" href="javascript:void(0)" url="adftrs=<%=filters.additionalFeatures[i].name %>" title="<%= filters.additionalFeatures[i].name %>"><%= filters.additionalFeatures[i].name %> (<%= filters.additionalFeatures[i].Quantity %>)</a></div></li>
+        <%}  } %>
+        </ul>
+	</div>
+					
+<!-- End Additional features -->
+				
+<!-- Start Issuers -->
+<fieldset class="filter-inputs">
+	<div id="companies_title" class="filter-title-container">
+		<h4 class="collapseTitle"><legend>Show Companies</legend></h4>
+	</div>
+	<div class="expcol-container filter-expcoll">
+		<a href="javascript:void(0);" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="companies" data-name="Show Companies" title="collapse"><span class='HiddenText'>Show Companies </span>Close <span aria-hidden="true">-</span></a>
+	</div>
+	<div class="clearBoth"></div>
+	<div id="companies" class="filter-section companies">
+        <fieldset>
+        <legend class="HiddenText">Select Companies to narrow your results</legend>
+            <input type="checkbox" id="checkall" class="filters" <%- (filteredparams.companies)?"":"checked" %>   url="companies=" />
+            <label for="checkall" class="filters" url="companies=">Show All Companies</label>
+            <% for(var i = 0 ; i < filters.showCompanies.length; i++) {%>
+		        <div class="collapseTextCollapsed">
+                <input  type="checkbox" id="<%-filters.showCompanies[i].IssuerID%>" class="filters" <%- (filteredparams.companies && filteredparams.companies.indexOf(filters.showCompanies[i].IssuerID) > -1 ) ? "checked":"" %> url="companies=<%=filters.showCompanies[i].IssuerID %>" />
+                    <label for="<%- filters.showCompanies[i].IssuerID %>" class="filters" url="companies=<%=filters.showCompanies[i].IssuerID %>">
+                        <%= filters.showCompanies[i].IssuerName %> (<%= filters.showCompanies[i].Quantity %>)
+                    </label>
+                </div>
+	        <%} %>
+                                    
+        </fieldset>
+    </div>
+</fieldset>					
+<!-- End Issuers -->
 		
-					
-				<!-- End Doctors Choice -->
-				
-				<!-- Start Additional features -->
-					<div id="addfeatures_title" class="filter-title-container">
-						<div class="collapseTitle">Additional Features</div>
-						
-					</div>
-					<div class="expcol-container filter-expcoll">
-						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="addfeatures" data-name="Additional Features" title="collapse"><span class='HiddenText'>Additional Features </span>Close <span aria-hidden="true">-</span></a>
-					</div>
-					<div class="clearBoth"></div>
-					<div id="addfeatures" class="filter-section addfeatures">
-                       <% if(filteredparams.adftrs) { %>
-                    <div class="collapseText filter-section-entry"><a class="filters" href="javascript:void(0)" url="adftrs=" title="Show All Additional Features">Show All Additional Features</a></div>
-                    <% } %>
-                      <% for(var i = 0 ; i < filters.additionalFeatures.length; i++){  if(filteredparams.adftrs) { %>
-                            <% if(filteredparams.adftrs.toLowerCase() === filters.additionalFeatures[i].name.toLowerCase() ) { %>
-									<div class="collapseTextCollapsed filter-section-entry" style="margin-bottom:2px;"><a class="filters" href="javascript:void(0)" url="adftrs=<%=filters.additionalFeatures[i].name %>" title="<%= filters.additionalFeatures[i].name %>"><%= filters.additionalFeatures[i].name %> (<%= filters.additionalFeatures[i].Quantity %>)</a></div>
-                     <% } } else{ %>
-                            <div class="collapseTextCollapsed filter-section-entry" style="margin-bottom:2px;"><a class="filters" href="javascript:void(0)" url="adftrs=<%=filters.additionalFeatures[i].name %>" title="<%= filters.additionalFeatures[i].name %>"><%= filters.additionalFeatures[i].name %> (<%= filters.additionalFeatures[i].Quantity %>)</a></div>
-                     <%}  } %>
-					</div>
-					
-				<!-- End Additional features -->
-				
-				<!-- Start Issuers -->
-				<fieldset class="filter-inputs">
-					<div id="companies_title" class="filter-title-container">
-						<div class="collapseTitle"><legend>Show Companies</legend></div>
-					</div>
-					<div class="expcol-container filter-expcoll">
-						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="companies" data-name="Show Companies" title="collapse"><span class='HiddenText'>Show Companies </span>Close <span aria-hidden="true">-</span></a>
-					</div>
-					<div class="clearBoth"></div>
-				    <div id="companies" class="filter-section companies">
-                        <fieldset>
-                        <legend class="HiddenText">Select Companies to narrow your results</legend>
-                            <div class="collapseText filter-section-entry">
-                                <% if(filteredparams.companies){ %>
-                            <input type="checkbox" id="checkall" class="filters" <%- (filteredparams.companies)?"":"checked" %> href="javascript:void(0)" url="companies=" title="Show All Companies"/>
-                            <%} else { %>
-                            <input type="checkbox" id="checkall" onclick="this.checked=true;" checked="checked" url="companies=" title="Show All Companies"/>
-                            <%} %>
-                            <label for="checkall">Show All Companies</label></div>
-                            <% for(var i = 0 ; i < filters.showCompanies.length; i++) {%>
-		                        <div class="collapseTextCollapsed"><input type="checkbox" id="<%-filters.showCompanies[i].IssuerID%>" class="filters" <%- (filteredparams.companies && filteredparams.companies.indexOf(filters.showCompanies[i].IssuerID) > -1 ) ? "checked":"" %> href="javascript:void(0)" url="companies=<%=filters.showCompanies[i].IssuerID %>" title="<%= filters.showCompanies[i].IssuerName %>"/><label for="<%- filters.showCompanies[i].IssuerID %>"><%= filters.showCompanies[i].IssuerName %> (<%= filters.showCompanies[i].Quantity %>)</label></div>
-	                        <%} %>                        
-                        </fieldset>
-                    </div>
-				</fieldset>					
-				<!-- End Issuers -->
-		</div>	
-		<!-- End filters-->
-        <div class="dividerSmall"></div>	 
+<!-- End filters-->
+<div class="dividerSmall"></div>	 
 
-	<div class="updateStatmentBox">
+<div class="updateStatmentBox">
     <!--<p >-->
-	<h3>3 Things to Know</h3>
+	<h2>3 Things to Know</h2>
     <ul>
     
     <li type="disc" style="font-size:medium">We only list products submitted by insurers with information they certify as accurate.</li>
@@ -92,5 +91,14 @@
     <li type="disc" style="font-size:medium">Please contact the insurer for actual monthly costs.</li>
     </ul>
     <!--</p>-->
-    </div>
-	</div>
+ </div>
+
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#companies input').focus(function () {
+			$(window).scrollTop($(this).offset().top - 100)
+		});
+	});
+
+</script>

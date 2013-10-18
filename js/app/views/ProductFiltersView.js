@@ -38,19 +38,26 @@ define(["jquery",
                 page = helper.updateQueryStringParameter(page, 'pagenumber', '1');
                 page = helper.updateQueryStringParameter(page, 'cmpids', '');
                 page = helper.updateQueryStringParameter(page, 'cpmplans', '');
-                if (url && temp.length === 2) {
 
+                if (event.currentTarget.nodeName === 'LABEL') {
+                    ($(event.target).hasClass("checked")) ? $('label[for=' + $(event.target).attr('for') + ']').removeClass('checked') : $('label[for=' + $(event.target).attr('for') + ']').addClass('checked');
+                    ($(event.target).hasClass("checked")) ? $(event.target).prop("checked", false) : $(event.target).prop("checked", true);
+                }
+
+                if (url && temp.length === 2) {
                     page = (url.indexOf('companies') > -1) ? helper.updateQueryStringParameter(page, "ctrl", temp[1]) : helper.updateQueryStringParameter(page, "ctrl", "");
 
                     if (url.indexOf('companies') > -1 && page.indexOf('companies') > -1 && temp[1]) {
                         var prevId = helper.getParameterByName("companies", page);
-                        if (prevId && $(event.target).is(":checked"))
+                        if (prevId && ($(event.target).is(":checked") || $(event.target).hasClass("checked")))
                             temp[1] = prevId + '*' + temp[1];
                         else
                             temp[1] = prevId.replace(temp[1] + "*", "").replace("*" + temp[1], "").replace(temp[1], "");
                     }
-                    var nav = helper.updateQueryStringParameter(page, helper.encodeSpecialChar(temp[0]), helper.encodeSpecialChar(temp[1]));
+                    //var nav = helper.updateQueryStringParameter(page, helper.encodeSpecialChar(temp[0]), helper.encodeSpecialChar(temp[1]));
+                    var nav = helper.updateQueryStringParameter(page, temp[0], temp[1]);
                     Backbone.history.navigate(nav, { trigger: true });
+                    return false;
                 }
             },
             // Renders the view's template to the UI
@@ -63,7 +70,7 @@ define(["jquery",
                     ctrlId: helper.getParameterByName("ctrl", hash)
                 }
                 if (this.options.filters != null)
-                	this.$el.append(_.template(productFilters, { filters: this.options.filters, filteredparams: filteredparams }));
+                    this.$el.append(_.template(productFilters, { filters: this.options.filters, filteredparams: filteredparams }));
 
                 //customize checkbox ui
                 $('input').customInput();

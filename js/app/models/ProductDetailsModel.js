@@ -1,4 +1,4 @@
-//Product details
+﻿//Product details
 define(["jquery",
         "backbone",
         "jqueryXML",
@@ -17,8 +17,7 @@ define(["jquery",
         var ProductDetailsModel = Backbone.Model.extend({
 
 
-            //url: gblServiceHandler,
-            url: gblProductBenefitsServiceHandler,
+            url: gblServiceHandler+gblProductBenefits,
 
             // Model Constructor
             initialize: function () {

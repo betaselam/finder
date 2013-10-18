@@ -48,7 +48,7 @@
     	
     }
 	
-	tr,td,th,p
+	tr,td,th,p, .indexCardContainer
 	{
 	    page-break-inside:avoid;
 	}

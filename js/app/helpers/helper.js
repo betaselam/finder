@@ -1,4 +1,4 @@
-define(["jquery",
+﻿define(["jquery",
         "backbone",
         "text!templates/RequestTemplates/PlanRequest.html",
         "text!templates/RequestTemplates/ProductRequest.html",
@@ -178,7 +178,7 @@ define(["jquery",
                             $('#zip-feedbackMsg').text(" ")
                             var requestData = helper.getCountiesRequest(value);
                             var countiesModel = new CountiesModel();
-                            countiesModel.fetch({ type: "POST", dataType: "xml", data: requestData, async: false, processData: false, contentType: 'application/xml',
+                            countiesModel.fetch({ type: "POST", dataType: "xml", data: requestData, async: false,
                                 success: function (data) {
                                     if (data && data.attributes.counties !== null) {
                                         if (data.attributes.counties.length > 1) {
@@ -325,13 +325,13 @@ define(["jquery",
                 var amount = "";
                 if (amountList.hasOwnProperty('Amounts') && amountList.Amounts.Amount instanceof Array) {
                     $.each(amountList.Amounts.Amount, function (i, amt) {
-                        amount += "$" + amt.Text + ".00, ";
+                        amount += "$" + helper.addCommas(amt.Text) + ".00, ";
                     });
                     // added to remove the last unnecessary comma khurram 8/2
                     amount = amount.substring(0, amount.length - 2);
                 }
                 else if (amountList.hasOwnProperty('Amounts')) {
-                    amount = "$" + amountList.Amounts.Amount.Text + ".00";
+                    amount = "$" + helper.addCommas(amountList.Amounts.Amount.Text) + ".00";
                 }
                 return (amount === "") ? "Not Applicable" : amount;
             },
@@ -342,9 +342,9 @@ define(["jquery",
 
                 if (CoinsuranceRate.hasOwnProperty("Min") && CoinsuranceRate.hasOwnProperty("Max")) {
                     if (CoinsuranceRate.Min.Text === CoinsuranceRate.Max.Text) {
-                        minmax = (type === "$") ? "$" + CoinsuranceRate.Min.Text : CoinsuranceRate.Min.Text + "%";
+                        minmax = (type === "$") ? "$" + helper.addCommas(CoinsuranceRate.Min.Text)+ ".00" : CoinsuranceRate.Min.Text + "%";
                     } else {
-                        minmax = (type === "$") ? "$" + CoinsuranceRate.Min.Text + "-$" + CoinsuranceRate.Max.Text : CoinsuranceRate.Min.Text + "-" + CoinsuranceRate.Max.Text + "%";
+                        minmax = (type === "$") ? "$" + helper.addCommas(CoinsuranceRate.Min.Text) + ".00" + " -$" + helper.addCommas(CoinsuranceRate.Max.Text) + ".00" : CoinsuranceRate.Min.Text + "-" + CoinsuranceRate.Max.Text + "%";
                     }
                 }
                 return (minmax === "") ? "Not Applicable" : minmax;
@@ -365,7 +365,14 @@ define(["jquery",
                 }
                 var template = _.template(productDetailsRequest);
                 template = template({ input: input });
-                return template;
+
+
+//                var requestData = {
+//                    'requestURL': gblProductBenefitsServiceURL,
+//                    'postRequest': encodeURI(template)
+//                }
+
+                return encodeURI(template);
             },
 
 
@@ -436,7 +443,13 @@ define(["jquery",
                 }
                 var template = _.template(planDetailsRequest);
                 template = template({ input: input });
-                return template;
+
+//                var requestData = {
+//                    'requestURL': gblPlanBenefitsServiceURL,
+//                    'postRequest': encodeURI(template)
+//                }
+
+                return encodeURI(template);
             },
 
             getPlanRequest: function (params) {
@@ -530,8 +543,12 @@ define(["jquery",
                 }
                 var template = _.template(planRequest);
                 template = template({ input: input });
-                return template;
 
+//                var requestData = {
+//                    'requestURL': gblPlansServiceURL,
+//                    'postRequest': encodeURI(template)
+//                };
+                return encodeURI(template);
             },
 
             reverseDate: function (date) {
@@ -613,8 +630,12 @@ define(["jquery",
                 }
                 var template = _.template(productRequest);
                 template = template({ input: input });
-                return template;
 
+//                requestData = {
+//                    'requestURL': gblProductsServiceURL,
+//                    'postRequest': encodeURI(template)
+//                }
+                return encodeURI(template);
             },
 
             setSelectorValues: function (params) {
@@ -676,7 +697,14 @@ define(["jquery",
             getCountiesRequest: function (zipCode) {
 
                 var template = _.template(countiesRequest);
-                return template({ zip: zipCode });
+
+
+                template = template({ zip: zipCode });
+//                var requestData = {
+//                    'requestURL': gblCountiesForZipServiceURL,
+//                    'postRequest': encodeURI(template({ zip: zipCode }))
+//                }
+                return encodeURI(template);
             },
 
             getURLText: function (urlValid, urlText, altText) {
@@ -695,7 +723,7 @@ define(["jquery",
                     return text = obj[prop].Text;
                 }
                 else if (obj.hasOwnProperty(prop) && prop === "Amount") {
-                    return text = "$" + obj[prop].Text;
+                    return text = "$" + helper.addCommas(obj[prop].Text) + ".00";
                 }
                 else if (obj.hasOwnProperty(prop) && prop === "Text") {
                     text = obj[prop];
@@ -782,8 +810,8 @@ define(["jquery",
                     return value;
                 }
             },
-            planDetailsMapping: function (model, data) {
 
+            planDetailsMapping: function (model, data) {
                 var plan = data;
                 //Cost & Coverage Overview 
                 model.set({ planID: plan.PlanID.Text });
@@ -794,7 +822,7 @@ define(["jquery",
                 model.set({ issuerTollFreeNumber: this.getPhoneFormate(plan.IssuerTollFreeNumber.Text) });
                 model.set({ issuerLocalNumber: this.getPhoneFormate(plan.IssuerLocalNumber.Text) });
                 model.set({ issuerTTYNumber: this.getPhoneFormate(plan.IssuerTTYNumber.Text) });
-                model.set({ baseRateAmount: plan.BaseRateAmount.Text });
+                model.set({ baseRateAmount: this.addCommas(plan.BaseRateAmount.Text) });
                 model.set({ productApplicantsDeniedPercentage: plan.ProductApplicantsDeniedPercentage.Text });
                 model.set({ productApplicantsUpRatedPercentage: plan.ProductApplicantsUpRatedPercentage.Text });
                 model.set({ InNetworkCostSharing:

@@ -117,7 +117,17 @@ a {
 	
 }
 
+a:visited 
+{
+    color: #800080;
+}
 
+a i.new-window-i
+{
+	font-weight:normal;
+	color:#333;
+	margin:	1px;
+}
 
 a.comparePanel
 {
@@ -194,7 +204,8 @@ p.popover-bluebar
 }
 
 /*-------------------BUTTON CLASSES----------------------------*/
-.btn {
+.btn,
+a.btn:visited {
 	height:auto;
 	display: inline-block;
 	*display: inline;
@@ -253,7 +264,8 @@ p.popover-bluebar
 	padding: 6px 9px;
 }
 
-.btn-primary {
+.btn-primary,
+a.btn-primary:visited {
 	color: #ffffff;
 	/*  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
 	background-color: #2d8611;
@@ -418,7 +430,7 @@ label {
 	vertical-align: middle;
 }
 .custom-checkbox label.focus, .custom-radio label.focus {
-	/*outline: 2px solid #029DD3;*/
+	outline: 2px solid #029DD3;
 }
 .custom-checkbox label.hover, .custom-checkbox label.focus, .custom-radio label.hover, .custom-radio label.focus {
 	background-position: -13px -214px;
@@ -637,6 +649,13 @@ input[type="color"]:focus,
 	margin-top: 10px;
 	width: 260px;
 	
+}
+
+#leftHand-rail.navContainer h2,
+#leftHand-rail.navContainer h3,
+#leftHand-rail.navContainer h4
+{
+	margin:0;
 }
 
 
@@ -1120,6 +1139,13 @@ input.EmployeeNumTextBoxWithImage
 /*-
 CSS rules for plan details and product details
 */
+
+.externalLink
+{
+	float:left; 
+	font-weight:bold;
+}
+
 .noDecoration, .noDecoration:hover
 {
     text-decoration: none;
@@ -1186,11 +1212,12 @@ p.planText
     float: right;
 }
 
-.btn-print
+a.btn-print
 {   
     float:right;
     margin-top:-50px;
     width: 255px;
+    text-decoration:none;
 }
 
 .indexLargeFont {
@@ -1201,14 +1228,14 @@ p.planText
 {
     padding-left: 20px;
 }
-.sumBenefitsCoverage
+a.sumBenefitsCoverage
 {
-    width: 320px;
-     height: 50px;
+    width: 225px;
     font-size: 15px;
     font-weight: bold;
     line-height: 18px;
-    padding: 5px 12px;
+    padding: 15px 5px;
+    text-decoration:none;
 }
  
 .topSmallText
@@ -1350,13 +1377,17 @@ top-align
 }
 .expandText 
 {
-    font-size: 17px;
+    
     margin-left: 20px;
     margin-right: 25px;
     margin-top: 7px;
     padding-bottom: 7px;
 }
 
+.planNameDetails
+{
+    width: 110%;
+}
 /*-------------------------------------------------
 Custom Handling for error framework and calender widget
 ---------------------------------------------------*/
@@ -1438,7 +1469,7 @@ Plan / Products result list paging
 {
 	font-weight:600;
 	padding:15px 0;
-	width:70%
+	width:75%
 }
 
 .filter-expcoll
@@ -1709,6 +1740,12 @@ background-color: #F5F5F5;
 padding: 10px 20px;
 }
 
+#leftHand-rail.navContainer .updateStatmentBox h2 
+{
+	font-size:1.1em;
+	margin-bottom:10px;
+}
+
 .tableTextSmallBold {
 font-family: Helvetica;
 font-weight: bold;
@@ -1914,4 +1951,11 @@ ul.filterlinks
 {
 list-style: none;
 margin: 0 0 0 0;    
+}
+
+.nonContextualHelp
+{
+	text-decoration:none;
+	color:#000;
+	font-weight: 600;
 }

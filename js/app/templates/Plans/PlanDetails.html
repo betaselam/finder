@@ -1,6 +1,6 @@
 ﻿<div class="title-print-header">
 	<h1>Plan Details</h1>
-	<button class="btn btn-small btn-print" onclick="window.print()"><i class="icon-print" aria-hidden="true"></i>Print</button>
+	<a href="#" class="btn btn-small btn-print" onclick="window.print(); return false" role="button"><i class="icon-print" aria-hidden="true"></i>Print</a>
 </div>
 <div id="blueTop">
     
@@ -13,15 +13,15 @@
 	                <div>
 		                <div class="indexCardHeader">
 			                <div class="indexTitle">
-				                <div class="planName">
-                                    <h2><a href="javascript:void(0);" planid="<%= model.planID %>" class="planDetailsButton" title="Plan Title"><%= model.planNameText %></a></h2>
+				                <div class="planName planNameDetails">
+                                    <h2 href="javascript:void(0);" planid="<%= model.planID %>" class="planDetailsButton darkBlueText" title="Plan Title"><%= model.planNameText %></h2>
                                 </div>
                                 <div class="contactCompany "><%= model.issuerNameText%>
                                 </div>
 			                </div>
                             <div class="SBCButton ">                            
                                 <%if (model.SBC.uRLCode !== "No Link"){ %>
-                                 <button class="btn btn-primary sumBenefitsCoverage forceDisplay" onclick="window.open('<%=model.SBC.uRLAddress %>');" title="Summary of Benefits And Coverage" >Summary of Benefits &amp; Coverage</button>
+                                 <a href="<%=model.SBC.uRLAddress %>" class="btn btn-primary sumBenefitsCoverage forceDisplay" target="_blank" title="Summary of Benefits And Coverage" role="button" >Summary of Benefits&#13;&#10; &amp; Coverage</a>
                                 <%} %>
                             </div>
                             <div class="insurContactBox">
@@ -40,14 +40,16 @@
                                         </div>
                                         <div class="leftSide bold blue">
                                             <% if(model.IssuerURL.uRLCode == "Valid") { %>
-                                            <span class="tableText"><a id="A1" class=" noDecoration planTitle" href="<%=model.IssuerURL.uRLAddress %>" onclick="_gaq.push                                            (['_trackEvent', 'outbound', 'click', '#']);" target="_blank" title="Visit the Website">View website
+                                            <div class="externalLink">
+                                            <!--<span class="tableText">-->                                            <a id="A1" class=" noDecoration planTitle" href="<%=model.IssuerURL.uRLAddress %>" target="_blank" title="Visit the Website">View website
                                                 </a>
-                                                <i class="icon-circle_remove" title="test"></i>
-                                                <!--
-                                                <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide">
-                                                <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
-                                                -->
-                                            </span>
+                                                <!--</span>-->
+                                                </div>
+                                                <div>
+                                                <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide" title="External Link Policy">
+                                                <i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i></a>
+                                                </div>
+                                            
                                             <% } %>
                                         </div>
                                     </div>
@@ -71,7 +73,9 @@
 				                <div class="indexBodyColInner">
 					                <p>
                                         <b>
-                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_Estimated-Monthly-Base-Rate" class="contextualHelp" title="Estimated Monthly Base Rate">Estimated Monthly Base Rate</a>
+                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_Estimated-Monthly-Base-Rate" aria-describedby="<%= model.planID %>_Estimated-Monthly-Base-Rate" class="contextualHelp" title="">
+                                            Estimated Monthly Base Rate</a>
+                                            <span id="<%= model.planID %>_Estimated-Monthly-Base-Rate" class="HiddenText" aria-hidden="true"></span>
                                         </b>
                                     </p>
 					                <span class="planText bold indexLargeFont">$<%=model.baseRateAmount %></span>/mo.
@@ -81,7 +85,9 @@
 				                <div class="indexBodyColInner">
 					                <p>
                                         <b>
-                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_In-Network-Out-of-Pocket-Limit" class="contextualHelp" title="In-Network Out-of-Pocket Limit">In-Network Out-of-Pocket Limit</a>
+                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_In-Network-Out-of-Pocket-Limit" aria-describedby="<%= model.planID %>_In-Network-Out-of-Pocket-Limit" class="contextualHelp" title="In-Network Out-of-Pocket Limit">
+                                            In-Network Out-of-Pocket Limit</a>
+                                            <span id="<%= model.planID %>_In-Network-Out-of-Pocket-Limit" class="HiddenText" aria-hidden="true"></span>
                                         </b>
                                     </p>
 					                <p class="planText">
@@ -98,7 +104,9 @@
 				                <div class="indexBodyColInner">
 					                <p>
                                         <b>
-                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_Annual-Deductible-For-Plan" class="contextualHelp" title="Annual Deductible">Annual Deductible</a>
+                                            <a href="javascript:void(0);" data-name="<%= model.planID %>_Annual-Deductible-For-Plan" aria-describedby="<%= model.planID %>_Annual-Deductible-For-Plan" class="contextualHelp" title="Annual Deductible">
+                                            Annual Deductible</a>
+                                            <span id="<%= model.planID %>_Annual-Deductible-For-Plan" class="HiddenText" aria-hidden="true"></span>
                                         </b>
                                    </p>
                                     <p class="planText">
@@ -113,7 +121,7 @@
                             </div>
                             <div class="indexBodyCol">
 		                        <div class="indexBodyColInner">
-					                <p><b><a href="javascript:void(0);" data-name="<%= model.planID %>_Annual-Deductible-For-Plan" class="contextualHelp" title="Annual Maximum Benefits">Annual Maximum Benefits</a></b></p>
+					                <p><b class="nonContextualHelp">Annual Maximum Benefits</b></p>
                                     <p class="planText">
 							            Individual<br /><span class="bold indexLargeFont">
                                          <%=model.InNetworkCostSharing.individualAnnualMaxBenefitAmount %></span>
@@ -126,20 +134,21 @@
 		                    </div>
 			                <div class="spacer"></div>
 		                </div>
-                        <div class="indexCardFooter">
+                        <div class="indexCardFooter standardBottomMargin">
 			                <div class="indexFooterCol col-plan3">
-				               <b><a href="javascript:void(0);" data-name="<%= model.planID %>_Doctor-Choice" class="contextualHelp" title="Doctor Choice">Doctor Choice:</a></b>
+				               <b><a href="javascript:void(0);" data-name="<%= model.planID %>_Doctor-Choice" class="contextualHelp" aria-describedby="<%= model.planID %>_Doctor-Choice" title="Doctor Choice">
+                                    Doctor Choice:</a></b><span id="<%= model.planID %>_Doctor-Choice" class="HiddenText" aria-hidden="true"></span>
                                <p class="planText" style="margin-top: 0px;"><%=model.providerType %>
 							   <% if (model.providerType ==="PPO"){ %>
-					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-PPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on PPO"></a>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-PPO" aria-describedby="<%= model.planID %>_Provider-Type-PPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on PPO"><span class="HiddenText" aria-hidden="false">Info on PPO</span></a><span id="<%= model.planID %>_Provider-Type-PPO" class="HiddenText" aria-hidden="true"></span>
 					                <%} else if (model.providerType ==="HMO"){ %>
-					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-HMO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on HMO"></a>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-HMO" aria-describedby="<%= model.planID %>_Provider-Type-HMO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on HMO"><span class="HiddenText" aria-hidden="false">Info on HMO</span></a><span id="<%= model.planID %>_Provider-Type-HMO" class="HiddenText" aria-hidden="true"></span>
 					                <%} else if (model.providerType ==="INDEMNITY"){ %>
-					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-INDEMNITY" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on INDEMNITY"></a>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-INDEMNITY" aria-describedby="<%= model.planID %>_Provider-Type-INDEMNITY" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on INDEMNITY"><span class="HiddenText" aria-hidden="false">Info on INDEMNITY</span></a><span id="<%= model.planID %>_Provider-Type-INDEMNITY" class="HiddenText" aria-hidden="true"></span>
 					                <%} else if (model.providerType ==="POS"){ %>
-					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-POS" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on POS"></a> 
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-POS" aria-describedby="<%= model.planID %>_Provider-Type-POS" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on POS"><span class="HiddenText" aria-hidden="false">Info on POS</span></a><span id="<%= model.planID %>_Provider-Type-POS" class="HiddenText" aria-hidden="true"></span>
 					                <%} else if (model.providerType ==="EPO"){ %>
-					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-EPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on EPO"></a>
+					                <a href="javascript:void(0);" data-name="<%= model.planID %>_Provider-Type-EPO" aria-describedby="<%= model.planID %>_Provider-Type-EPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on EPO"><span class="HiddenText" aria-hidden="false">Info on EPO</span></a><span id="<%= model.planID %>_Provider-Type-EPO" class="HiddenText" aria-hidden="true"></span>
 					                <%} else {%>
 					                <%= model.providerType %>
 					                <%} %>
@@ -152,7 +161,9 @@
 				                </p>
 			                </div>
                             <div class="indexFooterCol col-plan3 placeRight">
-				                <b><a href="javascript:void(0);" data-name="<%= model.planID %>_Denied-Applications" class="contextualHelp" title="How many applications are denied?">How many applications are denied?</a></b><br />
+				                <b><a href="javascript:void(0);" data-name="<%= model.planID %>_Denied-Applications" class="contextualHelp" title="How many applications are denied?">
+                                    How many applications are denied?<span id="<%= model.planID %>_Denied-Applications" class="HiddenText"></span>
+                                    </a></b><br/>
 				                    <p class="planText" style="margin-top: 0px;">
 					                    <%=model.productApplicantsDeniedPercentage %>% who applied were turned down.
 				                    </p>
@@ -162,7 +173,8 @@
 	                </div>
                     <div class="article-footer-gray greyFooterDetailPad">
 		                <!--<b class="bold">You may be charged more.</b>-->
-                        <b><a href="javascript:void(0);" data-name="<%= model.planID %>_More-Charged" class="contextualHelp" title="You may be charged more">You may be charged more.</a></b>
+                        <b><a href="javascript:void(0);" data-name="<%= model.planID %>_More-Charged" aria-describedby="<%= model.planID %>_More-Charged" class="contextualHelp" title="You may be charged more">
+                            You may be charged more.</a></b><span id="<%= model.planID %>_More-Charged" class="HiddenText" aria-hidden="true"></span>
 			                <%=model.productApplicantsUpRatedPercentage %>% received surcharged quotes.
 	                </div>  
                 </div>
@@ -174,7 +186,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">Plan Coverage</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="plan-plan-coverage" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="plan-plan-coverage" data-name="Plan Coverage" title="collapse"><span class='HiddenText'>Plan Coverage</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>
@@ -220,16 +232,20 @@
                             </td>
                         
                             <td class="tableLeftSideText">
-                                <p class="tableLeftSideText">
+                                <div class="tableLeftSideText">
                                     <% if (model.ProviderURL.uRLCode == "Valid"){ %>
-                                    <a id="check_for_doc" class="blue noDecoration bold" href="<%= model.ProviderURL.uRLAddress %>" onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '#']);" target="_blank" title="Check for your doctor">
+                                    <div class="externalLink">
+                                    <a id="check_for_doc" class="blue noDecoration bold" href="<%= model.ProviderURL.uRLAddress %>" target="_blank" title="Check for your doctor">
                                             Check for your Doctor
                                     </a>
-                                    <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide">
-                                        <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/>
+                                    </div>
+                                    <div>
+                                    <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide" title="External Link Policy">
+                                        <i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i>
                                     </a>
+                                    </div>
                                             <%} else { model.ProviderURL.alternateText } %>
-                                </p>
+                                </div>
                             </td>
                         </tr>
                         <tr class="darkBlueBackground boldWhiteText expandTable">
@@ -237,7 +253,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">If you are sick and go to the doctor's office or need other services?</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planCommonMedical" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planCommonMedical" data-name="If you are sick and go to the doctor's office or need other services?" title="collapse"><span class='HiddenText'>If you are sick and go to the doctor's office or need other services?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>
@@ -278,7 +294,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">If you need minor surgery?</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planMinorSurgery" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planMinorSurgery" data-name="If you need minor surgery?" title="collapse"><span class='HiddenText'>If you need minor surgery?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>
@@ -308,7 +324,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">If you stay overnight in the hospital?</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planOvernightHospital" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planOvernightHospital" data-name="If you stay overnight in the hospital?" title="collapse"><span class='HiddenText'>If you stay overnight in the hospital?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>
@@ -338,7 +354,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">If you have an Emergency?</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planEmergency" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planEmergency" data-name="If you have an Emergency?" title="collapse"><span class='HiddenText'>If you have an Emergency?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>
@@ -356,16 +372,20 @@
                         <tr class="darkBlueBackground boldWhiteText expandTable">
                             <td class=" bottomGreyBorder darkBlueBackground boldWhiteText" colspan="2">
                                 <div class="darkerBlueBackground expandTablePad"></div>
-                                <h3 class="expandText left"><a href="javascript:void(0);" data-name="Prescription-Drugs" class="contextualHelp ctx-help-bluebar" title="" data-original-title="If you need drugs to treat your illness or condition?">If you need drugs to treat your illness or condition?</a></h3>
+                                <h3 class="expandText left"><a href="javascript:void(0);" data-name="Prescription-Drugs" aria-describedby="Prescription-Drugs" class="contextualHelp ctx-help-bluebar" title="" data-original-title="If you need drugs to treat your illness or condition?">
+                                    If you need drugs to treat your illness or condition?
+                                    </a></h3><span id="Prescription-Drugs" class="HiddenText" aria-hidden="true"></span>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planPharmacy" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planPharmacy" data-name="If you need drugs to treat your illness or condition?" title="collapse"><span class='HiddenText'>If you need drugs to treat your illness or condition?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>
                         <tr class="planPharmacy">
                             <td class="tableRightSideText bottomGreyBorder">
                                 <span class="tableRightSideText">
-                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Generic-Drugs" class="contextualHelp noDecoration dashed" title="Generic drugs">Generic drugs</a>
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Generic-Drugs" aria-describedby="<%= model.planID %>_Generic-Drugs" class="contextualHelp noDecoration dashed" title="Generic drugs">
+                                    Generic drugs<span id="<%= model.planID %>_Generic-Drugs" class="HiddenText" aria-hidden="true"></span>
+                                    </a>
                                     <span class="normalWeight"> (Purchase from Pharmacy)</span>
                                 </span>
                             </td>
@@ -382,7 +402,8 @@
                         <tr class="planPharmacy">
                             <td class="tableRightSideText bottomGreyBorder">
                                 <span class="tableRightSideText">
-                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Brand-Drugs" class="contextualHelp noDecoration dashed" title="Preferred Brand Drugs">Preferred Brand Drugs</a>
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Brand-Drugs" aria-describedby="<%= model.planID %>_Brand-Drugs" class="contextualHelp noDecoration dashed" title="Preferred Brand Drugs">
+                                    Preferred Brand Drugs</a><span id="<%= model.planID %>_Brand-Drugs" class="HiddenText" aria-hidden="true"></span>
                                     <span class="normalWeight"> (Purchase from Pharmacy)</span>
                                 </span>
                             </td>
@@ -399,7 +420,9 @@
                         <tr class="planPharmacy">
                             <td class="tableRightSideText ">
                                 <span class="tableRightSideText">
-                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Non-formulary-Drugs" class="contextualHelp noDecoration dashed" title="Specialty drugs">Specialty drugs</a>
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Non-formulary-Drugs"  aria-describedby="<%= model.planID %>_Non-formulary-Drugs" class="contextualHelp noDecoration dashed" title="Specialty drugs">
+                                    Specialty drugs<span id="<%= model.planID %>_Non-formulary-Drugs" class="HiddenText" aria-hidden="true"></span>
+                                    </a>
                                     <span class="normalWeight"> (Purchase from Pharmacy)</span>
                                 </span>
                             </td>
@@ -419,7 +442,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">What drugs are covered in the formulary?</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planCoveredDrugs" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planCoveredDrugs" data-name="What drugs are covered in the formulary?" title="collapse"><span class='HiddenText'>What drugs are covered in the formulary?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>  
@@ -427,24 +450,28 @@
                         <tr class="planCoveredDrugs">
                             <td class="tableRightSideText ">
                                 <span class="tableRightSideText ">
-                                    Drugs covered in <a href="javascript:void(0);" data-name="<%= model.planID %>_Formulary" class="contextualHelp noDecoration dashed " title="formulary">formulary</a>
+                                    Drugs covered in <a href="javascript:void(0);" data-name="<%= model.planID %>_Formulary" aria-describedby="<%= model.planID %>_Formulary" class="contextualHelp noDecoration dashed " title="formulary">
+                                    formulary<span id="<%= model.planID %>_Formulary" class="HiddenText" aria-hidden="true"></span>
+                                    </a>
                                 </span>
                             </td>
                                        
                             <td class="tableLeftSideText ">
-                                <p class="tableLeftSideText bold">
+                                <div class="tableLeftSideText">
                                     <%if (model.ProductFormularyURL.uRLCode === "Valid" && model.ProductFormularyURL.uRLAddress !== "#" ){ %>
+                                    <div class="externalLink">
                                     <a id="check_the_formulary1" class="tableTextBold noDecoration" href="<%= model.ProductFormularyURL.uRLAddress %>" 
-                                    onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%= model.ProductFormularyURL.uRLAddress %>']);" 
-                                    target="_blank" title="Check the Formulary">Check the Formulary 
-                                                
+                                    target="_blank" title="Check the Formulary">Check the Formulary              
                                     </a>
-                                    <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide">
-                                    <img src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
+                                    </div>
+                                    <div>
+                                    <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide" title="External Link Policy">
+                                    <i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i></a>
+                                    </div>
                                     <%}else{ %>
                                     <%= model.ProductFormularyURL.alternateText%>
                                     <%} %>
-                                    </p>
+                                    </div>
                             </td>
                         </tr>
                         <tr class="darkBlueBackground boldWhiteText expandTable">
@@ -452,7 +479,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">If you have mental health or substance abuse needs?</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planMentalHealth" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planMentalHealth" data-name="If you have mental health or substance abuse needs?" title="collapse"><span class='HiddenText'>If you have mental health or substance abuse needs?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>  
@@ -503,7 +530,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">If you become pregnant?</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planPregnant" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planPregnant" data-name="If you become pregnant?" title="collapse"><span class='HiddenText'>If you become pregnant?</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>     
@@ -534,10 +561,19 @@
                                     Plan Brochure</span>
                             </td>
                             <td class="tableLeftSideText">
-                                <p class="tableLeftSideText">
-                                    <a id="read_brochure" class="tableTextBold noDecoration  bold" href="http://docs.anthem.com/wellpoint/docs/viewDocument?mcItemNbr=VABR13005XLD" onclick="_gaq.push(['_trackEvent', 'outbound', 'click', 'http://docs.anthem.com/wellpoint/docs/viewDocument?mcItemNbr=VABR13005XLD']);" target="_blank" title="Link to plan brochure">Possible link to Brochure
-                                    </a>
-                                </p>
+                                <div class="tableLeftSideText">
+                                    <%if (model.PlanBrochureURL.uRLCode === "Valid" && model.PlanBrochureURL.uRLAddress !== "#" ){ %>
+                                    <div class="externalLink">
+                                    <a id="read_brochure" class="tableTextBold noDecoration  bold" href="<%=model.PlanBrochureURL.uRLAddress %>" onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%=model.PlanBrochureURL.uRLAddress %>']);" target="_blank" title="Link to plan brochure">Possible link to Brochure</a>
+                                    </div>
+                                    <div>
+                                    <a href="http://www.cms.gov/goodbye.asp" target="_blank" class="print-hide" title="External Link Policy">
+                                    <i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i></a>
+                                    </div>
+                                     <%}else{ %>
+                                    <%= model.PlanBrochureURL.alternateText%>
+                                    <%} %>
+                                </div>
                             </td>
                         </tr>
                              
@@ -546,7 +582,7 @@
                                 <div class="darkerBlueBackground expandTablePad"></div>
                                 <h3 class="expandText left">Benefits</h3>
                                 <div class="expcol-container right expandText">
-                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planSummary" title="collapse">Close -</a>
+                                    <a href="#" class="expcol-trigger boldWhiteText" onclick="funcExpCol(this.target);return false;" target="planSummary" data-name="Benefits" title="collapse"><span class='HiddenText'>Benefits</span>Close <span aria-hidden="true">-</span></a>
                                 </div>
                             </td>
                         </tr>     
@@ -555,7 +591,9 @@
                         <tr class="planSummary">
                             <td class="tableRightSideText bottomGreyBorder">
                                 <span class="tableRightSideText">
-                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Included-Benefits" class="contextualHelp noDecoration dashed" title="Included Benefits">Included Benefits</a></span>
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Included-Benefits" aria-describedby="<%= model.planID %>_Included-Benefits" class="contextualHelp noDecoration dashed" title="Included Benefits">
+                                    Included Benefits
+                                    </a></span><span id="<%= model.planID %>_Included-Benefits" class="HiddenText" aria-hidden="true"></span>
                             </td>
                             <td class="tableLeftSideText bottomGreyBorder">
                                 <% if(model.includedBenfits.length >0){%>
@@ -572,7 +610,9 @@
                         <tr class="planSummary">
                             <td class="tableRightSideText bottomGreyBorder">
                                 <span class="tableRightSideText">
-                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Excluded-Benefits" class="contextualHelp noDecoration dashed" title="Excluded Benefits">Excluded Benefits</a></span>
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Excluded-Benefits" aria-describedby="<%= model.planID %>_Excluded-Benefits" class="contextualHelp noDecoration dashed" title="Excluded Benefits">
+                                    Excluded Benefits
+                                    </a></span><span id="<%= model.planID %>_Excluded-Benefits" class="HiddenText" aria-hidden="true"></span>
                             </td>
                             <td class="tableLeftSideText bottomGreyBorder">
                                 <% if(model.excludedBenfits.length >0){%>
@@ -589,7 +629,9 @@
                         <tr class="planSummary">
                             <td class="tableRightSideText bottomGreyBorder">
                                 <span class="tableRightSideText">
-                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Limited-Benefits" class="contextualHelp noDecoration dashed" title="Limited Benefits">Limited Benefits</a></span>
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Limited-Benefits" aria-describedby="<%= model.planID %>_Limited-Benefits" class="contextualHelp noDecoration dashed" title="Limited Benefits">
+                                    Limited Benefits
+                                    </a></span><span id="<%= model.planID %>_Limited-Benefits" class="HiddenText" aria-hidden="true"></span>
                             </td>
                             <td class="tableLeftSideText bottomGreyBorder">
                                     <% if(model.limitedBenfits.length >0){%>
@@ -606,7 +648,9 @@
                         <tr class="planSummary">
                             <td class="tableRightSideText">
                                 <span class="tableRightSideText">
-                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Benefit-Available-for-Purchase" class="contextualHelp noDecoration dashed" title="Benefits Available for Purchase at Additional Cost">Benefits Available for Purchase at Additional Cost</a></span>
+                                    <a href="javascript:void(0);" data-name="<%= model.planID %>_Benefit-Available-for-Purchase" aria-describedby="<%= model.planID %>_Benefit-Available-for-Purchase" class="contextualHelp noDecoration dashed" title="Benefits Available for Purchase at Additional Cost">
+                                    Benefits Available for Purchase at Additional Cost
+                                    </a></span><span id="<%= model.planID %>_Benefit-Available-for-Purchase" class="HiddenText" aria-hidden="true"></span>
                             </td>
                             <td class="tableLeftSideText">
                                 <% if(model.additionalBenfits.length >0){%>

@@ -1,4 +1,4 @@
-// Collection.js
+﻿// Collection.js
 // -------------
 define(["jquery", "backbone", "models/PlanModel", "helpers/helper"],
 
@@ -7,8 +7,7 @@ define(["jquery", "backbone", "models/PlanModel", "helpers/helper"],
       // Creates a new Backbone Collection class object
       var PlanCollecion = Backbone.Collection.extend({
 
-          //url: gblServiceHandler,
-          url: gblPlansServiceHandler,
+          url: gblServiceHandler + gblPlans,
           //filters
           compareId: "",
           TotalEligiblePlansQuanity: 0,
@@ -59,7 +58,7 @@ define(["jquery", "backbone", "models/PlanModel", "helpers/helper"],
               temp.planID = plan.PlanID.Text;
               temp.planNameText = plan.PlanNameText.Text;
               temp.issuerNameText = plan.IssuerNameText.Text;
-              temp.baseRateAmount = plan.BaseRateAmount.Text; //Estimated Monthly Base Rate:
+              temp.baseRateAmount = helper.addCommas(plan.BaseRateAmount.Text); //Estimated Monthly Base Rate:
               temp.productApplicantsUpRatedPercentage = plan.ProductApplicantsUpRatedPercentage.Text; // You may be charged more.
               temp.productApplicantsDeniedPercentage = plan.ProductApplicantsDeniedPercentage.Text; //	How many applications are denied?
               temp.issuerID = plan.IssuerID.Text;

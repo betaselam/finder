@@ -2,7 +2,7 @@
 <% if(model.length === 0 ){ %>
 <div class="title-print-header">
 	<h1 class="headersmall header-bold" style="visibility:hidden"><%= model.length %> Insurance Plans</h1>
-	<button class="btn btn-small btn-print" onclick="window.print()"><i class="icon-print" aria-hidden="true" title="Print"></i>Print</button>
+	<a href="#" class="btn btn-small btn-print" onclick="window.print(); return false" role="button"><i class="icon-print" aria-hidden="true"></i>Print</a>
 </div>
 <div class="article compare-no-items"> 
     <p>You have no insurance plans selected.<br />
@@ -18,7 +18,7 @@
 
 <div class="title-print-header">
 	<h1 class="headersmall header-bold"><%= model.length %> Insurance Plans</h1>
-	<button class="btn btn-small btn-print" onclick="window.print()"><i class="icon-print" aria-hidden="true" title="Print"></i>Print</button>
+	<a href="#" class="btn btn-small btn-print" onclick="window.print(); return false" role="button"><i class="icon-print" aria-hidden="true"></i>Print</a>
 </div>
 
 
@@ -59,12 +59,13 @@
 				<!---get compare sections--->
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_1">
-						<% if(model[i].attributes.baseRateAmount >0){ %>
-						<a href="javascript:void(0);" data-name="Estimated-Monthly-Base-Rate" class="contextualHelp" title="Estimated monthly Base Rate">Estimated Monthly Base Rate</a><br />
-						<span class="highlight-rate">$<%= model[i].attributes.baseRateAmount %></span>/mo
+						<a href="javascript:void(0);" data-name="<%= i %>_Estimated-Monthly-Base-Rate" aria-describedby="<%= i %>_Estimated-Monthly-Base-Rate" class="contextualHelp" title="Estimated monthly Base Rate">Estimated Monthly Base Rate</a><br />
+                        <span id="<%= i %>_Estimated-Monthly-Base-Rate" class="HiddenText" aria-hidden="true"></span>
+                        <% if(model[i].attributes.baseRateAmount >0){ %>
+						    <span class="highlight-rate">$<%= model[i].attributes.baseRateAmount %></span>/mo
 						<% }else { %>
-						Estimate is not available at this time.
-					<% }%>						
+						    Estimate is not available at this time.
+					    <% }%>						
 					</td>
 				<%});%>
 			</tr>
@@ -73,7 +74,8 @@
 				<!---get compare sections--->
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_1">
-						<a href="javascript:void(0);" data-name="<%= model[i].attributes.planID %>_More-Charged" class="contextualHelp" title="You may be charged more">You may be charged more.</a><br />       
+						<a href="javascript:void(0);" data-name="<%= i %>_More-Charged" aria-describedby="<%= i %>_More-Charged" class="contextualHelp" title="You may be charged more">You may be charged more.</a><br />
+                        <span id="<%= i %>_More-Charged" class="HiddenText" aria-hidden="true"></span>
 						<span class="highlight-rate"><%= model[i].attributes.productApplicantsUpRatedPercentage %>%</span> received surcharged quotes.						
 					</td>
 				<%});%> 
@@ -83,9 +85,9 @@
 				<!---get compare sections--->
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_1">
-						<a href="javascript:void(0);" data-name="<%= model[i].attributes.planID %>_Denied-Applications" class="contextualHelp" title="How many applications are denied">How many applications are denied?</a><br /> 
+						<a href="javascript:void(0);" data-name="<%= i %>_Denied-Applications"  aria-describedby="<%= i %>_Denied-Applications" class="contextualHelp" title="How many applications are denied">How many applications are denied?</a><br />
+                        <span id="<%= i %>_Denied-Applications" class="HiddenText" aria-hidden="true"></span>
 						<span class="highlight-rate"><%=model[i].attributes.productApplicantsDeniedPercentage %>%</span> who applied were turned down.
-						
 					</td>
 				<%});%>
 			</tr>
@@ -94,7 +96,8 @@
 				<!---get compare sections--->
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_1">
-						<p><a href="javascript:void(0);" data-name="Annual-Deductible-For-Plan" class="contextualHelp" title="Deductible">Deductible</a></p>
+						<p><a href="javascript:void(0);" data-name="<%= i %>_Annual-Deductible-For-Plan" aria-describedby="<%= i %>_Annual-Deductible-For-Plan" class="contextualHelp" title="Deductible">Deductible</a></p>
+                        <span id="<%= i %>_Annual-Deductible-For-Plan" class="HiddenText" aria-hidden="true"></span>
 						<p>Individual<br /><span class="highlight-rate"><%= model[i].attributes.InNetworkCostSharing.individualAnnualDeductibleAmount %></span></p>
 						<p>Family<br /><span class="highlight-rate"><%= model[i].attributes.InNetworkCostSharing.familyAnnualDeductibleAmount %></span></p>
 					</td>
@@ -105,11 +108,10 @@
 				<!---get compare sections--->
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_1">
-						<p><a href="javascript:void(0);" data-name="In-Network-Out-of-Pocket-Limit" class="contextualHelp" title="In-Network Out-of-pocket">In-Network Out-of-pocket Limit</a></p>
+						<p><a href="javascript:void(0);" data-name="<%= i %>_In-Network-Out-of-Pocket-Limit" aria-describedby="<%= i %>_In-Network-Out-of-Pocket-Limit" class="contextualHelp" title="In-Network Out-of-pocket">In-Network Out-of-pocket Limit</a></p>
+                        <span id="<%= i %>_In-Network-Out-of-Pocket-Limit" class="HiddenText" aria-hidden="true"></span>
 						<p>Individual<br /> <span class="highlight-rate"><%= model[i].attributes.InNetworkCostSharing.individualAnnualOOPLimitAmount %></span></p>
 						<p>Family:<br /> <span class="highlight-rate"><%= model[i].attributes.InNetworkCostSharing.familyAnnualOOPLimitAmount %></span></p>
-						
-            
 					</td>
 				<%});%>
 			</tr>
@@ -139,16 +141,19 @@
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_1">
 						<p>How can I find a doctor in this plan's network?</p>
-						<p><% if (model[i].attributes.ProviderURL.uRLCode == "Valid"){ %>
+						<div><% if (model[i].attributes.ProviderURL.uRLCode == "Valid"){ %>
+                        <div class="externalLink">
 							<a id="check_for_doc" class="blue" href="<%= model[i].attributes.ProviderURL.uRLAddress %>" onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '#']);" target="_blank" title="Check for your doctor for <%= model[i].attributes.planNameText %>">
 								Check for your Doctor
 								<span class="LinkDisclaimer"> <%= model[i].attributes.planNameText %> - Opens in a new window</span>
-								</a>
-								<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank">
-									<img alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" title="External Link Policy"/>
+								</a></div>
+                                <div>
+								<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank" title="External Link Policy">
+									<i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i>
                                  </a>
+                                 </div>
 							<%} else { model[i].attributes.ProviderURL.alternateText } %>
-						</p>
+						</div>
 					</td>
 				<%});%>
 			</tr>
@@ -157,21 +162,22 @@
 				<!---get compare sections--->
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_1">
-						<p><a href="javascript:void(0);" data-name="Doctor-Choice" class="contextualHelp" title="Doctor Choice">Doctor Choice</a></p>
+						<p><a href="javascript:void(0);" data-name="<%= i %>_Doctor-Choice" aria-describedby="<%= i %>_Doctor-Choice" class="contextualHelp" title="Doctor Choice">Doctor Choice</a></p>
+                        <span id="<%= i %>_Doctor-Choice" class="HiddenText" aria-hidden="true"></span>
 						<p><b><%= model[i].attributes.providerType %></b>
 						<% if (model[i].attributes.providerType ==="PPO"){ %>
-							<a href="javascript:void(0);" data-name="<%= model[i].attributes.planID %>_Provider-Type-PPO"  class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on PPO"></a>
-							<%} else if (model[i].attributes.providerType ==="HMO"){ %>
-							<a href="javascript:void(0);" data-name="<%= model[i].attributes.planID %>_Provider-Type-HMO"   class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on HMO"></a>
-							<%} else if (model[i].attributes.providerType ==="INDEMNITY"){ %>
-							<a href="javascript:void(0);" data-name="<%= model[i].attributes.planID %>_Provider-Type-INDEMNITY"  class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on INDEMNITY"></a>
-							<%} else if (model[i].attributes.providerType ==="POS"){ %>
-							<a href="javascript:void(0);" data-name="<%= model[i].attributes.planID %>_Provider-Type-POS"  class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on POS"></a>
-							<%} else if (model[i].attributes.providerType ==="EPO"){ %>
-							<a href="javascript:void(0);" data-name="<%= model[i].attributes.planID %>_Provider-Type-EPO"  class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" aria-hidden="true" title="Info on EPO"></a>
-							<%} else {%>
-							(<%= model[i].attributes.providerType %>)
-							<%} %>
+						<a href="javascript:void(0);" data-name="<%= i %>_Provider-Type-PPO" aria-describedby="<%= i %>_Provider-Type-PPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on PPO"><span class="HiddenText" aria-hidden="false">Info on PPO</span></a><span id="<%= i %>_Provider-Type-PPO" class="HiddenText" aria-hidden="true"></span>
+						<%} else if (model[i].attributes.providerType ==="HMO"){ %>
+						<a href="javascript:void(0);" data-name="<%= i %>_Provider-Type-HMO"  aria-describedby="<%= i %>_Provider-Type-HMO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on HMO"><span class="HiddenText" aria-hidden="false">Info on HMO</span></a><span id="<%= i %>_Provider-Type-HMO" class="HiddenText" aria-hidden="true"></span>
+						<%} else if (model[i].attributes.providerType ==="INDEMNITY"){ %>
+						<a href="javascript:void(0);" data-name="<%= i %>_Provider-Type-INDEMNITY"  aria-describedby="<%= i %>_Provider-Type-INDEMNITY" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on INDEMNITY"><span class="HiddenText" aria-hidden="false">Info on INDEMNITY</span></a><span id="<%= i %>_Provider-Type-INDEMNITY" class="HiddenText" aria-hidden="true"></span>
+						<%} else if (model[i].attributes.providerType ==="POS"){ %>
+						<a href="javascript:void(0);" data-name="<%= i %>_Provider-Type-POS"  aria-describedby="<%= i %>_Provider-Type-POS" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on POS"><span class="HiddenText" aria-hidden="false">Info on POS</span></a><span id="<%= i %>_Provider-Type-POS" class="HiddenText" aria-hidden="true"></span>
+						<%} else if (model[i].attributes.providerType ==="EPO"){ %>
+						<a href="javascript:void(0);" data-name="<%= i %>_Provider-Type-EPO" aria-describedby="<%= i %>_Provider-Type-EPO" class="contextualHelp icon-circle_question_mark compare-question-mark contextualHelpIcon" title="Info on EPO"><span class="HiddenText" aria-hidden="false">Info on EPO</span></a><span id="<%= i %>_Provider-Type-EPO" class="HiddenText" aria-hidden="true"></span>
+						<%} else {%>
+						(<%= model[i].attributes.providerType %>)
+						<%} %>
 						</p>
 					</td>
 				<%});%>
@@ -189,23 +195,19 @@
 			</tr>
 
 			<!---blue bar dividers--->
-			<tr>
-				
+			<tr>				
 				<th id="section_2" abbr="If you are sick and go to the doctor's office or need other services?" class="compare-bluebar" colspan="<%= model.length %>">
 					<h3>If you are sick and go to the doctor's office or need other services?</h3>
 					<div class="expcol-container compare-expcoll">
 						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="content-sick-services" data-name="If you are sick and go to the doctor's office or need other services" title="collapse"><span class='HiddenText'>If you are sick and go to the doctor's office or need other services </span>Close <span aria-hidden="true">-</span></a>
 					</div>
-				</th>
-				
+				</th>				
 			</tr>
 
-			<tr class="content-sick-services">
-				
+			<tr class="content-sick-services">				
 				<th id="sect2_subsection1" headers="section_2"  class="compare-bluebarlight" colspan="<%= model.length %>">
 					<h4>Primary care physician office visit</h4>
-				</th>
-				
+				</th>				
 			</tr>
 
 			<tr class="content-sick-services">
@@ -376,25 +378,21 @@
 			</tr>
 
 			<!---blue bar dividers--->
-			<tr>
-				
-				<th id="section_6" abbr="If you need drugs to treat your illness or condition?" class="compare-bluebar" colspan="<%= model.length %>">
-					
-					<h3><a href="javascript:void(0);" data-name="Prescription-Drugs" class="contextualHelp ctx-help-bluebar" title="If you need drugs to treat your illness or condition?">If you need drugs to treat your illness or condition?</a></h3>
+			<tr>				
+				<th id="section_6" abbr="If you need drugs to treat your illness or condition?" class="compare-bluebar" colspan="<%= model.length %>">					
+					<h3><a href="javascript:void(0);" data-name="Prescription-Drugs" aria-describedby=="Prescription-Drugs" class="contextualHelp ctx-help-bluebar" title="If you need drugs to treat your illness or condition?">If you need drugs to treat your illness or condition?</a></h3>
+                    <span id="Prescription-Drugs" class="HiddenText" aria-hidden="true"></span>
 					<div class="expcol-container compare-expcoll">
 						<a href="#" class="expcol-trigger" onclick="funcExpCol(this.target);return false;" target="content-drug" data-name="If you need drugs to treat your illness or condition" title="collapse"><span class='HiddenText'>If you need drugs to treat your illness or condition </span>Close <span aria-hidden="true">-</span></a>
 					</div>
-				</th>
-				
+				</th>				
 			</tr>
 
-
-			<tr class="content-drug">
-				
+			<tr class="content-drug">				
 				<th id="sect6_subsection1" headers="section_6" class="compare-bluebarlight" colspan="<%= model.length %>">
-					<h4><a href="javascript:void(0);" data-name="Generic-Drugs" class="contextualHelp" title="Generic Drugs">Generic Drugs</a> (Purchase from Pharmacy)</h4>
-				</th>
-				
+					<h4><a href="javascript:void(0);" data-name="Generic-Drugs" aria-describedby="Generic-Drugs" class="contextualHelp" title="Generic Drugs">Generic Drugs</a> (Purchase from Pharmacy)</h4>
+                    <span id="Generic-Drugs" class="HiddenText" aria-hidden="true"></span>
+				</th>				
 			</tr>
 
 			<tr class="content-drug">
@@ -406,10 +404,10 @@
 				<%});%>
 			</tr>
 
-			<tr class="content-drug">
-				
+			<tr class="content-drug">				
 				<th id="sect6_subsection2" headers="section_6" class="compare-bluebarlight" colspan="<%= model.length %>">
-					<h4><a href="javascript:void(0);" data-name="Brand-Drugs" class="contextualHelp" title="Preferred Brand Drugs">Preferred Brand Drugs</a> (Purchase from Pharmacy)</h4>
+					<h4><a href="javascript:void(0);" data-name="Brand-Drugs" aria-describedby="Brand-Drugs" class="contextualHelp" title="Preferred Brand Drugs">Preferred Brand Drugs</a> (Purchase from Pharmacy)</h4>
+                    <span id="Brand-Drugs" class="HiddenText" aria-hidden="true"></span>
 				</th>
 			</tr>
 
@@ -425,7 +423,8 @@
 			<tr class="content-drug">
 
 				<th id="sect6_subsection3" headers="section_6" class="compare-bluebarlight" colspan="<%= model.length %>">
-					<h4><a href="javascript:void(0);" data-name="Non-formulary-Drugs" class="contextualHelp" title="Specialty Drugs">Specialty Drugs</a> (Purchase from Pharmacy)</h4>
+					<h4><a href="javascript:void(0);" data-name="Non-formulary-Drugs" aria-describedby="Non-formulary-Drugs" class="contextualHelp" title="Specialty Drugs">Specialty Drugs</a> (Purchase from Pharmacy)</h4>
+                    <span id="Non-formulary-Drugs" class="HiddenText" aria-hidden="true"></span>
 				</th>
 			</tr>
 
@@ -441,7 +440,8 @@
 
 			<tr class="content-drug">
 				<th id="sect6_subsection4" headers="section_6" class="compare-bluebarlight" colspan="<%= model.length %>">
-                    <h4>What drugs are covered in the <a href="javascript:void(0);" data-name="Formulary" class="contextualHelp" title="" data-original-title="formulary">formulary</a> ?</h4>
+                    <h4>What drugs are covered in the <a href="javascript:void(0);" data-name="Formulary" aria-describedby="Formulary" class="contextualHelp" title="" data-original-title="formulary">formulary</a> ?</h4>
+                    <span id="Formulary" class="HiddenText" aria-hidden="true"></span>
 				</th>
 			</tr>
 
@@ -450,13 +450,15 @@
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_6 sect6_subsection4">
 						<%if (model[i].attributes.ProductFormularyURL.uRLCode === "Valid" && model[i].attributes.ProductFormularyURL.uRLAddress !== "#" ){ %>
-						<a id="check_the_formulary1" class="tableTextBold" href="<%= model[i].attributes.ProductFormularyURL.uRLAddress %>" 
-						    onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%= model[i].attributes.ProductFormularyURL.uRLAddress %>']);" 
-						    target="_blank" title="Check the Formulary for <%= model[i].attributes.planNameText %>">Check the Formulary
+                        <div class="externalLink">
+						<a id="check_the_formulary1" class="tableTextBold" href="<%= model[i].attributes.ProductFormularyURL.uRLAddress %>" target="_blank" title="Check the Formulary for <%= model[i].attributes.planNameText %>">Check the Formulary
 						    <span class="LinkDisclaimer"> <%= model[i].attributes.planNameText %> - Opens in a new window</span>
 						</a>
-						<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank">
-								<img alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" title="External Link Policy"/></a>
+                        </div>
+                        <div>
+						<a href="http://www.cms.gov/goodbye.asp" class="print-hide" target="_blank" title="External Link Policy">
+								<i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i></a>
+                        </div>
 						<%}else{ %>
 							<%= model[i].attributes.ProductFormularyURL.alternateText%>
 						<%} %>
@@ -614,14 +616,17 @@
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_8 sect8_subsection3">
 						 <%if (model[i].attributes.PlanBrochureURL.uRLCode === "Valid"){ %>
+                        <div class="externalLink">
 						<a id="read_brochure" class="tableTextBold" href="<%= model[i].attributes.PlanBrochureURL.uRLAddress%>"
 						    onclick="_gaq.push(['_trackEvent', 'outbound', 'click', '<%= model[i].attributes.PlanBrochureURL.uRLAddress%>']);" 
 						    target="_blank" title="Link to plan brochure for <%= model[i].attributes.planNameText %>">Does this plan have a brochure with more information?
                             <span class="LinkDisclaimer"> <%= model[i].attributes.planNameText %> - Opens in a new window</span>
 						</a>
-						<a href="http://www.cms.gov/goodbye.asp" class="print-hide"  target="_blank">
-						<img alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
-
+                        </div>
+                        <div>
+						<a href="http://www.cms.gov/goodbye.asp" class="print-hide"  target="_blank" title="External Link Policy">
+						<i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i></a>
+                        </div>
 						<%}else{ %>
 						   <%= model[i].attributes.PlanBrochureURL.alternateText%>
 						<%} %>
@@ -647,11 +652,10 @@
 			<tr class="content-benefits">
 				
 				<th id="sect9_subsection1" headers="section_9" class="compare-bluebarlight" colspan="<%= model.length %>">
-					<h4><a href="javascript:void(0);" data-name="Included-Benefits" class="contextualHelp" title="Included Benefits">Included Benefits</a></h4>
-				</th>
-				
+					<h4><a href="javascript:void(0);" data-name="Included-Benefits" aria-describedby="Included-Benefits" class="contextualHelp" title="Included Benefits">Included Benefits</a></h4>
+                    <span id="Included-Benefits" class="HiddenText" aria-hidden="true"></span>
+				</th>				
 			</tr>
-
 
 			<tr class="content-benefits">
 				<!---get compare sections--->
@@ -669,12 +673,11 @@
 				<%});%>
 			</tr>
 
-			<tr class="content-benefits">
-				
+			<tr class="content-benefits">				
 				<th id="sect9_subsection2" headers="section_9" class="compare-bluebarlight" colspan="<%= model.length %>">
-					<h4><a href="javascript:void(0);" data-name="Excluded-Benefits" class="contextualHelp" title="Excluded Benefits">Excluded Benefits</a></h4>
-				</th>
-				
+					<h4><a href="javascript:void(0);" data-name="Excluded-Benefits" aria-describedby="Excluded-Benefits" class="contextualHelp" title="Excluded Benefits">Excluded Benefits</a></h4>
+                    <span id="Excluded-Benefits" class="HiddenText" aria-hidden="true"></span>
+				</th>				
 			</tr>
 
 			<tr class="content-benefits">
@@ -693,12 +696,11 @@
 				<%});%>
 			</tr>
 
-			<tr class="content-benefits">
-				
+			<tr class="content-benefits">				
 				<th id="sect9_subsection3" headers="section_9" class="compare-bluebarlight" colspan="<%= model.length %>">
-					<h4><a href="javascript:void(0);" data-name="Limited-Benefits" class="contextualHelp" title="Limited Benefits">Limited Benefits</a></h4>
-				</th>
-				
+					<h4><a href="javascript:void(0);" data-name="Limited-Benefits" aria-describedby="Limited-Benefits" class="contextualHelp" title="Limited Benefits">Limited Benefits</a></h4>
+                    <span id="Limited-Benefits" class="HiddenText" aria-hidden="true"></span>
+				</th>				
 			</tr>
 
 			<tr class="content-benefits">
@@ -720,7 +722,8 @@
 			<tr class="content-benefits">
 				
 				<th id="sect9_subsection4" headers="section_9" class="compare-bluebarlight" colspan="<%= model.length %>">
-					<h4><a href="javascript:void(0);" data-name="Benefit-Available-for-Purchase" class="contextualHelp" title="Benefits Available for Purchase at Additional Cost">Benefits Available for Purchase at Additional Cost</a></h4>
+					<h4><a href="javascript:void(0);" data-name="Benefit-Available-for-Purchase" aria-describedby="Benefit-Available-for-Purchase" class="contextualHelp" title="Benefits Available for Purchase at Additional Cost">Benefits Available for Purchase at Additional Cost</a></h4>
+                    <span id="Benefit-Available-for-Purchase" class="HiddenText" aria-hidden="true"></span>
 				</th>
 				
 			</tr>
@@ -784,13 +787,18 @@
 				<% _.each(model, function(val, i) { %>
 					<td headers="plan_<%= i+1 %> section_10 sect10_subsection2">
 						<% if(model[i].attributes.IssuerURL.uRLCode == "Valid") { %>
-						<span class="tableText">
+						<div class="tableText">
+                                                <div class="externalLink">
+
                         <a id="link_to_carrier" class="blue" href="<%=model[i].attributes.IssuerURL.uRLAddress %>" target="_blank" title="Visit the Website for <%= model[i].attributes.planNameText %>">Visit the Website
 							    <span class="LinkDisclaimer"> <%= model[i].attributes.planNameText %> - Opens in a new window</span>
 							</a>
-							<a href="http://www.cms.gov/goodbye.asp" class="print-hide"  target="_blank">
-								<img alt="External Globe Icon" src="http://www.cms.gov/resources/global/images/icons/external.gif" alt=" - External Link Policy" title="External Link Policy"/></a>
-							 </span>
+                            </div>
+                            <div>
+							<a href="http://www.cms.gov/goodbye.asp" class="print-hide"  target="_blank" title="External Link Policy">
+								<i class="icon-new_window new-window-i" aria-hidden="true"><span class="HiddenText">External Web Site Policy - opens in a new window</span></i></a>
+                                </div>
+							 </div>
 						<% } %>
 						
 					</td>

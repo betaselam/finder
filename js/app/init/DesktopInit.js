@@ -7,7 +7,13 @@ require(["jquery", "backbone", "routers/DesktopRouter", "jqueryui", "bootstrap",
   function($, Backbone, DesktopRouter) {
 
     // Instantiates a new Desktop Router instance
-    new DesktopRouter();
+      $(document).ready(function () {
+
+
+          new DesktopRouter();
+
+      });
+
 
   }
 

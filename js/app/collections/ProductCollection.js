@@ -1,4 +1,4 @@
-// Collection.js
+﻿// Collection.js
 // -------------
 define(["jquery", "backbone", "models/ProductModel", "helpers/helper"],
 
@@ -7,8 +7,7 @@ define(["jquery", "backbone", "models/ProductModel", "helpers/helper"],
       // Creates a new Backbone Collection class object
       var ProductCollection = Backbone.Collection.extend({
 
-          //url: gblServiceHandler,
-          url: gblProductsServiceHandler,
+          url: gblServiceHandler + gblProducts,
 
           TotalEligibleProductsQuantity: 0,
           doctorChoice: "",
